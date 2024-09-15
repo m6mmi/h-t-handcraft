@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3ynp-pdif(kcx#$u)@aw_b7w#r_m*_$)o$fbjzect40mulu=kp'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -74,9 +75,13 @@ WSGI_APPLICATION = 'h_t_handcraft.wsgi.application'
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": config("DB_ENGINE", "django.db.backends.postgresql"),
+        "NAME": config("DB_NAME", "dio_backend"),
+        "USER": config("DB_USER", "postgres"),
+        "PASSWORD": config("DB_PASSWORD", "password"),
+        "HOST": config("DB_HOST", "127.0.0.1"),
+        "PORT": "5432",
     }
 }
 
