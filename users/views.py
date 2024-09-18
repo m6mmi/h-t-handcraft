@@ -13,7 +13,7 @@ class RegisterView(View):
     def get(self, request):
         form = RegistrationForm()
         print(form)
-        return render(request, 'users/register.html', {'form': form})
+        return render(request, 'templates/register.html', {'form': form})
 
     def post(self, request):
         form = RegistrationForm(request.POST)
@@ -31,13 +31,13 @@ class RegisterView(View):
             login(request, user)
 
             return redirect('accounts:login')
-        return render(request, 'users/register.html', {'form': form})
+        return render(request, 'templates/register.html', {'form': form})
 
 
 class LoginView(View):
     def get(self, request):
         form = AuthenticationForm()
-        return render(request, 'users/login.html', {'form': form})
+        return render(request, 'templates/login.html', {'form': form})
 
     def post(self, request):
         form = AuthenticationForm(request, data=request.POST)
@@ -45,11 +45,11 @@ class LoginView(View):
             user = form.get_user()
             login(request, user)
 
-            return redirect('users:profile')
+            return redirect('templates:profile')
         else:
 
             print(form.errors)
-        return render(request, 'users/login.html', {'form': form})
+        return render(request, 'templates/login.html', {'form': form})
 
 
 class LogoutView(View):
