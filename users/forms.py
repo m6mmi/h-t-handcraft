@@ -29,3 +29,12 @@ class LoginForm(forms.Form):
         if not User.objects.filter(username=username).exists():
             raise forms.ValidationError("This username does not exist.")
         return username
+
+class ChangePasswordForm(forms.Form):
+    old_password = forms.CharField(widget=forms.PasswordInput())
+    new_password = forms.CharField(widget=forms.PasswordInput())
+    confirm_password = forms.CharField(widget=forms.PasswordInput())
+    def clean_old_password(self):
+        old_password = self.cleaned_data['old_password']
+        if old_password != self.cleaned_data['new_password']:
+            raise forms.ValidationError("")

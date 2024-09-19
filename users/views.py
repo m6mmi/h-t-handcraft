@@ -1,9 +1,12 @@
 from urllib import request
 from django.shortcuts import render, redirect
 from django.views import View
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout
 from .forms import RegistrationForm
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
+
 
 # Create your views here.
 
@@ -52,3 +55,9 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect('users:login')
+
+
+class ChangePasswordView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('templates:profile')
+    template_name = 'change_password.html'
