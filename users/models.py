@@ -22,7 +22,7 @@ class Address(models.Model):
     postal_code = models.CharField(max_length=5)
     apartment_number = models.CharField(max_length=5)
     country = models.CharField(max_length=50)
-    user_id = User.id
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.street
