@@ -1,8 +1,8 @@
 from enum import unique
 
 from django.db import models
-from users import User
-from products import Product
+from users.models import User
+from products.models import Product
 
 
 # Create your models here.
@@ -18,7 +18,7 @@ class Cart(models.Model):
 class Order(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
-    order_id = models.AutoField(max_length=50, primary_key=True)
+    order_id = models.AutoField(primary_key=True)
     confirmation = models.BooleanField(default=False)
 
 
