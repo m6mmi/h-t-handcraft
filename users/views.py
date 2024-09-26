@@ -32,7 +32,7 @@ class RegisterView(View):
             user = authenticate(username=username, password=raw_password)
             if user:
                 login(request, user)
-                return redirect('accounts:login')
+                return redirect('users:login')
             return render(request, 'register.html', {'form': form})
 
 
@@ -46,7 +46,7 @@ class LoginView(View):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('templates:profile')
+            return redirect('users:profile')
         else:
             print(form.errors)
         return render(request, 'login.html', {'form': form})
@@ -60,7 +60,7 @@ class LogoutView(View):
 
 class ChangePasswordView(LoginRequiredMixin, PasswordChangeView):
     form_class = PasswordChangeForm
-    success_url = reverse_lazy('templates:profile')
+    success_url = reverse_lazy('users:profile')
     template_name = 'change_password.html'
 
 
