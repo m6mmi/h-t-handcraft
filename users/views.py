@@ -25,7 +25,6 @@ class RegisterView(View):
             user.last_name = form.cleaned_data.get('last_name')
             user.email = form.cleaned_data.get('email')
             user.save()
-
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
