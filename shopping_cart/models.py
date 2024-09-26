@@ -35,4 +35,5 @@ class CartProduct(models.Model):
 
     def __str__(self):
         user = self.cart_id.user_id
-        return f'[{user.first_name} {user.last_name}], {self.product_id.title}, {self.product_id.price}, {self.product_id.stock}, {self.product_id.description}'
+        return (f'[{user.first_name} {user.last_name}], {self.product_id.title}, {self.product_id.price}, '
+                f'{self.product_id.stock}, {self.product_id.description}')
