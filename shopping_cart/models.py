@@ -1,4 +1,6 @@
-from enum import unique
+from itertools import product
+
+from products.models import Product
 
 from django.db import models
 from users.models import User
@@ -28,8 +30,5 @@ class CartProduct(models.Model):
     quantity = models.PositiveSmallIntegerField()
     active = models.BooleanField(default=True)
 
-    def sub_total(self):
-        return self.product.price * self.quantity
-
     def __str__(self):
-        return self.product
+        return f'{self.product_id.title}, {self.product_id.price}, {self.product_id.stock}, {self.product_id.description}'
