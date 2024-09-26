@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User Orders</title>
-</head>
-<body>
-    Cart ID: {{ message }}
+{% extends 'base.html' %}
+
+{% block content %}
     {% for order in orders %}
         <a href="{% url 'shopping_cart:cart' order.order_id %}">
             <h4>{{ order }}</h4>
         </a>
     {% endfor %}
-</body>
-</html>
+{% endblock %}

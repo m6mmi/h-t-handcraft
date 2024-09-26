@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Shopping cart</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
     Cart ID: {{ message }}
     {% for item in cart_items %}
         <form action="{% url 'shopping_cart:delete_from_cart' item.id %}" method="post">
@@ -16,5 +12,4 @@
             </h4>
         </form>
     {% endfor %}
-</body>
-</html>
+{% endblock %}
