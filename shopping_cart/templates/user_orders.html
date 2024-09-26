@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Orders</title>
+</head>
+<body>
+    Cart ID: {{ message }}
+    {% for order in orders %}
+        <h4>{{ order }}</h4>
+    {% endfor %}
+</body>
+</html>

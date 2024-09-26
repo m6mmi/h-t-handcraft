@@ -2,12 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Shopping cart</title>
 </head>
 <body>
-    Message: {{ message }}
+    Cart ID: {{ message }}
     {% for item in cart_items %}
-        <h4>{{ item }}</h4>
+        <form action="{% url 'shopping_cart:delete_from_cart' item.id %}" method="post">
+            <h4>{{ item.product_id.title }}
+                {% csrf_token %}
+                <button type="submit">Delete from Cart</button>
+            </h4>
+        </form>
     {% endfor %}
 </body>
 </html>
