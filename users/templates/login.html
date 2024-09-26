@@ -8,7 +8,7 @@
       <div class="main">
             <h1>H&T Käsitöö</h1>
             <h3>Enter your login credentials</h3>
-            <form action="">
+            <form action="post">
                   <label for="first">
                         Username:
                   </label>
@@ -32,12 +32,7 @@
                         </button>
                   </div>
             </form>
-            <p>Not registered?
-                  <a href="#"
-                     style="text-decoration: none;">
-                        Create an account
-                  </a>
-            </p>
+            <p>Don't have an account? <a href="{% url 'users:register' %}">Register here</a>.</p>
       </div>
 </body>
 </html>
