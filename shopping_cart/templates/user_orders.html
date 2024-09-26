@@ -7,7 +7,9 @@
 <body>
     Cart ID: {{ message }}
     {% for order in orders %}
-        <h4>{{ order }}</h4>
+        <a href="{% url 'shopping_cart:cart' order.order_id %}">
+            <h4>{{ order }}</h4>
+        </a>
     {% endfor %}
 </body>
 </html>
