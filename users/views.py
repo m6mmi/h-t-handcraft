@@ -1,11 +1,13 @@
-from urllib import request
-from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout
+from django.views.generic import DetailView
 from .forms import RegistrationForm
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
+from .models import User
 
 
 # Create your views here.
@@ -56,7 +58,16 @@ class LogoutView(View):
         return redirect('users:login')
 
 
-class ChangePasswordView(PasswordChangeView):
+class ChangePasswordView(LoginRequiredMixin, PasswordChangeView):
     form_class = PasswordChangeForm
     success_url = reverse_lazy('templates:profile')
     template_name = 'change_password.html'
+
+
+class UserProfileView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'profile.html'
+    context_object_name = 'user_profile'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(User, username=self.request.user.username)
