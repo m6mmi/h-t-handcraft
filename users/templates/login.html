@@ -5,6 +5,27 @@
     <title>Login</title>
 </head>
 <body>
+      <div class="main">
+            <h1>H&T Käsitöö</h1>
+            <h3>Enter your login credentials</h3>
+           {% if form.non_field_errors %}
+            <div style="color: red;">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        <form method="POST" action="{% url 'users:login' %}">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your Username" required>
 
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+
+            <div class="wrap">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        <p>Don't have an account? <a href="{% url 'users:register' %}">Register here</a>.</p>
+      </div>
 </body>
 </html>

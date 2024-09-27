@@ -1,11 +1,13 @@
-from urllib import request
-from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout
+from django.views.generic import DetailView
 from .forms import RegistrationForm
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
+from .models import User
 
 
 # Create your views here.
@@ -14,7 +16,6 @@ from django.urls import reverse_lazy
 class RegisterView(View):
     def get(self, request):
         form = RegistrationForm()
-        print(form)
         return render(request, 'register.html', {'form': form})
 
     def post(self, request):
@@ -25,14 +26,16 @@ class RegisterView(View):
             user.last_name = form.cleaned_data.get('last_name')
             user.email = form.cleaned_data.get('email')
             user.save()
-
+            phone_number = form.cleaned_data.get('phone_number')
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            if user:
+            if user is not None:
                 login(request, user)
-                return redirect('accounts:login')
-            return render(request, 'register.html', {'form': form})
+                return redirect('users:profile')
+            else:
+                return render(request, 'register.html', {'form': form})
+        return render(request, 'register.html', {'form': form})
 
 
 class LoginView(View):
@@ -42,10 +45,12 @@ class LoginView(View):
 
     def post(self, request):
         form = AuthenticationForm(request, data=request.POST)
+
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('templates:profile')
+            print(f"User logged in: {user.username}")
+            return redirect('users:profile')
         else:
             print(form.errors)
         return render(request, 'login.html', {'form': form})
@@ -57,7 +62,16 @@ class LogoutView(View):
         return redirect('users:login')
 
 
-class ChangePasswordView(PasswordChangeView):
+class ChangePasswordView(LoginRequiredMixin, PasswordChangeView):
     form_class = PasswordChangeForm
-    success_url = reverse_lazy('templates:profile')
+    success_url = reverse_lazy('users:profile')
     template_name = 'change_password.html'
+
+
+class UserProfileView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'profile.html'
+    context_object_name = 'user_profile'
+
+    def get_object(self, queryset=None):
+        return self.request.user
