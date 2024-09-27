@@ -6,9 +6,8 @@
     <title>{{ user_profile.username }}'s Profile</title>
 </head>
 <body>
-       <header>
+    <header>
         <h1>{{ user_profile.username }}'s Profile</h1>
-        <button onclick="window.location.href='{% url 'home' %}'">Go to Home Page</button>
     </header>
 
     <section>
@@ -26,7 +25,7 @@
     </section>
     <section>
         <a href="{% url 'users:profile' %}">View Profile</a>
-        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'users:logout' %}">Logout</a>
     </section>
 
 </body>

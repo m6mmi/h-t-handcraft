@@ -26,6 +26,7 @@ class RegisterView(View):
             user.last_name = form.cleaned_data.get('last_name')
             user.email = form.cleaned_data.get('email')
             user.save()
+            phone_number = form.cleaned_data.get('phone_number')
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
@@ -48,8 +49,10 @@ class LoginView(View):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
+            print(f"User logged in: {user.username}")
             return redirect('users:profile')
-
+        else:
+            print(form.errors)
         return render(request, 'login.html', {'form': form})
 
 
