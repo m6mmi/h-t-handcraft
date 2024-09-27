@@ -16,7 +16,6 @@ from .models import User
 class RegisterView(View):
     def get(self, request):
         form = RegistrationForm()
-        print(form)
         return render(request, 'register.html', {'form': form})
 
     def post(self, request):
@@ -30,10 +29,12 @@ class RegisterView(View):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            if user:
+            if user is not None:
                 login(request, user)
-                return redirect('users:login')
-            return render(request, 'register.html', {'form': form})
+                return redirect('users:profile')
+            else:
+                return render(request, 'register.html', {'form': form})
+        return render(request, 'register.html', {'form': form})
 
 
 class LoginView(View):
@@ -43,12 +44,12 @@ class LoginView(View):
 
     def post(self, request):
         form = AuthenticationForm(request, data=request.POST)
+
         if form.is_valid():
             user = form.get_user()
             login(request, user)
             return redirect('users:profile')
-        else:
-            print(form.errors)
+
         return render(request, 'login.html', {'form': form})
 
 
@@ -70,4 +71,4 @@ class UserProfileView(LoginRequiredMixin, DetailView):
     context_object_name = 'user_profile'
 
     def get_object(self, queryset=None):
-        return get_object_or_404(User, username=self.request.user.username)
+        return self.request.user
