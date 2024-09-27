@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-</head>
-<body>
+{% block content %}
     <div class="container">
-        <h1>Register</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Register</button>
-        </form>
-        <div class="text-center">
-            <p>Already have an account?</p>
-            <a href="{% url 'users:login' %}" class="link-button">Login</a>
+            <h1>Register</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Register</button>
+            </form>
+            <div class="text-center">
+                <p>Already have an account?</p>
+                <a href="{% url 'users:login' %}" class="link-button">Login</a>
+            </div>
         </div>
-    </div>
-</body>
-</html>
+{% endblock %}

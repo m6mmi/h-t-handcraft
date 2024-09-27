@@ -123,13 +123,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'templates/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = "templates:login"
-LOGIN_REDIRECT_URL = "<app_name>:<view_name>"
+LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'users:profile'
 LOGOUT_REDIRECT_URL = LOGIN_URL

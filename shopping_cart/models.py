@@ -24,7 +24,7 @@ class Order(models.Model):
     confirmation = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Order id: {self.order_id}, date ordered: {self.date_ordered.strftime("%Y-%m-%d %H:%M:%S")}'
+        return f'Order id: {self.order_id}, order date: {self.date_ordered.strftime("%Y-%m-%d")}'
 
 
 class CartProduct(models.Model):

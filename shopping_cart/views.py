@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -29,8 +30,7 @@ class DeleteFromCart(View):
         return redirect(reverse('shopping_cart:cart', kwargs={'cart_id': cart_product.cart_id_id}))
 
 
-class UserOrders(View):
+class UserOrders(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
-        user_id = self.kwargs.get('user_id')
-        orders = Order.objects.filter(user_id=user_id)
+        orders = Order.objects.filter(user_id=self.request.user)
         return render(request, 'user_orders.html', {'orders': orders})

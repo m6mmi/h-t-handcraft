@@ -1,36 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ user_profile.username }}'s Profile</title>
-</head>
-<body>
-    <header>
-        <h1>{{ user_profile.username }}'s Profile</h1>
-    </header>
+{% extends 'base.html' %}
 
-    <section>
-        <h2>Personal Information</h2>
-        <p><strong>Username:</strong> {{ user_profile.username }}</p>
-        <p><strong>Name:</strong> {{ user_profile.first_name }}</p>
-        <p><strong>Last name:</strong> {{ user_profile.last_name }}</p>
-        <p><strong>Email:</strong> {{ user_profile.email }}</p>
-        <p><strong>Phone Number:</strong> {{ user_profile.phone_number }}</p>
-        <p><strong>Account Created At:</strong> {{ user_profile.created_at }}</p>
-    </section>
-    <section>
-        <h2>Categories</h2>
-        <div>
-            <button onclick="">View Categories</button>
-        </div>
-    </section>
-    <section>
-        <a href="{% url 'users:profile' %}">View Profile</a>
-        <a href="{% url 'users:logout' %}">Logout</a>
-    </section>
-    <footer>
-        <a href="{% url 'users:change_password' %}">Change Password</a> <!-- Link parooli muutmise lehele -->
-    </footer>
-</body>
-</html>
+{% block content %}
+    <header>
+            <h1>{{ user_profile.username }}'s Profile</h1>
+        </header>
+
+        <section>
+            <h2>Personal Information</h2>
+            <p><strong>Username:</strong> {{ user_profile.username }}</p>
+            <p><strong>Name:</strong> {{ user_profile.first_name }}</p>
+            <p><strong>Last name:</strong> {{ user_profile.last_name }}</p>
+            <p><strong>Email:</strong> {{ user_profile.email }}</p>
+            <p><strong>Phone Number:</strong> {{ user_profile.phone_number }}</p>
+            <p><strong>Account Created At:</strong> {{ user_profile.created_at }}</p>
+        </section>
+        <section>
+            <h2>Categories</h2>
+            <div>
+                <button onclick="">View Categories</button>
+            </div>
+        </section>
+        <section>
+            <a href="{% url 'users:profile' %}">View Profile</a>
+            <a href="{% url 'users:logout' %}">Logout</a>
+        </section>
+        <footer>
+            <a href="{% url 'users:change_password' %}">Change Password</a> <!-- Link parooli muutmise lehele -->
+        </footer>
+{% endblock %}

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H&T Käsitöö</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'templates/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <div class="container-fluid">
@@ -23,11 +23,17 @@
                 </div>
             </div>
             <div class="col-3 text-end">
-                <button class="btn btn-primary">Login / Register</button>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'shopping_cart:user_orders' user_id=user.id %}"><button class="btn btn-primary">Order History</button></a>
+                    <a href="{% url 'users:logout' %}"><button class="btn btn-primary">Logout</button></a>
+                {% else %}
+                    <a href="{% url 'users:login' %}"><button class="btn btn-primary">Login / Register</button></a>
+                {% endif %}
             </div>
         </header>
 
         <div class="row">
+
             <nav class="col-md-3 col-lg-2 bg-light sidebar">
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link active" href="#">Pet Signs</a></li>
@@ -43,9 +49,9 @@
             <main class="col-md-9 col-lg-10">
                 <h1>H&T Käsitöö</h1>
                 <p>All the woodwork you ever need.</p>
-                <div class="alert alert-secondary" role="alert">
-                    Warning Sign for Dogs, Funny Cat Signs
-                </div>
+{#                <div class="alert alert-secondary" role="alert">#}
+{#                    Warning Sign for Dogs, Funny Cat Signs#}
+{#                </div>#}
                 <div class="product-list bg-white p-3 border rounded">
                     {% block content %}
                         <!-- Content goes here -->
