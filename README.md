@@ -19,3 +19,13 @@
     
     `    python manage.py migrate
     `
+
+6. Export data
+      
+      
+      python manage.py dumpdata [app_name] --output fixtures_[app_name].json
+
+7. Import data
+
+
+      python manage.py loaddata fixtures_[app_name].json
