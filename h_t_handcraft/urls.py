@@ -24,5 +24,5 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('admin/', admin.site.urls),
     path('users/', include('users.urls', namespace='users')),
-    path('cart/', include('shopping_cart.urls')),
+    path('shopping/', include('shopping_cart.urls')),
 ]

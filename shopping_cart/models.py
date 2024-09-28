@@ -12,6 +12,7 @@ class Cart(models.Model):
     cart_id = models.AutoField(primary_key=True, unique=True)
     user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f'Cart id: {self.cart_id}, user: {self.user_id}, date added: {self.date_added.strftime("%Y-%m-%d %H:%M:%S")}'
@@ -22,6 +23,7 @@ class Order(models.Model):
     date_ordered = models.DateTimeField(auto_now_add=True)
     order_id = models.AutoField(primary_key=True)
     confirmation = models.BooleanField(default=False)
+    cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f'Order id: {self.order_id}, order date: {self.date_ordered.strftime("%Y-%m-%d")}'
@@ -31,7 +33,6 @@ class CartProduct(models.Model):
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
     cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField()
-    active = models.BooleanField(default=True)
 
     def __str__(self):
         user = self.cart_id.user_id
