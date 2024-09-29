@@ -11,7 +11,6 @@ from .models import Cart, CartProduct, Order
 class UserOrders(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         orders = Order.objects.filter(user_id=self.request.user, cart__is_active=False)
-        print(orders)
         return render(request, 'user_orders.html', {'orders': orders})
 
 

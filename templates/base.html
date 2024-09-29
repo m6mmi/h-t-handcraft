@@ -38,13 +38,13 @@
 
             <nav class="col-md-3 col-lg-2 bg-light sidebar">
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link active" href="#">Pet Signs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Bathroom and WC Signs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Humorous and Novelty Signs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Home and Kitchen Signs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sauna and Relaxation Signs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Customizable Signs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                    <hr class="p-0 m-0">
+                    {% for category in categories %}
+                        <li class="nav-item active">
+                            <a class="nav-link fw-bold " aria-current="page" href="">{{ category.name }}</a>
+                        </li>
+                        <hr class="p-0 m-0">
+                    {% endfor %}
                 </ul>
             </nav>
 
