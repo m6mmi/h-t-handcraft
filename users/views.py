@@ -52,6 +52,7 @@ class LoginView(View):
             user = form.get_user()
             login(request, user)
             print(f"User logged in: {user.username}")
+
             return redirect('users:profile')
         else:
             print(form.errors)
