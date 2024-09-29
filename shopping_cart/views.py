@@ -62,6 +62,7 @@ class Checkout(LoginRequiredMixin, View):
 
         # Create a new order
         order = Order()
+        order.cart_id = Cart.objects.get(user_id=self.request.user, is_active=True).cart_id
         order.user_id = self.request.user
         order.first_name = first_name
         order.last_name = last_name
