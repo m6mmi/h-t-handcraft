@@ -1,0 +1,17 @@
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.sidebar {
+    padding-top: 20px;
+    height: 100vh;
+}
+
+.product-list {
+    min-height: 400px;
+}
+
+footer {
+    margin-top: auto;
+}

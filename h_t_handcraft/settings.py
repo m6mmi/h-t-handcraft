@@ -9,10 +9,9 @@ https://docs.djangoproject.com/en/dev/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
-
+import os.path
 from pathlib import Path
 from decouple import config
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -59,7 +58,7 @@ ROOT_URLCONF = 'h_t_handcraft.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,15 +123,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'templates/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = "users:login"
-LOGIN_REDIRECT_URL = "<app_name>:<view_name>"
+LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'users:profile'
 LOGOUT_REDIRECT_URL = LOGIN_URL
 
 EMAIL = {

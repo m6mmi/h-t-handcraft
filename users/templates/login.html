@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-      <div class="main">
-            <h1>H&T Käsitöö</h1>
-            <h3>Enter your login credentials</h3>
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="main">
            {% if form.non_field_errors %}
             <div style="color: red;">
                 {{ form.non_field_errors }}
@@ -28,5 +22,4 @@
         <a href="{% url 'users:reset_password' %}"><i>Forgot Password?</i></a>
         <p>Don't have an account? <a href="{% url 'users:register' %}">Register here</a>.</p>
       </div>
-</body>
-</html>
+{% endblock %}
