@@ -25,6 +25,16 @@ class Order(models.Model):
     confirmation = models.BooleanField(default=False)
     cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
 
+    # Shipping information
+    first_name = models.CharField(max_length=200, null=True)
+    last_name = models.CharField(max_length=200, null=True)
+    address = models.CharField(max_length=200, null=True)
+    city = models.CharField(max_length=200, null=True)
+    county = models.CharField(max_length=200, null=True)
+    zipcode = models.CharField(max_length=200, null=True)
+    country = models.CharField(max_length=200, null=True)
+    phone_number = models.CharField(max_length=200, null=True)
+
     def __str__(self):
         return f'Order id: {self.order_id}, order date: {self.date_ordered.strftime("%Y-%m-%d")}'
 

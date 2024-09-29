@@ -26,9 +26,10 @@
                 {% if user.is_authenticated %}
                     <a href="{% url 'shopping_cart:cart' %}"><button class="btn btn-outline-success">🛒</button></a>
                     <a href="{% url 'shopping_cart:user_orders' %}"><button class="btn btn-outline-success">Order History</button></a>
+                    <a href="{% url 'users:profile' %}"><button class="btn btn-outline-success">Profile</button></a>
                     <a href="{% url 'users:logout' %}"><button class="btn btn-outline-success">Logout</button></a>
                 {% else %}
-                    <a href="{% url 'users:login' %}"><button class="btn btn-primary">Login / Register</button></a>
+                    <a href="{% url 'users:login' %}"><button class="btn btn-outline-success">Login / Register</button></a>
                 {% endif %}
             </div>
         </header>

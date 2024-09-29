@@ -39,7 +39,7 @@ class DeleteFromCart(View):
     def post(self, request, pk):
         cart_product = CartProduct.objects.get(id=pk)
         cart_product.delete()
-        return redirect(reverse('shopping_cart:cart', kwargs={'cart_id': cart_product.cart_id_id}))
+        return redirect(reverse('shopping_cart:cart'))
 
 
 class Checkout(LoginRequiredMixin, View):
@@ -48,4 +48,36 @@ class Checkout(LoginRequiredMixin, View):
         contact = Address.objects.get(user_id=user_id)
 
         return render(request, 'checkout.html',
-                      {'user_id': user_id, 'contact': contact})
+                      {'contact': contact})
+
+    def post(self, request):
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        county = request.POST.get('county')
+        zipcode = request.POST.get('zipcode')
+        country = request.POST.get('country')
+        phone_number = request.POST.get('phone_number')
+
+        # Create a new order
+        order = Order()
+        order.user_id = self.request.user
+        order.first_name = first_name
+        order.last_name = last_name
+        order.email = email
+        order.address = address
+        order.city = city
+        order.county = county
+        order.zipcode = zipcode
+        order.country = country
+        order.phone_number = phone_number
+        order.save()
+
+        # CSet cart to inactive
+        cart = Cart.objects.get(user_id=self.request.user, is_active=True)
+        cart.is_active = False
+        cart.save()
+
+        return redirect(reverse('shopping_cart:user_orders'))
