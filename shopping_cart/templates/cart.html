@@ -5,7 +5,7 @@
     {% for item in cart_items %}
         <form action="{% url 'shopping_cart:delete_from_cart' item.id %}" method="post">
             {% csrf_token %}
-            <h4>{{ item.product_id.title }}
+            <h4>{{ item.product_id.title }}, {{ item.quantity }},
                 <button class="btn btn-outline-danger" type="submit">🗑️</button>
             </h4>
         </form>

@@ -30,14 +30,19 @@ class OrderView(LoginRequiredMixin, View):
 class CartView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         cart_id = Cart.objects.filter(is_active=True, user_id=self.request.user).first()
-        cart_items = CartProduct.objects.filter(cart_id=cart_id, cart_id__is_active=True)
+        cart_items = CartProduct.objects.filter(cart_id=cart_id, cart_id__is_active=True).order_by('-id')
         return render(request, 'cart.html', {'cart_items': cart_items})
 
 
 class DeleteFromCart(View):
     def post(self, request, pk):
         cart_product = CartProduct.objects.get(id=pk)
-        cart_product.delete()
+        if cart_product.quantity > 1:
+            cart_product.quantity -= 1
+            cart_product.save()
+            return redirect(reverse('shopping_cart:cart'))
+        else:
+            cart_product.delete()
         return redirect(reverse('shopping_cart:cart'))
 
 
