@@ -50,7 +50,10 @@ class DeleteFromCart(View):
 class Checkout(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         user_id = self.request.user
-        contact = Address.objects.get(user_id=user_id)
+        try:
+            contact = Address.objects.get(user_id=user_id)
+        except Address.DoesNotExist:
+            contact = None
 
         return render(request, 'checkout.html',
                       {'contact': contact})

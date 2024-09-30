@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AnonymousUser
 from django.db.models import Sum
 
 from shopping_cart.models import Cart
@@ -9,13 +10,16 @@ def categories(request):
 
 
 def cart_items_count(request):
-    try:
-        cart = Cart.objects.get(user_id=request.user, is_active=True)
-        count = {'cart_items_count': cart.cartproduct_set.aggregate(total_quantity=Sum('quantity'))['total_quantity']}
-        if count['cart_items_count'] is None:
-            count = {'cart_items_count': 0}
-        return count
-    except Cart.DoesNotExist:
+    if request.user.is_authenticated:
+        try:
+            cart = Cart.objects.get(user_id=request.user, is_active=True)
+            count = {'cart_items_count': cart.cartproduct_set.aggregate(total_quantity=Sum('quantity'))['total_quantity']}
+            if count['cart_items_count'] is None:
+                count = {'cart_items_count': 0}
+            return count
+        except Cart.DoesNotExist:
+            return {'cart_items_count': 0}
+    else:
         return {'cart_items_count': 0}
 
 

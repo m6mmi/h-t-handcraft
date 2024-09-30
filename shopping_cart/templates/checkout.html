@@ -9,28 +9,28 @@
           {% csrf_token %}
           <dl class="row">
             <dt class="col-sm-3">First name:</dt>
-            <dd class="col-sm-9"><input type="text" name="first_name" value="{{ user.first_name }}" /></dd>
+            <dd class="col-sm-9"><input type="text" name="first_name" value="{{ user.first_name }}" required/></dd>
             <dt class="col-sm-3">Last name:</dt>
-            <dd class="col-sm-9"><input type="text" name="last_name" value="{{ user.last_name }}" /></dd>
+            <dd class="col-sm-9"><input type="text" name="last_name" value="{{ user.last_name }}" required/></dd>
             <dt class="col-sm-3">E-Mail:</dt>
-            <dd class="col-sm-9"><input type="email" name="email" value="{{ user.email }}" /></dd>
+            <dd class="col-sm-9"><input type="email" name="email" value="{{ user.email }}" required/></dd>
           </dl>
           <h6 class="card-subtitle mb-2 text-muted">Address</h6>
           <dl class="row">
             <dt class="col-sm-3">Address:</dt>
-            <dd class="col-sm-9"><input type="text" name="address" value="{{ contact.address }}" /></dd>
+            <dd class="col-sm-9"><input type="text" name="address" value="{{ contact.address }}" required/></dd>
             <dt class="col-sm-3">City:</dt>
-            <dd class="col-sm-9"><input type="text" name="city" value="{{ contact.city }}" /></dd>
+            <dd class="col-sm-9"><input type="text" name="city" value="{{ contact.city }}" required/></dd>
             <dt class="col-sm-3">County:</dt>
-            <dd class="col-sm-9"><input type="text" name="county" value="{{ contact.county }}" /></dd>
+            <dd class="col-sm-9"><input type="text" name="county" value="{{ contact.county }}" required/></dd>
             <dt class="col-sm-3">Zipcode:</dt>
-            <dd class="col-sm-9"><input type="text" name="zipcode" value="{{ contact.zipcode }}" /></dd>
+            <dd class="col-sm-9"><input type="text" name="zipcode" value="{{ contact.zipcode }}" required/></dd>
             <dt class="col-sm-3">Country:</dt>
-            <dd class="col-sm-9"><input type="text" name="country" value="{{ contact.country }}" /></dd>
+            <dd class="col-sm-9"><input type="text" name="country" value="{{ contact.country }}" required/></dd>
           </dl>
           <dl class="row">
             <dt class="col-sm-3">Phone:</dt>
-            <dd class="col-sm-9"><input type="tel" name="phone_number" value="{{ contact.phone_number }}" /></dd>
+            <dd class="col-sm-9"><input type="tel" name="phone_number" value="{{ contact.phone_number }}" required/></dd>
           </dl>
           <button type="submit" class="btn btn-outline-success">Place Order</button>
         </form>
