@@ -2,7 +2,7 @@
 
 {% block content %}
     {% for order in orders %}
-        <a href="{% url 'shopping_cart:order' order.order_id %}">
+        <a href="{% url 'shopping_cart:order' order.cart_id %}">
             <h4>{{ order }}</h4>
         </a>
     {% endfor %}

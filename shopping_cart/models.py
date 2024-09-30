@@ -42,7 +42,7 @@ class Order(models.Model):
 class CartProduct(models.Model):
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
     cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    quantity = models.PositiveSmallIntegerField()
+    quantity = models.PositiveSmallIntegerField(null=True)
 
     def __str__(self):
         user = self.cart_id.user_id

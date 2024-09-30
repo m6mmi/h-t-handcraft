@@ -17,6 +17,7 @@ class UserOrders(LoginRequiredMixin, View):
 class OrderView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         cart_id = self.kwargs.get('cart_id')
+        print(cart_id)
         cart_items = CartProduct.objects.filter(cart_id=cart_id)
         try:
             cart = get_object_or_404(Cart, cart_id=cart_id)
