@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Checkout</h1>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">User Information</h5>
+        <form method="post">
+          {% csrf_token %}
+          <dl class="row">
+            <dt class="col-sm-3">First name:</dt>
+            <dd class="col-sm-9"><input type="text" name="first_name" value="{{ user.first_name }}" /></dd>
+            <dt class="col-sm-3">Last name:</dt>
+            <dd class="col-sm-9"><input type="text" name="last_name" value="{{ user.last_name }}" /></dd>
+            <dt class="col-sm-3">E-Mail:</dt>
+            <dd class="col-sm-9"><input type="email" name="email" value="{{ user.email }}" /></dd>
+          </dl>
+          <h6 class="card-subtitle mb-2 text-muted">Address</h6>
+          <dl class="row">
+            <dt class="col-sm-3">Address:</dt>
+            <dd class="col-sm-9"><input type="text" name="address" value="{{ contact.address }}" /></dd>
+            <dt class="col-sm-3">City:</dt>
+            <dd class="col-sm-9"><input type="text" name="city" value="{{ contact.city }}" /></dd>
+            <dt class="col-sm-3">County:</dt>
+            <dd class="col-sm-9"><input type="text" name="county" value="{{ contact.county }}" /></dd>
+            <dt class="col-sm-3">Zipcode:</dt>
+            <dd class="col-sm-9"><input type="text" name="zipcode" value="{{ contact.zipcode }}" /></dd>
+            <dt class="col-sm-3">Country:</dt>
+            <dd class="col-sm-9"><input type="text" name="country" value="{{ contact.country }}" /></dd>
+          </dl>
+          <dl class="row">
+            <dt class="col-sm-3">Phone:</dt>
+            <dd class="col-sm-9"><input type="tel" name="phone_number" value="{{ contact.phone_number }}" /></dd>
+          </dl>
+          <button type="submit" class="btn btn-outline-success">Place Order</button>
+        </form>
+      </div>
+    </div>
+{% endblock %}

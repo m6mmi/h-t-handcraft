@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    Cart ID: {{ message }}
+    {% for item in cart_items %}
+        <form action="{% url 'shopping_cart:delete_from_cart' item.id %}" method="post">
+            {% csrf_token %}
+            <h4>{{ item.product_id.title }}, {{ item.quantity }},
+                <button class="btn btn-outline-danger" type="submit">🗑️</button>
+            </h4>
+        </form>
+    {% endfor %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'shopping_cart:checkout' %}"><button class="btn btn-outline-success">Checkout</button></a>
+    {% else %}
+        <a href="{% url 'users:login' %}"><button class="btn btn-primary">Login / Register</button></a>
+    {% endif %}
+{% endblock %}

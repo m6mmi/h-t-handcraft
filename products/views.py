@@ -1,24 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.views import View
+from django.views.generic import ListView, DetailView
+from .models import Product, Category, Subcategory
 
-# Product list CBV (Class-Based View)
 
-from django.views.generic import ListView
-from .models import Product
-
-class ProductListView(ListView):
+class CategoryProductsView(ListView):
     model = Product
-    template_name = 'product_list.html'  # Tepliit
-    context_object_name = 'products'  # Templiidis kasutatud konteksti nimi
-    paginate_by = 10  # Optional: Tooteid leheküljel
+    template_name = 'product_list.html'
+    context_object_name = 'products'
+    paginate_by = 10
 
     def get_queryset(self):
-        # Customize the queryset if necessary (e.g., filtering, ordering)
-        return Product.objects.filter(stock__gt=0).order_by('-id')
+        category = get_object_or_404(Category, id=self.kwargs['id'])
+        return Product.objects.filter(subcategory__category=category)
 
-from django.views.generic import DetailView
-from .models import Product # Kas on vaja korduvalt lisada?
 
 class ProductDetailView(DetailView):
     model = Product
-    template_name = 'product_detail.html'  # Templiit
+    template_name = 'product_detail.html'
     context_object_name = 'product'
+
+
+class IndexView(View):
+    def get(self, request):
+        return render(request, 'index.html')

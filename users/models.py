@@ -2,13 +2,14 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
+# Create your models here.
+
+
 class Address(models.Model):
-    street = models.CharField(max_length=50)
-    house_number = models.CharField(max_length=5)
-    postal_code = models.CharField(max_length=5)
-    apartment_number = models.CharField(max_length=5)
+    address = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
+    zipcode = models.CharField(max_length=10)
+    county = models.CharField(max_length=25)
     country = models.CharField(max_length=50)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.street
+    phone_number = models.CharField(max_length=15, null=True)
