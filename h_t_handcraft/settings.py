@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 import os.path
 from pathlib import Path
 from decouple import config
+import certifi
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -135,11 +136,12 @@ LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'users:profile'
 LOGOUT_REDIRECT_URL = LOGIN_URL
 
-EMAIL = {
-    "HOST": "smtp.gmail.com",
-    "HOST_USER": "<EMAIL>",
-    "HOST_PASSWORD": "<PASSWORD>",
-    "USE_TLS": True,
-    "BACKEND": "django.core.mail.backends",
-    "PORT": 587
-}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+
+os.environ['SSL_CERT_FILE'] = certifi.where()
