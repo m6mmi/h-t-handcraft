@@ -18,6 +18,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+
+from h_t_handcraft.views import AboutUsView, TermsAndConditionsView, WeatherView
 from products.views import IndexView
 
 urlpatterns = [
@@ -25,6 +27,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls', namespace='users')),
     path('shopping/', include('shopping_cart.urls')),
+    path('about/', AboutUsView.as_view(), name='about'),
+    path('terms-and-conditions/', TermsAndConditionsView.as_view(), name='terms_and_conditions'),
+    path('weather/', WeatherView.as_view(), name='weather'),
 
     path('reset_password/', auth_views.PasswordResetView.as_view
     (template_name="reset_password.html"), name='reset_password'),

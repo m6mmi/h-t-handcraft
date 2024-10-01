@@ -5,3 +5,4 @@ python-decouple==3.8
 sqlparse==0.5.1
 
 certifi~=2024.8.30
+requests==2.32.3

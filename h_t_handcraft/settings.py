@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'products.context_processors.categories',
                 'products.context_processors.cart_items_count',
+                'products.context_processors.get_weather',
             ],
         },
     },

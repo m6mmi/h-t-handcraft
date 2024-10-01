@@ -34,6 +34,10 @@
                 {% else %}
                     <a href="{% url 'users:login' %}"><button class="btn btn-outline-success">Login / Register</button></a>
                 {% endif %}
+                <div class="weather-info">
+                    <p>Current temperature in {{ weather_data.city }}: {{ weather_data.temperature }}°C</p>
+                    <p>{{ weather_data.description }}</p>
+                </div>
             </div>
         </header>
 
