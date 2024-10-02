@@ -17,7 +17,6 @@ class UserOrders(LoginRequiredMixin, View):
 class OrderView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         cart_id = self.kwargs.get('cart_id')
-        print(cart_id)
         cart_items = CartProduct.objects.filter(cart_id=cart_id)
         try:
             cart = get_object_or_404(Cart, cart_id=cart_id)
@@ -41,7 +40,6 @@ class DeleteFromCart(View):
         if cart_product.quantity > 1:
             cart_product.quantity -= 1
             cart_product.save()
-            return redirect(reverse('shopping_cart:cart'))
         else:
             cart_product.delete()
         return redirect(reverse('shopping_cart:cart'))

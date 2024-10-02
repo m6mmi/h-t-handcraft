@@ -1,13 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout
-from django.views.generic import DetailView, TemplateView
+from django.views.generic import DetailView
 
 from .forms import RegistrationForm
-from django.contrib.auth.views import PasswordChangeView, PasswordResetView
+from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from .models import User
 
@@ -28,15 +27,12 @@ class RegisterView(View):
             user.last_name = form.cleaned_data.get('last_name')
             user.email = form.cleaned_data.get('email')
             user.save()
-            phone_number = form.cleaned_data.get('phone_number')
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            if user is not None:
+            if user:
                 login(request, user)
                 return redirect('users:profile')
-            else:
-                return render(request, 'register.html', {'form': form})
         return render(request, 'register.html', {'form': form})
 
 

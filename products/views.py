@@ -1,11 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView, DetailView
 
 from shopping_cart.models import Cart, CartProduct
-from .models import Product, Category, Subcategory
+from .models import Product, Category
 
 
 class CategoryProductsView(ListView):
@@ -15,7 +14,8 @@ class CategoryProductsView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        category = get_object_or_404(Category, id=self.kwargs['id'])
+        # add try exception handling
+        category = get_object_or_404(Category, id=self.kwargs.get('id'))
         return Product.objects.filter(subcategory__category=category)
 
 
