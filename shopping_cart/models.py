@@ -1,10 +1,8 @@
-from itertools import product
-
-from products.models import Product
-
 from django.db import models
-from users.models import User
+
 from products.models import Product
+from products.models import Product
+from users.models import User
 
 
 # Create your models here.
@@ -25,7 +23,7 @@ class Order(models.Model):
 
     # Shipping information
 
-    # Create a separate model for shipping and billing
+    # TODO: Create a separate model for shipping and billing
     first_name = models.CharField(max_length=64, null=True)
     last_name = models.CharField(max_length=64, null=True)
     address = models.CharField(max_length=200, null=True)
@@ -36,7 +34,7 @@ class Order(models.Model):
     phone_number = models.CharField(max_length=16, null=True)
 
     def __str__(self):
-        return f'Order id: {self.id}, order date: {self.date_ordered.strftime("%Y-%m-%d")}'
+        return f'Order id: {self.id}, order date: {self.date_ordered.strftime("%Y-%m-%d")}, cart: {self.cart.id}'
 
 
 class CartProduct(models.Model):

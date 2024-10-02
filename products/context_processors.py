@@ -1,4 +1,3 @@
-from django.contrib.auth.models import AnonymousUser
 from django.db.models import Sum
 
 from shopping_cart.models import Cart
@@ -6,7 +5,7 @@ from .models import Category
 import requests
 
 
-def categories():
+def categories(request):
     return {'categories': Category.objects.all()}
 
 
@@ -27,7 +26,7 @@ def cart_items_count(request):
     return {'cart_items_count': 0}
 
 
-def get_weather():
+def get_weather(request):
 
     api_key = "328b03be55b1e37111ff631fe5786946"
     location = "Tallinn"

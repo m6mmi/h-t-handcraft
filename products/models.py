@@ -1,5 +1,3 @@
-# Lisatud 19.09.24
-
 from django.db import models
 
 

@@ -3,12 +3,17 @@
 {% block content %}
     Cart ID: {{ message }}
     {% for item in cart_items %}
-        <form action="{% url 'shopping_cart:delete_from_cart' item.id %}" method="post">
-            {% csrf_token %}
-            <h4>{{ item.product_id.title }}, {{ item.quantity }},
-                <button class="btn btn-outline-danger" type="submit">🗑️</button>
-            </h4>
-        </form>
+        <div class="d-flex align-items-center">
+            <h4 class="mr-3">{{ item.product.title }}, {{ item.quantity }}</h4>
+            <form action="{% url 'shopping_cart:delete_from_cart' item.id %}" method="post" class="ml-auto">
+                {% csrf_token %}
+                <button class="btn btn-outline-danger btn-sm mx-2" type="submit">-</button>
+            </form>
+            <form action="{% url 'products:add_to_cart' item.product.id %}" method="post" class="ml-auto">
+                {% csrf_token %}
+                <button class="btn btn-outline-success btn-sm" type="submit">+</button>
+            </form>
+        </div>
     {% endfor %}
     {% if user.is_authenticated %}
         <a href="{% url 'shopping_cart:checkout' %}"><button class="btn btn-outline-success">Checkout</button></a>

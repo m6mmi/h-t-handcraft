@@ -24,9 +24,11 @@
             </div>
             <div class="col-3 text-end">
                 {% if user.is_authenticated %}
-                    <a href="{% url 'shopping_cart:cart' %}"><button class="btn btn-outline-success">
-                        🛒
-                        <span class="badge bg-secondary">{{ cart_items_count }}</span></button>
+                    <a href="{% url 'shopping_cart:cart' %}">
+                        <button class="btn btn-outline-success">
+                            🛒
+                            <span class="badge bg-secondary">{{ cart_items_count }}</span>
+                        </button>
                     </a>
                     <a href="{% url 'shopping_cart:user_orders' %}"><button class="btn btn-outline-success">Order History</button></a>
                     <a href="{% url 'users:profile' %}"><button class="btn btn-outline-success">Profile</button></a>

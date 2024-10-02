@@ -14,7 +14,7 @@ class CategoryProductsView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        # add try exception handling
+        # TODO add try exception handling
         category = get_object_or_404(Category, id=self.kwargs.get('id'))
         return Product.objects.filter(subcategory__category=category)
 
@@ -33,12 +33,16 @@ class IndexView(View):
 class AddToCart(LoginRequiredMixin, View):
     def post(self, request, pk):
         product = get_object_or_404(Product, id=pk)
-        cart = Cart.objects.get_or_create(user_id=request.user, is_active=True)
-        cart_product, created = CartProduct.objects.get_or_create(product_id=product, cart_id=cart[0])
+        cart = Cart.objects.get_or_create(user_id=request.user.id, is_active=True)
+        print(cart)
+        cart_product, created = CartProduct.objects.get_or_create(product_id=product.id, cart=cart[0])
         if created:
             cart_product.quantity = 1
         else:
-            cart_product.quantity += 1
+            if product.stock > cart_product.quantity:
+                cart_product.quantity += 1
+            else:
+                return redirect(request.META['HTTP_REFERER'])
         cart_product.save()
 
         return redirect(request.META['HTTP_REFERER'])

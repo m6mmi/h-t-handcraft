@@ -1,6 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
@@ -16,21 +15,17 @@ class UserOrders(LoginRequiredMixin, View):
 
 class OrderView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
-        cart_id = self.kwargs.get('cart_id')
-        cart_items = CartProduct.objects.filter(cart_id=cart_id)
-        try:
-            cart = get_object_or_404(Cart, cart_id=cart_id)
-        except Http404:
-            return redirect(reverse('index'))
-        if cart.is_active:
-            return redirect(reverse('index'))
+        order_id = self.kwargs.get('id')
+        cart_items = CartProduct.objects.filter(cart_id__order=order_id, cart__is_active=False).order_by('-id')
         return render(request, 'order.html', {'cart_items': cart_items})
 
 
 class CartView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
-        cart_id = Cart.objects.filter(is_active=True, user_id=self.request.user).first()
-        cart_items = CartProduct.objects.filter(cart_id=cart_id, cart_id__is_active=True).order_by('-id')
+        cart_id = Cart.objects.filter(is_active=True, user=self.request.user).first()
+        cart_items = CartProduct.objects.filter(cart=cart_id, cart__is_active=True).order_by('-id')
+        if not cart_items:
+            return render(request, 'cart.html')
         return render(request, 'cart.html', {'cart_items': cart_items})
 
 
@@ -47,9 +42,9 @@ class DeleteFromCart(View):
 
 class Checkout(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
-        user_id = self.request.user
+        user_id = self.request.user.id
         try:
-            contact = Address.objects.get(user_id=user_id)
+            contact = Address.objects.get(user=user_id)
         except Address.DoesNotExist:
             contact = None
 
@@ -69,8 +64,8 @@ class Checkout(LoginRequiredMixin, View):
 
         # Create a new order
         order = Order()
-        order.cart_id = Cart.objects.get(user_id=self.request.user, is_active=True).cart_id
-        order.user_id = self.request.user
+        order.cart = Cart.objects.get(user_id=self.request.user, is_active=True)
+        order.user = self.request.user
         order.first_name = first_name
         order.last_name = last_name
         order.email = email
