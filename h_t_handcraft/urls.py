@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-from h_t_handcraft.views import AboutUsView, TermsAndConditionsView, WeatherView
+from h_t_handcraft.views import AboutUsView, TermsAndConditionsView
 from products.views import IndexView
 
 urlpatterns = [
@@ -29,7 +29,6 @@ urlpatterns = [
     path('shopping/', include('shopping_cart.urls')),
     path('about/', AboutUsView.as_view(), name='about'),
     path('terms-and-conditions/', TermsAndConditionsView.as_view(), name='terms_and_conditions'),
-    path('weather/', WeatherView.as_view(), name='weather'),
 
     path('reset_password/', auth_views.PasswordResetView.as_view
     (template_name="reset_password.html"), name='reset_password'),

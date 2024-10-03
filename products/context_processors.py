@@ -1,5 +1,6 @@
 from django.db.models import Sum
 
+from h_t_handcraft.settings import WEATHER_API_KEY
 from shopping_cart.models import Cart
 from .models import Category
 import requests
@@ -21,14 +22,13 @@ def cart_items_count(request):
             if not count['cart_items_count']:
                 count = {'cart_items_count': 0}
             return count
-        except Cart.DoesNotExist:
+        except Cart.DoesNotExist or None:
             return {'cart_items_count': 0}
     return {'cart_items_count': 0}
 
 
 def get_weather(request):
-
-    api_key = "328b03be55b1e37111ff631fe5786946"
+    api_key = WEATHER_API_KEY
     location = "Tallinn"
     weather_url = f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={api_key}&units=metric"
 

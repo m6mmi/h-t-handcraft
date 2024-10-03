@@ -149,3 +149,5 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 os.environ['SSL_CERT_FILE'] = certifi.where()
+
+WEATHER_API_KEY = config('WEATHER_API_KEY')

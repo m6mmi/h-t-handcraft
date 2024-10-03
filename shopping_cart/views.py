@@ -37,7 +37,7 @@ class DeleteFromCart(View):
             cart_product.save()
         else:
             cart_product.delete()
-        return redirect(reverse('shopping_cart:cart'))
+        return redirect(request.META['HTTP_REFERER'])
 
 
 class Checkout(LoginRequiredMixin, View):

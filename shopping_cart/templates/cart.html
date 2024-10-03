@@ -1,22 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-    Cart ID: {{ message }}
     {% for item in cart_items %}
         <div class="d-flex align-items-center">
             <h4 class="mr-3">{{ item.product.title }}, {{ item.quantity }}</h4>
-            <form action="{% url 'shopping_cart:delete_from_cart' item.id %}" method="post" class="ml-auto">
-                {% csrf_token %}
-                <button class="btn btn-outline-danger btn-sm mx-2" type="submit">-</button>
-            </form>
             <form action="{% url 'products:add_to_cart' item.product.id %}" method="post" class="ml-auto">
                 {% csrf_token %}
-                <button class="btn btn-outline-success btn-sm" type="submit">+</button>
+                <button class="btn btn-outline-success btn-sm mx-2" type="submit">+</button>
+            </form>
+            <form action="{% url 'shopping_cart:delete_from_cart' item.id %}" method="post" class="ml-auto">
+                {% csrf_token %}
+                <button class="btn btn-outline-danger btn-sm" type="submit">-</button>
             </form>
         </div>
     {% endfor %}
     {% if user.is_authenticated %}
-        <a href="{% url 'shopping_cart:checkout' %}"><button class="btn btn-outline-success">Checkout</button></a>
+        {% if cart_items %}
+            <a href="{% url 'shopping_cart:checkout' %}"><button class="btn btn-outline-success">Checkout</button></a>
+        {% else %}
+            <h4>No items in cart</h4>
+        {% endif %}
     {% else %}
         <a href="{% url 'users:login' %}"><button class="btn btn-primary">Login / Register</button></a>
     {% endif %}

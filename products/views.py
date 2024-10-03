@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 
 from shopping_cart.models import Cart, CartProduct
 from .models import Product, Category
@@ -14,9 +14,11 @@ class CategoryProductsView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        # TODO add try exception handling
-        category = get_object_or_404(Category, id=self.kwargs.get('id'))
-        return Product.objects.filter(subcategory__category=category)
+        try:
+            category = get_object_or_404(Category, id=self.kwargs.get('id'))
+            return Product.objects.filter(subcategory__category=category)
+        except Exception as e:
+            return Product.objects.none()
 
 
 class ProductDetailView(DetailView):
@@ -34,7 +36,6 @@ class AddToCart(LoginRequiredMixin, View):
     def post(self, request, pk):
         product = get_object_or_404(Product, id=pk)
         cart = Cart.objects.get_or_create(user_id=request.user.id, is_active=True)
-        print(cart)
         cart_product, created = CartProduct.objects.get_or_create(product_id=product.id, cart=cart[0])
         if created:
             cart_product.quantity = 1
@@ -46,3 +47,11 @@ class AddToCart(LoginRequiredMixin, View):
         cart_product.save()
 
         return redirect(request.META['HTTP_REFERER'])
+
+
+class AboutUsView(TemplateView):
+    template_name = 'about_us.html'
+
+
+class TermsAndConditionsView(TemplateView):
+    template_name = 'terms_and_conditions.html'
