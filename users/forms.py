@@ -40,3 +40,9 @@ class ChangePasswordForm(forms.Form):
         old_password = self.cleaned_data['old_password']
         if old_password != self.cleaned_data['new_password']:
             raise forms.ValidationError("")
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
