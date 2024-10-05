@@ -20,12 +20,12 @@
                 </div>
             </div>
             <div class="col-6">
-                <div class="input-group">
-                    <label>
-                        <input type="text" class="form-control" placeholder="Search bar">
-                    </label>
-                    <button class="btn btn-outline-secondary" type="button">Search</button>
-                </div>
+                <form action="{% url 'products:search' %}" method="get" aria-label="Search for products">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="q" placeholder="Search for products" aria-label="Product search">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </div>
+                </form>
             </div>
             <div class="col-3 text-end">
                 {% if user.is_authenticated %}

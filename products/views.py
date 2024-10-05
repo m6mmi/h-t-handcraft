@@ -55,3 +55,16 @@ class AboutUsView(TemplateView):
 
 class TermsAndConditionsView(TemplateView):
     template_name = 'terms_and_conditions.html'
+
+
+class ProductSearchView(ListView):
+    model = Product
+    template_name = 'product_list.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Product.objects.filter(title__icontains=query)
+        else:
+            return Product.objects.none()

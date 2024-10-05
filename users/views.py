@@ -11,9 +11,6 @@ from django.urls import reverse_lazy
 from .models import User
 
 
-# Create your views here.
-
-
 class RegisterView(View):
     def get(self, request):
         form = RegistrationForm()
