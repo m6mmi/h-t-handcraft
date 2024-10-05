@@ -128,7 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = 'templates/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static'),
+                    os.path.join(BASE_DIR, 'users/templates/static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field

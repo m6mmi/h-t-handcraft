@@ -1,33 +1,41 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-    <header>
+
+<div class="container mt-5">
+    <header class="text-center mb-4">
         <h1>{{ user_profile.username }}'s Profile</h1>
+        <p class="lead text-muted">Manage your personal information and account settings.</p>
     </header>
 
-    <section>
-        <h2>Personal Information</h2>
-        <p><strong>Username:</strong> {{ user_profile.username }}</p>
-        <p><strong>Name:</strong> {{ user_profile.first_name }}</p>
-        <p><strong>Last name:</strong> {{ user_profile.last_name }}</p>
-        <p><strong>Email:</strong> {{ user_profile.email }}</p>
-        <p><strong>Phone Number:</strong> {{ user_profile.phone_number }}</p>
-        <p><strong>Account Created At:</strong> {{ user_profile.created_at }}</p>
-    </section>
-
-    <section>
-        <h2>Categories</h2>
-        <div>
-            <button onclick="">View Categories</button>
+    <section class="mb-5">
+        <h2 class="h5 text-secondary">Personal Information</h2>
+        <div class="card shadow border-light">
+            <div class="card-body">
+                <p><strong>Username:</strong> {{ user_profile.username }}</p>
+                <p><strong>Name:</strong> {{ user_profile.first_name }}</p>
+                <p><strong>Last name:</strong> {{ user_profile.last_name }}</p>
+                <p><strong>Email:</strong> {{ user_profile.email }}</p>
+                <p><strong>Phone Number:</strong> {{ user_profile.phone_number }}</p>
+                <p><strong>Account Created At:</strong> {{ user_profile.created_at }}</p>
+            </div>
         </div>
     </section>
 
-    <section>
-        <a href="{% url 'users:update_profile' %}">Edit Profile</a>
-        <a href="{% url 'users:logout' %}">Logout</a>
+    <section class="mb-5 text-center">
+        <h2 class="h5 text-secondary">Categories</h2>
+        <button class="btn custom-btn" onclick="">View Categories</button>
     </section>
 
-    <footer>
-        <a href="{% url 'users:change_password' %}">Change Password</a>
-    </footer>
+    <section class="text-center">
+        <h2 class="h5 text-secondary">Account Actions</h2>
+        <div class="d-flex justify-content-center flex-wrap">
+            <a class="btn custom-btn" href="{% url 'users:update_profile' %}">Edit Profile</a>
+            <a class="btn custom-btn" href="{% url 'users:logout' %}">Logout</a>
+            <a class="btn custom-btn" href="{% url 'users:change_password' %}">Change Password</a>
+        </div>
+    </section>
+</div>
+
 {% endblock %}
+
