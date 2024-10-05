@@ -13,12 +13,14 @@
         <header class="row bg-light py-3 align-items-center">
             <div class="col-3">
                 <div class="logo">
-                    <img src="https://placehold.co/150x100">
+                    <img src="{% static 'img/logo.png' %}" alt="Logo" style="max-width: 150px;">
                 </div>
             </div>
             <div class="col-6">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search bar">
+                    <label>
+                        <input type="text" class="form-control" placeholder="Search bar">
+                    </label>
                     <button class="btn btn-outline-secondary" type="button">Search</button>
                 </div>
             </div>
@@ -30,7 +32,7 @@
                             <span class="badge bg-secondary">{{ cart_items_count }}</span>
                         </button>
                     </a>
-                    <a href="{% url 'shopping_cart:user_orders' %}"><button class="btn btn-outline-success">Order History</button></a>
+                    <a href="{% url 'users:user_orders' %}"><button class="btn btn-outline-success">Order History</button></a>
                     <a href="{% url 'users:profile' %}"><button class="btn btn-outline-success">Profile</button></a>
                     <a href="{% url 'users:logout' %}"><button class="btn btn-outline-success">Logout</button></a>
                 {% else %}
