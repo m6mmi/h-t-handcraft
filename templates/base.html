@@ -14,7 +14,9 @@
         <header class="row bg-light py-3 align-items-center">
             <div class="col-3">
                 <div class="logo">
-                    <img src="{% static 'img/logo.png' %}" alt="Logo" style="max-width: 150px;">
+                     <a href="{% url 'index' %}">
+                        <img src="{% static 'img/logo.png' %}" alt="Logo" style="max-width: 150px;">
+                    </a>
                 </div>
             </div>
             <div class="col-6">
@@ -58,7 +60,12 @@
                         <hr class="p-0 m-0">
                     {% endfor %}
                 </ul>
+
+
+                    <a class="fixed-bottom m-5" href="{% url 'about' %}">About Us</a>
+
             </nav>
+
 
             <main class="col-md-9 col-lg-10">
                 <h1>H&T Käsitöö</h1>

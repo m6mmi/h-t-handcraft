@@ -29,7 +29,6 @@ urlpatterns = [
     path('shopping/', include('shopping_cart.urls')),
     path('about/', AboutUsView.as_view(), name='about'),
     path('terms-and-conditions/', TermsAndConditionsView.as_view(), name='terms_and_conditions'),
-
     path('reset_password/', auth_views.PasswordResetView.as_view
     (template_name="reset_password.html"), name='reset_password'),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view
