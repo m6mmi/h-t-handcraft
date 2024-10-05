@@ -1,20 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
- <div class="container">
+<div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <ul class="list-group">
-        {% for product in products %}
-          <li class="list-group-item">
-            <h2 class="mb-0 text-muted">{{ product.title }}</h2>
-            <p class="text-muted small">{{ product.description }}</p>
-            <p class="text-primary small">Price: ${{ product.price }}</p>
-            <p class="text-secondary small">Stock: {{ product.stock }}</p>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+    {% for product in products %}
+      <div class="col-md-4">
+        <div class="card">
+          <a href="{% url 'products:detail' product.id %}">
+              <img src="{{ product.image_path }}" alt="{{ product.title }}" class="product-list-image">
+              <div class="card-body">
+                <h2 class="mb-0 text-muted">{{ product.title }}</h2>
+                <p class="text-muted small">{{ product.description }}</p>
+                <p class="text-primary small">Price: ${{ product.price }}</p>
+                <p class="text-secondary small">Stock: {{ product.stock }}</p>
+                {% if user.is_authenticated %}
+                  <form action="{% url 'products:add_to_cart' product.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-success">Add to cart</button>
+                  </form>
+                {% endif %}
+              </div>
+            </a>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 </div>
 

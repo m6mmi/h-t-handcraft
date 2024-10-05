@@ -1,11 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404
-from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Sum, F
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
-from users.models import Address
-from .models import Cart, CartProduct, Order
+from users.models import Order
+from .models import Cart, CartProduct
 
 
 class UserOrders(LoginRequiredMixin, View):
@@ -16,22 +16,23 @@ class UserOrders(LoginRequiredMixin, View):
 
 class OrderView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
-        cart_id = self.kwargs.get('cart_id')
-        cart_items = CartProduct.objects.filter(cart_id=cart_id)
-        try:
-            cart = get_object_or_404(Cart, cart_id=cart_id)
-        except Http404:
-            return redirect(reverse('index'))
-        if cart.is_active:
-            return redirect(reverse('index'))
+        order_id = self.kwargs.get('id')
+        cart_items = CartProduct.objects.filter(cart_id__order=order_id, cart__is_active=False).order_by('-id')
         return render(request, 'order.html', {'cart_items': cart_items})
 
 
 class CartView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
-        cart_id = Cart.objects.filter(is_active=True, user_id=self.request.user).first()
-        cart_items = CartProduct.objects.filter(cart_id=cart_id, cart_id__is_active=True).order_by('-id')
-        return render(request, 'cart.html', {'cart_items': cart_items})
+        cart_id = Cart.objects.filter(is_active=True, user=self.request.user).first()
+        cart_items = CartProduct.objects.filter(cart=cart_id, cart__is_active=True).order_by('-id')
+        total_price = cart_items.aggregate(total_price=Sum(F('quantity') * F('product__price')))
+
+        if not cart_items:
+            return render(request, 'cart.html')
+        return render(request, 'cart.html', {
+                                                    'cart_items': cart_items,
+                                                    'total_price': total_price
+                                                })
 
 
 class DeleteFromCart(View):
@@ -40,19 +41,14 @@ class DeleteFromCart(View):
         if cart_product.quantity > 1:
             cart_product.quantity -= 1
             cart_product.save()
-            return redirect(reverse('shopping_cart:cart'))
         else:
             cart_product.delete()
-        return redirect(reverse('shopping_cart:cart'))
+        return redirect(request.META['HTTP_REFERER'])
 
 
 class Checkout(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
-        user_id = self.request.user
-        contact = Address.objects.get(user_id=user_id)
-
-        return render(request, 'checkout.html',
-                      {'contact': contact})
+        return render(request, 'checkout.html')
 
     def post(self, request):
         first_name = request.POST.get('first_name')
@@ -67,8 +63,8 @@ class Checkout(LoginRequiredMixin, View):
 
         # Create a new order
         order = Order()
-        order.cart_id = Cart.objects.get(user_id=self.request.user, is_active=True).cart_id
-        order.user_id = self.request.user
+        order.cart = Cart.objects.get(user_id=self.request.user, is_active=True)
+        order.user = self.request.user
         order.first_name = first_name
         order.last_name = last_name
         order.email = email
@@ -85,4 +81,4 @@ class Checkout(LoginRequiredMixin, View):
         cart.is_active = False
         cart.save()
 
-        return redirect(reverse('shopping_cart:user_orders'))
+        return redirect(reverse('users:user_orders'))

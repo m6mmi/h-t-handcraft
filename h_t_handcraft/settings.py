@@ -67,7 +67,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'products.context_processors.categories'
+                'products.context_processors.categories',
+                'products.context_processors.cart_items_count',
+                'products.context_processors.get_weather',
             ],
         },
     },
@@ -126,7 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = 'templates/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static'),
+                    os.path.join(BASE_DIR, 'users/templates/static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field
@@ -147,3 +150,5 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 os.environ['SSL_CERT_FILE'] = certifi.where()
+
+WEATHER_API_KEY = config('WEATHER_API_KEY')
