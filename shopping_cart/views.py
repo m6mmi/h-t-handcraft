@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum, F
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -24,9 +25,14 @@ class CartView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         cart_id = Cart.objects.filter(is_active=True, user=self.request.user).first()
         cart_items = CartProduct.objects.filter(cart=cart_id, cart__is_active=True).order_by('-id')
+        total_price = cart_items.aggregate(total_price=Sum(F('quantity') * F('product__price')))
+
         if not cart_items:
             return render(request, 'cart.html')
-        return render(request, 'cart.html', {'cart_items': cart_items})
+        return render(request, 'cart.html', {
+                                                    'cart_items': cart_items,
+                                                    'total_price': total_price
+                                                })
 
 
 class DeleteFromCart(View):

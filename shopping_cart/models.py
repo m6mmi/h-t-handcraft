@@ -19,6 +19,9 @@ class CartProduct(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField(null=True)
 
+    def total_item_price(self):
+        return self.quantity * self.product.price
+
     def __str__(self):
         user = self.cart.user
         return (f'[{user.first_name} {user.last_name}], {self.product.title}, {self.product.price}, '

@@ -20,3 +20,10 @@ footer {
     max-width: 180px;
 }
 
+.product-list-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+}
