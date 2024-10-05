@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
-from users.models import Address
-from .models import Cart, CartProduct, Order
+from users.models import Address, Order
+from .models import Cart, CartProduct
 
 
 class UserOrders(LoginRequiredMixin, View):
@@ -42,14 +42,7 @@ class DeleteFromCart(View):
 
 class Checkout(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
-        user_id = self.request.user.id
-        try:
-            contact = Address.objects.get(user=user_id)
-        except Address.DoesNotExist:
-            contact = None
-
-        return render(request, 'checkout.html',
-                      {'contact': contact})
+        return render(request, 'checkout.html')
 
     def post(self, request):
         first_name = request.POST.get('first_name')
@@ -82,4 +75,4 @@ class Checkout(LoginRequiredMixin, View):
         cart.is_active = False
         cart.save()
 
-        return redirect(reverse('shopping_cart:user_orders'))
+        return redirect(reverse('users:user_orders'))
