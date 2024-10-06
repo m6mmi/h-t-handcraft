@@ -10,96 +10,143 @@
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
 <body>
-    <div class="container-fluid">
-        <header class="row bg-light py-3 align-items-center">
-            <div class="col-3">
-                <div class="logo">
-                     <a href="{% url 'index' %}">
-                        <img class="logo-img" src="{% static 'img/logo_no_background.png' %}" alt="Logo">
-                    </a>
+<div class="container-fluid">
+    <header class="row bg-light py-3 align-items-center">
+        <div class="col-3">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img class="logo-img" src="{% static 'img/logo_no_background.png' %}" alt="Logo">
+                </a>
+            </div>
+        </div>
+        <div class="col-6">
+            <form action="{% url 'products:search' %}" method="get" aria-label="Search for products">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" placeholder="Search for products"
+                           aria-label="Product search">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
                 </div>
-            </div>
-            <div class="col-6">
-                <form action="{% url 'products:search' %}" method="get" aria-label="Search for products">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="q" placeholder="Search for products" aria-label="Product search">
-                        <button class="btn btn-outline-secondary" type="submit">Search</button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-3 text-end">
-                {% if user.is_authenticated %}
-                    <a href="{% url 'shopping_cart:cart' %}">
-                        <button class="btn btn-outline-success">
-                            🛒
-                            <span class="badge bg-secondary">{{ cart_items_count }}</span>
-                        </button>
-                    </a>
-                    <a href="{% url 'users:user_orders' %}"><button class="btn btn-outline-success">Order History</button></a>
-                    <a href="{% url 'users:profile' %}"><button class="btn btn-outline-success">Profile</button></a>
-                    <a href="{% url 'users:logout' %}"><button class="btn btn-outline-success">Logout</button></a>
-                {% else %}
-                    <a href="{% url 'users:login' %}"><button class="btn btn-outline-success">Login / Register</button></a>
-                {% endif %}
+            </form>
+        </div>
+        <div class="col-3 text-end">
+            {% if user.is_authenticated %}
+                <a href="{% url 'shopping_cart:cart' %}">
+                    <button class="btn btn-outline-success">
+                        🛒
+                        <span class="badge bg-secondary">{{ cart_items_count }}</span>
+                    </button>
+                </a>
+                <a href="{% url 'users:user_orders' %}">
+                    <button class="btn btn-outline-success">Order History</button>
+                </a>
+                <a href="{% url 'users:profile' %}">
+                    <button class="btn btn-outline-success">Profile</button>
+                </a>
+                <a href="{% url 'users:logout' %}">
+                    <button class="btn btn-outline-success">Logout</button>
+                </a>
+            {% else %}
+                <a href="{% url 'users:login' %}">
+                    <button class="btn btn-outline-success">Login / Register</button>
+                </a>
+            {% endif %}
+        </div>
+    </header>
 
-            </div>
-        </header>
+    <div class="row">
 
-        <div class="row">
-
-            <nav class="col-md-3 col-lg-2 bg-light sidebar">
-                <ul class="nav flex-column">
+        <nav class="col-md-3 col-lg-2 bg-light sidebar">
+            <ul class="nav flex-column">
+                <hr class="p-0 m-0">
+                {% for category in categories %}
+                    <li class="nav-item active">
+                        <a class="nav-link fw-bold " aria-current="page"
+                           href="{% url 'products:category_products' category.id %}">{{ category.name }}</a>
+                    </li>
                     <hr class="p-0 m-0">
-                    {% for category in categories %}
-                        <li class="nav-item active">
-                            <a class="nav-link fw-bold " aria-current="page" href="{% url 'products:category_products' category.id %}">{{ category.name }}</a>
-                        </li>
-                        <hr class="p-0 m-0">
-                    {% endfor %}
-                </ul>
-
-                <!-- Weather card  -->
+                {% endfor %}
+            </ul>
+            <!-- Weather Card Section -->
 <section class="mt-4">
-    <div class="card bg-light text-dark" style="border-radius: 20px;">
-        <div class="position-relative" style="border-radius: 15px;">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/draw1.webp"
-                 class="card-img-top img-fluid" alt="weather" style="max-height: 150px; object-fit: cover; border-radius: 20px;">
-            <div class="card-img-overlay d-flex flex-column justify-content-end p-2 text-dark" style="border-radius: 15px;">
-                <h6 class="mb-1" style="font-size: 0.9rem;">{{ weather_data.city }}</h6>
-                <p class="h6 my-1" style="font-size: 1.2rem;">{{ weather_data.temperature }}°C</p>
-                <p class="mb-1" style="font-size: 0.8rem;">Feels Like: <strong>{{ weather_data.feels_like }}°C</strong></p>
-                <p class="mb-1" style="font-size: 0.8rem;">{{ weather_data.description }}</p>
+    <div class="card bg-light text-dark" id="weather-card" style="border-radius: 20px;">
+        <div class="position-relative">
+            <img id="seasonal-image" src="{% static 'spring.jpg' %}" class="card-img-top img-fluid" alt="weather" style="max-height: 150px; object-fit: cover; border-radius: 20px;">
+            <div class="card-img-overlay d-flex flex-column justify-content-end p-2" style="border-radius: 15px;">
+                <h6 class="mb-1" style="font-size: 0.9rem; font-weight: bold; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);">{{ weather_data.city }}</h6>
+                <p class="h6 my-1" style="font-size: 1.2rem; font-weight: bold; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);">{{ weather_data.temperature }}°C</p>
+                <p class="mb-1" style="font-size: 0.8rem; font-weight: bold; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);">Feels Like: <strong>{{ weather_data.feels_like }}°C</strong></p>
+                <p class="mb-1" style="font-size: 0.8rem; font-weight: bold; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);">{{ weather_data.description }}</p>
             </div>
         </div>
     </div>
 </section>
-                <!-- End of Weather card -->
-                    <a class="fixed-bottom m-5" href="{% url 'about' %}">About Us</a>
 
-            </nav>
+<script>
+    function setSeasonalBackground() {
+        const date = new Date();
+        const month = date.getMonth();
+        const seasonalImage = document.getElementById('seasonal-image');
+        const weatherCard = document.getElementById('weather-card');
+
+        const images = {
+            winter: '{% static "winter.jpg" %}',
+            spring: '{% static "spring.jpg" %}',
+            summer: '{% static "summer.jpg" %}',
+            fall: '{% static "fall.jpg" %}'
+        };
+
+        // Default text color
+        let textColor = '#000000';
+
+        if (month === 11 || month === 0 || month === 1) { // December, January, February
+            seasonalImage.src = images.winter;
+            textColor = '#000000';
+        } else if (month >= 2 && month <= 4) { // March, April, May
+            seasonalImage.src = images.spring;
+            textColor = '#000000';
+        } else if (month >= 5 && month <= 7) { // June, July, August
+            seasonalImage.src = images.summer;
+            textColor = '#000000';
+        } else { // September, October, November
+            seasonalImage.src = images.fall;
+            textColor = '#FFFFFF';
+        }
+
+        // Set the text color for the weather card
+        const overlay = weatherCard.querySelector('.card-img-overlay');
+        overlay.style.color = textColor;
+    }
+
+    // Call the function on page load
+    window.onload = setSeasonalBackground;
+</script>
+            <!-- End of Weather Card Section -->
+            <a class="fixed-bottom m-5" href="{% url 'about' %}">About Us</a>
+
+        </nav>
 
 
-            <main class="col-md-9 col-lg-10">
-                <h1>H&T Käsitöö</h1>
-                <p>All the woodwork you ever need.</p>
-{#                <div class="alert alert-secondary" role="alert">#}
-{#                    Warning Sign for Dogs, Funny Cat Signs#}
-{#                </div>#}
-                <div class="product-list bg-white p-3 border rounded">
-                    {% block content %}
-                        <!-- Content goes here -->
-                    {% endblock %}
-                </div>
-            </main>
-        </div>
-
-        <footer class="row bg-light py-3 text-center">
-            <div class="col">
-                <p>Footer</p>
+        <main class="col-md-9 col-lg-10">
+            <h1>H&T Käsitöö</h1>
+            <p>All the woodwork you ever need.</p>
+            {#                <div class="alert alert-secondary" role="alert">#}
+            {#                    Warning Sign for Dogs, Funny Cat Signs#}
+            {#                </div>#}
+            <div class="product-list bg-white p-3 border rounded">
+                {% block content %}
+                    <!-- Content goes here -->
+                {% endblock %}
             </div>
-        </footer>
+        </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="row bg-light py-3 text-center">
+        <div class="col">
+            <p>Footer</p>
+        </div>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
