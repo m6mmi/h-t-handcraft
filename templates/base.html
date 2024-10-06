@@ -20,6 +20,9 @@
                 </div>
             </div>
             <div class="col-6">
+                <h1>H&T Käsitöö</h1>
+                <p>All the woodwork you ever need</p>
+                <br>
                 <form action="{% url 'products:search' %}" method="get" aria-label="Search for products">
                     <div class="input-group">
                         <input type="text" class="form-control" name="q" placeholder="Search for products" aria-label="Product search">
@@ -80,12 +83,11 @@
 
 
             <main class="col-md-9 col-lg-10">
-                <h1>H&T Käsitöö</h1>
-                <p>All the woodwork you ever need.</p>
+
 {#                <div class="alert alert-secondary" role="alert">#}
 {#                    Warning Sign for Dogs, Funny Cat Signs#}
 {#                </div>#}
-                <div class="product-list bg-white p-3 border rounded">
+                <div class="product-list bg-white p-3 border rounded mt-3">
                     {% block content %}
                         <!-- Content goes here -->
                     {% endblock %}
