@@ -67,59 +67,65 @@
                 {% endfor %}
             </ul>
             <!-- Weather Card Section -->
-<section class="mt-4">
-    <div class="card bg-light text-dark" id="weather-card" style="border-radius: 20px;">
-        <div class="position-relative">
-            <img id="seasonal-image" src="{% static 'spring.jpg' %}" class="card-img-top img-fluid" alt="weather" style="max-height: 150px; object-fit: cover; border-radius: 20px;">
-            <div class="card-img-overlay d-flex flex-column justify-content-end p-2" style="border-radius: 15px;">
-                <h6 class="mb-1" style="font-size: 0.9rem; font-weight: bold; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);">{{ weather_data.city }}</h6>
-                <p class="h6 my-1" style="font-size: 1.2rem; font-weight: bold; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);">{{ weather_data.temperature }}°C</p>
-                <p class="mb-1" style="font-size: 0.8rem; font-weight: bold; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);">Feels Like: <strong>{{ weather_data.feels_like }}°C</strong></p>
-                <p class="mb-1" style="font-size: 0.8rem; font-weight: bold; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);">{{ weather_data.description }}</p>
-            </div>
-        </div>
-    </div>
-</section>
+            <section class="mt-4">
+                <div class="card bg-light text-dark" id="weather-card" style="border-radius: 20px;">
+                    <div class="position-relative">
+                        <img id="seasonal-image" src="{% static 'spring.jpg' %}" class="card-img-top img-fluid"
+                             alt="weather" style="max-height: 150px; object-fit: cover; border-radius: 20px;">
 
-<script>
-    function setSeasonalBackground() {
-        const date = new Date();
-        const month = date.getMonth();
-        const seasonalImage = document.getElementById('seasonal-image');
-        const weatherCard = document.getElementById('weather-card');
+                        <div class="overlay"
+                             style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); border-radius: 20px;"></div>
 
-        const images = {
-            winter: '{% static "winter.jpg" %}',
-            spring: '{% static "spring.jpg" %}',
-            summer: '{% static "summer.jpg" %}',
-            fall: '{% static "fall.jpg" %}'
-        };
+                        <div class="card-img-overlay d-flex flex-column justify-content-end p-2"
+                             style="border-radius: 15px; z-index: 2;">
+                            <h6 class="mb-1" style="font-size: 0.9rem; font-weight: 600;">{{ weather_data.city }}</h6>
+                            <p class="h6 my-1"
+                               style="font-size: 1.2rem; font-weight: 600;">{{ weather_data.temperature }}°C</p>
+                            <p class="mb-1" style="font-size: 0.8rem; font-weight: 600;">Feels Like:
+                                <strong>{{ weather_data.feels_like }}°C</strong></p>
+                            <p class="mb-1"
+                               style="font-size: 0.8rem; font-weight: 600;">{{ weather_data.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        // Default text color
-        let textColor = '#000000';
+            <script>
+                function setSeasonalBackground() {
+                    const date = new Date();
+                    const month = date.getMonth();
+                    const seasonalImage = document.getElementById('seasonal-image');
+                    const weatherCard = document.getElementById('weather-card');
 
-        if (month === 11 || month === 0 || month === 1) { // December, January, February
-            seasonalImage.src = images.winter;
-            textColor = '#000000';
-        } else if (month >= 2 && month <= 4) { // March, April, May
-            seasonalImage.src = images.spring;
-            textColor = '#000000';
-        } else if (month >= 5 && month <= 7) { // June, July, August
-            seasonalImage.src = images.summer;
-            textColor = '#000000';
-        } else { // September, October, November
-            seasonalImage.src = images.fall;
-            textColor = '#FFFFFF';
-        }
+                    const images = {
+                        winter: '{% static "winter.jpg" %}',
+                        spring: '{% static "spring.jpg" %}',
+                        summer: '{% static "summer.jpg" %}',
+                        fall: '{% static "fall.jpg" %}'
+                    };
 
-        // Set the text color for the weather card
-        const overlay = weatherCard.querySelector('.card-img-overlay');
-        overlay.style.color = textColor;
-    }
+                    let textColor = '#000000';
 
-    // Call the function on page load
-    window.onload = setSeasonalBackground;
-</script>
+                    if (month === 11 || month === 0 || month === 1) { // December, January, February
+                        seasonalImage.src = images.winter;
+                        textColor = '#000000';
+                    } else if (month >= 2 && month <= 4) { // March, April, May
+                        seasonalImage.src = images.spring;
+                        textColor = '#000000';
+                    } else if (month >= 5 && month <= 7) { // June, July, August
+                        seasonalImage.src = images.summer;
+                        textColor = '#000000';
+                    } else { // September, October, November
+                        seasonalImage.src = images.fall;
+                        textColor = '#FFFFFF';
+                    }
+
+                    const overlay = weatherCard.querySelector('.card-img-overlay');
+                    overlay.style.color = textColor;
+                }
+
+                window.onload = setSeasonalBackground;
+            </script>
             <!-- End of Weather Card Section -->
             <a class="fixed-bottom m-5" href="{% url 'about' %}">About Us</a>
 
