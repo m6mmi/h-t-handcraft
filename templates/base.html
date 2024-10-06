@@ -66,67 +66,110 @@
                     <hr class="p-0 m-0">
                 {% endfor %}
             </ul>
-            <!-- Weather Card Section -->
-            <section class="mt-4">
-                <div class="card bg-light text-dark" id="weather-card" style="border-radius: 20px;">
-                    <div class="position-relative">
-                        <img id="seasonal-image" src="{% static 'spring.jpg' %}" class="card-img-top img-fluid"
-                             alt="weather" style="max-height: 150px; object-fit: cover; border-radius: 20px;">
+<!-- Weather Card Section -->
+<section class="mt-4">
+    <div class="card bg-light text-dark" id="weather-card" style="border-radius: 20px; position: relative;">
+        <div class="position-relative">
+            <img id="seasonal-image" src="{% static 'spring.jpg' %}" class="card-img-top img-fluid"
+                 alt="weather" style="max-height: 150px; object-fit: cover; border-radius: 20px;">
 
-                        <div class="overlay"
-                             style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); border-radius: 20px;"></div>
+            <div class="overlay"
+                 style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); border-radius: 20px;"></div>
 
-                        <div class="card-img-overlay d-flex flex-column justify-content-end p-2"
-                             style="border-radius: 15px; z-index: 2;">
-                            <h6 class="mb-1" style="font-size: 0.9rem; font-weight: 600;">{{ weather_data.city }}</h6>
-                            <p class="h6 my-1"
-                               style="font-size: 1.2rem; font-weight: 600;">{{ weather_data.temperature }}°C</p>
-                            <p class="mb-1" style="font-size: 0.8rem; font-weight: 600;">Feels Like:
-                                <strong>{{ weather_data.feels_like }}°C</strong></p>
-                            <p class="mb-1"
-                               style="font-size: 0.8rem; font-weight: 600;">{{ weather_data.description }}</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div class="card-img-overlay d-flex flex-column justify-content-end p-2"
+                 style="border-radius: 15px; z-index: 2;">
+                <h6 class="mb-1" style="font-size: 0.9rem; font-weight: 600;" id="city">{{ weather_data.city }}</h6>
+                <p class="h6 my-1"
+                   style="font-size: 1.2rem; font-weight: 600;" id="temperature">{{ weather_data.temperature }}°C</p>
+                <p class="mb-1" style="font-size: 0.8rem; font-weight: 600;">Feels Like:
+                    <strong id="feels-like-value">{{ weather_data.feels_like }}°C</strong></p>
+                <p class="mb-1"
+                   style="font-size: 0.8rem; font-weight: 600;" id="description">{{ weather_data.description }}</p>
+            </div>
+        </div>
+    </div>
+    <div id="status" style="margin-top: 10px; color: white;"></div>
+</section>
 
-            <script>
-                function setSeasonalBackground() {
-                    const date = new Date();
-                    const month = date.getMonth();
-                    const seasonalImage = document.getElementById('seasonal-image');
-                    const weatherCard = document.getElementById('weather-card');
+<script>
+    async function fetchWeatherData(lat, lon) {
+        const apiKey = 'WEATHER_API_KEY';
+        const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
 
-                    const images = {
-                        winter: '{% static "winter.jpg" %}',
-                        spring: '{% static "spring.jpg" %}',
-                        summer: '{% static "summer.jpg" %}',
-                        fall: '{% static "fall.jpg" %}'
-                    };
+        try {
+            const response = await fetch(weatherUrl);
+            const data = await response.json();
 
-                    let textColor = '#000000';
+            if (data.cod === 200) {
+                document.getElementById('city').textContent = data.name;
+                document.getElementById('temperature').textContent = `${data.main.temp}°C`;
+                document.getElementById('feels-like-value').textContent = `${data.main.feels_like}°C`;
+                document.getElementById('description').textContent = data.weather[0].description;
+                setSeasonalBackground();
+            } else {
+                console.error('Error fetching weather data:', data.message);
+            }
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+        }
+    }
 
-                    if (month === 11 || month === 0 || month === 1) { // December, January, February
-                        seasonalImage.src = images.winter;
-                        textColor = '#000000';
-                    } else if (month >= 2 && month <= 4) { // March, April, May
-                        seasonalImage.src = images.spring;
-                        textColor = '#000000';
-                    } else if (month >= 5 && month <= 7) { // June, July, August
-                        seasonalImage.src = images.summer;
-                        textColor = '#000000';
-                    } else { // September, October, November
-                        seasonalImage.src = images.fall;
-                        textColor = '#FFFFFF';
-                    }
+    function geoFindMe() {
+        const status = document.querySelector("#status");
 
-                    const overlay = weatherCard.querySelector('.card-img-overlay');
-                    overlay.style.color = textColor;
-                }
+        if (!navigator.geolocation) {
+            status.textContent = "Geolocation is not supported by your browser";
+        } else {
+            status.textContent = "Locating…";
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
 
-                window.onload = setSeasonalBackground;
-            </script>
-            <!-- End of Weather Card Section -->
+        function success(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            status.textContent = "Location found.";
+            fetchWeatherData(latitude, longitude);
+        }
+
+        function error() {
+            status.textContent = "Unable to retrieve your location";
+        }
+    }
+
+    function setSeasonalBackground() {
+        const seasonalImage = document.getElementById('seasonal-image');
+        const month = new Date().getMonth();
+
+        if (month === 11 || month === 0 || month === 1) {
+            seasonalImage.src = '{% static "winter.jpg" %}';
+        } else if (month >= 2 && month <= 4) {
+            seasonalImage.src = '{% static "spring.jpg" %}';
+        } else if (month >= 5 && month <= 7) {
+            seasonalImage.src = '{% static "summer.jpg" %}';
+        } else {
+            seasonalImage.src = '{% static "fall.jpg" %}';
+        }
+
+        const overlay = document.querySelector('.card-img-overlay');
+        overlay.style.color = (month === 11 || month === 0 || month === 1 || month >= 8) ? '#FFFFFF' : '#000000';
+    }
+
+    window.onload = () => {
+        setSeasonalBackground();
+        geoFindMe();
+    };
+
+    document.getElementById('refresh-btn').addEventListener('click', () => {
+        const status = document.querySelector("#status");
+        status.textContent = "Refreshing...";
+        geoFindMe();
+    });
+</script>
+<!-- End of Weather Card Section -->
+
+
+
             <a class="fixed-bottom m-5" href="{% url 'about' %}">About Us</a>
 
         </nav>
