@@ -16,7 +16,7 @@ class CategoryProductsView(ListView):
     def get_queryset(self):
         try:
             category = get_object_or_404(Category, id=self.kwargs.get('id'))
-            return Product.objects.filter(subcategory__category=category)
+            return Product.objects.filter(category=category)
         except Exception as e:
             return Product.objects.none()
 
