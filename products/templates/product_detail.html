@@ -2,7 +2,9 @@
 
 {% block content %}
     <h1>{{ product.title }}</h1>
-    <img src="{{ product.image_path.url }}" alt="{{ product.title }}">
+    {% if product.image_path.url is not None %}
+        <img src="{{ product.image_path.url }}" alt="{{ product.title }}" class="product-list-image">
+    {% endif %}
     <p>{{ product.description }}</p>
     <p>Price: ${{ product.price }}</p>
     <p>Stock: {{ product.stock }}</p>

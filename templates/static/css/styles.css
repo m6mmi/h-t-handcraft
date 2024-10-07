@@ -58,9 +58,8 @@ footer {
 }
 
 .product-list-image {
-    display: block;
+    display: inline-block;
     width: 100%;
-    aspect-ratio: 16 / 9;
     object-fit: cover;
     border-radius: 5px 5px 0 0;
 }
@@ -133,3 +132,4 @@ footer {
     z-index: 1000;
     margin: 0;
 }
+
