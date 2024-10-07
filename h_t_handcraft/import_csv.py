@@ -9,7 +9,7 @@ django.setup()
 from products.models import Product, Subcategory
 
 # Path to the CSV file
-CSV_FILE_PATH = 'C:/Users/Indrek/PycharmProjects/h-t-handcraft/ht_products1.csv'
+CSV_FILE_PATH = '../ht_products9.csv'
 
 
 # Function to add products to the database
