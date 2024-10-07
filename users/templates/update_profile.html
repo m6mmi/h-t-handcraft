@@ -2,14 +2,13 @@
 
 {% block content %}
     <header>
-        <h1>Edit Your Profile</h1>
+        <h1 class="page-title">Edit Your Profile</h1>
     </header>
 
-    <form method="POST">
+    <form method="POST" class="profile-edit-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save Changes</button>
+        <button type="submit" class="custom-btn">Save Changes</button>
     </form>
-
-    <a href="{% url 'users:profile' %}">Back to Profile</a>
+<a href="{% url 'users:profile' %}" class="custom-back-btn">Back to Profile</a>
 {% endblock %}

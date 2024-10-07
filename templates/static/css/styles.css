@@ -15,13 +15,9 @@ body {
     height: 100vh;
 }
 
-h1, h2 {
+h2 {
     font-weight: bold;
     color: #7a5d43;
-}
-
-h2 {
-    color: #8b6a4b;
 }
 
 .product-list {
