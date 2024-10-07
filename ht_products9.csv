@@ -1,0 +1,27 @@
+Title;Description;Price;Stock;Subcategory;Image_Path
+SEGASAUN;segasaun;13;1;Saun;/path/to/image_a.jpg
+SAUNA 10 KÄSKU;sauna 10 käsku;13;10;Saun;/path/to/image_b.jpg
+SEGASAUN MEHED SAUNAS NAISED TULEVAD SEGAMA;segasaun mehed saunas naised tulevad segama;13;12;Saun;/path/to/image_c.jpg
+ÕLLETA SAUNA EI SAA;õlleta sauna ei saa;13;3;Saun;/path/to/image_a.jpg
+ÕLLE ILMA SAUNATA ,POLE HÄDA MIDAGI .SAUN ILMA ÕLLETA ,POLE VÄÄRT MIDAGI;õlle ilma saunata ,pole häda midagi .saun ilma õlleta ,pole väärt midagi;13;13;Saun;/path/to/image_b.jpg
+KUUMUS KEHA KALLISTAJA PALAVUS PERSE PAITAJA;kuumus keha kallistaja palavus perse paitaja;13;9;Saun;/path/to/image_c.jpg
+ÕIGE SAUNAVIHA SAAD SIIS KUI ÜHISSAUNAS PEERETAD;õige saunaviha saad siis kui ühissaunas peeretad;13;4;Saun;/path/to/image_a.jpg
+SEGASAUN NAISED SAUNAS MEHED TULEVAD SEGAMA;segasaun naised saunas mehed tulevad segama;13;2;Saun;/path/to/image_b.jpg
+PEKISULATUS;pekisulatus;13;5;Saun;/path/to/image_c.jpg
+ENNEM PÄEV SÖÖMATA KUI NÄDAL SAUNAS KÄIMATA;ennem päev söömata kui nädal saunas käimata;13;12;Saun;/path/to/image_a.jpg
+OLEN MUIDU RÖÖMUS INIMENE AGA SAUNA LÄHEN ALATI VIHAGA;olen muidu röömus inimene aga sauna lähen alati vihaga;13;8;Saun;/path/to/image_b.jpg
+SAUN TEEB TERVEKS JA TUGEVAKS HÜVA LEILI;saun teeb terveks ja tugevaks hüva leili;13;4;Saun;/path/to/image_c.jpg
+ÕLLETA SAUNAS NAGU RAHATA KÕRTSIS;õlleta saunas nagu rahata kõrtsis;13;9;Saun;/path/to/image_a.jpg
+ÕLLETA VÕIB SAUNAST TULLA MITTE AGA MINNA;õlleta võib saunast tulla mitte aga minna;13;4;Saun;/path/to/image_b.jpg
+POPURII;popurii;13;7;Saun;/path/to/image_c.jpg
+MIKS SAUN ON PAREM KUI ARMUKE;miks saun on parem kui armuke;13;8;Saun;/path/to/image_a.jpg
+SAUNAS KÄIMISE 10 PÕHJUST;saunas käimise 10 põhjust;13;8;Saun;/path/to/image_b.jpg
+SAUNA EESKIRI;sauna eeskiri;13;6;Saun;/path/to/image_c.jpg
+SÕNA ON VABA;sõna on vaba;13;11;Saun;/path/to/image_a.jpg
+SAUN ON VASES MEHE TOHTER;saun on vases mehe tohter;13;1;Saun;/path/to/image_b.jpg
+SAUN ILMA VIHATA KUI VOODI ILMA KAASATA;saun ilma vihata kui voodi ilma kaasata;13;1;Saun;/path/to/image_c.jpg
+KUI IHU HARIDA SAAB EI SIIS HING HUKKA LÄHE!;kui ihu harida saab ei siis hing hukka lähe!;13;1;Saun;/path/to/image_a.jpg
+ETTEVAATUST KURJAD NAISED SAUNAS;ettevaatust kurjad naised saunas;;1;Saun;/path/to/image_b.jpg
+ETTEVAATUST LAHKED MEHED SAUNAS;ettevaatust lahked mehed saunas;;1;Saun;/path/to/image_c.jpg
+MEIE SAUNAS OLEME TEINETEISE SELTSKONNA LÕÕGASTUME NAUDIME OLEME HEATUJULISED ME VISKAME LEILI HIGISTAME HOIAME SAUNA PUHTANA JÄLGIME OHUTUSREEGLEID MÕTLEMA KA OMI MÕTTEID ARVESTAME ALATI TEINETEISE SOOVIDEGA;meie saunas oleme teineteise seltskonna lõõgastume naudime oleme heatujulised me viskame leili higistame hoiame sauna puhtana jälgime ohutusreegleid mõtlema ka omi mõtteid arvestame alati teineteise soovidega;13;4;Saun;/path/to/image_a.jpg
+EESTI SAUNAS ON NAISED JA KIVID KUUMAD JA JOOGID KÜLMAD;eesti saunas on naised ja kivid kuumad ja joogid külmad;13;4;Saun;/path/to/image_b.jpg

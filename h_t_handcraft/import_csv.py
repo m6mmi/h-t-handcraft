@@ -9,17 +9,22 @@ django.setup()
 from products.models import Product, Subcategory
 
 # Path to the CSV file
-CSV_FILE_PATH = '../ht_products7.csv'
-
+CSV_FILE_PATH = 'C:/Users/Indrek/PycharmProjects/h-t-handcraft/ht_products1.csv'
 
 
 # Function to add products to the database
 def add_products_from_csv(file_path):
     with open(file_path, newline='', encoding='ISO-8859-1') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=';')
-        print("Headers:", reader.fieldnames)  # Debug: Print headers to confirm correct reading
+
+        # Clean the headers to remove leading/trailing spaces
+        reader.fieldnames = [header.strip() for header in reader.fieldnames]
+        print("Cleaned Headers:", reader.fieldnames)  # Debug: Print cleaned headers to confirm correct reading
 
         for row in reader:
+            # Strip spaces from each key in the row dictionary
+            row = {key.strip(): value for key, value in row.items()}
+
             try:
                 # Extract and validate fields from the CSV row
                 title = row['Title']
@@ -40,7 +45,10 @@ def add_products_from_csv(file_path):
                     continue  # Skip this row
 
                 stock = int(stock_str)
+
+                # Extract subcategory and image path
                 subcategory_name = row['Subcategory']
+                image_path = row['Image_Path']
 
                 # Get or create the subcategory
                 subcategory, created = Subcategory.objects.get_or_create(name=subcategory_name)
@@ -53,6 +61,7 @@ def add_products_from_csv(file_path):
                         'price': price,
                         'stock': stock,
                         'subcategory': subcategory,
+                        'image_path': image_path,
                     }
                 )
 
