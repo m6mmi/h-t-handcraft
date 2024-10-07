@@ -1,15 +1,56 @@
+body {
+    background-color: #f4f1ec;
+    font-family: 'Playfair Display', serif;
+    color: #5a5a5a;
+}
+
 .logo {
     font-size: 24px;
     font-weight: bold;
 }
 
 .sidebar {
+    color: #6c5e53;
     padding-top: 20px;
     height: 100vh;
 }
 
+h1, h2 {
+    font-weight: bold;
+    color: #7a5d43;
+}
+
+h2 {
+    color: #8b6a4b;
+}
+
 .product-list {
     min-height: 400px;
+    padding: 15px;
+    background-color: #faf7f2;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.custom-btn {
+    background-color: #eae3d2;
+    color: #4a4a4a;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border: 1px solid #d1c4b8;
+}
+
+.custom-btn:hover {
+    background-color: #d6c9b7;
+    color: #3a3a3a;
+}
+
+a {
+    color: #6c5e53;
+}
+
+a:hover {
+    color: #4a4038;
 }
 
 footer {
@@ -17,7 +58,7 @@ footer {
 }
 
 .logo-img {
-    max-width: 180px;
+    max-width: 100px;
 }
 
 .product-list-image {
@@ -26,4 +67,73 @@ footer {
     aspect-ratio: 16 / 9;
     object-fit: cover;
     border-radius: 5px 5px 0 0;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+
+.container {
+    padding: 20px;
+}
+/* Logout-profile- order history- cart */
+.btn-outline-success {
+    color: #6c5e53;
+    border-color: #d1c4b8;
+}
+
+.btn-outline-success:hover {
+    background-color: #d6c9b7;
+    color: #4a4a4a;
+    border-color: #d1c4b8;
+}
+/* Kategooriad */
+.nav-link {
+    color: #6c5e53;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: #4a4038;
+    text-decoration: underline;
+}
+/* Otsinguriba */
+.nav-item.active .nav-link {
+    color: #8b6a4b;
+}
+
+.input-group .form-control {
+    border: 1px solid #d1c4b8;
+    border-radius: 5px 0 0 5px;
+    background-color: #faf7f2;
+    color: #5a5a5a;
+}
+
+.input-group .form-control:focus {
+    box-shadow: none;
+    border-color: #7a5d43;
+}
+
+.input-group .btn {
+    border: 1px solid #d1c4b8;
+    background-color: #eae3d2;
+    color: #5a5a5a;
+    border-radius: 0 5px 5px 0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.input-group .btn:hover {
+    background-color: #d6c9b7;
+    color: #3a3a3a;
+}
+/* Ilm */
+#weather-card {
+    width: 180px;
+    height: 150px;
+    position: fixed;
+    bottom: -150px;
+    right: 10px;
+    z-index: 1000;
+    margin: 0;
 }
