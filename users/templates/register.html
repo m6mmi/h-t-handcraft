@@ -1,16 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
+    <div class="container mt-5">
+        <header class="text-center mb-4">
             <h1>Register</h1>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Register</button>
-            </form>
-            <div class="text-center">
-                <p>Already have an account?</p>
-                <a href="{% url 'users:login' %}" class="link-button">Login</a>
-            </div>
+        </header>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn custom-btn">Register</button>
+        </form>
+
+        <div class="text-center mt-4">
+            <p>Already have an account?</p>
+            <a href="{% url 'users:login' %}" class="link-button">Login</a>
         </div>
+    </div>
 {% endblock %}
