@@ -1,0 +1,92 @@
+body {
+    background-color: #f4f1ec;
+    font-family: 'Playfair Display', serif;
+    color: #5a5a5a;
+}
+
+.container {
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background-color: #faf7f2;
+    border-radius: 10px;
+    margin: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    width: 300px;
+}
+
+.card:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-list-image {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-body h2 {
+    font-size: 1.2rem;
+    color: #7a5d43;
+    margin-bottom: 10px;
+}
+
+.card-body p {
+    margin: 5px 0;
+}
+
+.btn-add {
+    background-color: #eae3d2;
+    color: #6c5e53;
+    border: 1px solid #d1c4b8;
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-add:hover {
+    background-color: #d6c9b7;
+    color: #4a4a4a;
+}
+
+.pagination {
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.page-link {
+    color: #6c5e53;
+    padding: 10px 15px;
+    border: 1px solid #d1c4b8;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.page-item.active .page-link {
+    background-color: #eae3d2;
+    color: #4a4a4a;
+}
+
+.page-link:hover {
+    background-color: #d6c9b7;
+    color: #4a4a4a;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+.price {
+    color: #5a5a5a;
+}
