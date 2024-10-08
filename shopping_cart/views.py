@@ -18,7 +18,11 @@ class OrderView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         order_id = self.kwargs.get('id')
         cart_items = CartProduct.objects.filter(cart_id__order=order_id, cart__is_active=False).order_by('-id')
-        return render(request, 'order.html', {'cart_items': cart_items})
+        total_price = cart_items.aggregate(total_price=Sum(F('quantity') * F('product__price')))
+        return render(request, 'order.html', {
+            'cart_items': cart_items,
+            'total_price': total_price
+        })
 
 
 class CartView(LoginRequiredMixin, View):

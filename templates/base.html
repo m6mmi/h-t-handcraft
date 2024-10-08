@@ -8,86 +8,197 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product_list.css' %}">
+
 </head>
 <body>
-    <div class="container-fluid">
-        <header class="row bg-light py-3 align-items-center">
-            <div class="col-3">
-                <div class="logo">
-                     <a href="{% url 'index' %}">
-                        <img class="logo-img" src="{% static 'img/logo_no_background.png' %}" alt="Logo">
-                    </a>
-                </div>
+<div class="container-fluid">
+    <header class="row bg-light py-3 align-items-center">
+        <div class="col-3">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img class="logo-img" src="{% static 'img/logo_no_background.png' %}" alt="Logo">
+                </a>
             </div>
-            <div class="col-6">
-                <form action="{% url 'products:search' %}" method="get" aria-label="Search for products">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="q" placeholder="Search for products" aria-label="Product search">
-                        <button class="btn btn-outline-secondary" type="submit">Search</button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-3 text-end">
-                {% if user.is_authenticated %}
-                    <a href="{% url 'shopping_cart:cart' %}">
-                        <button class="btn btn-outline-success">
-                            🛒
-                            <span class="badge bg-secondary">{{ cart_items_count }}</span>
-                        </button>
-                    </a>
-                    <a href="{% url 'users:user_orders' %}"><button class="btn btn-outline-success">Order History</button></a>
-                    <a href="{% url 'users:profile' %}"><button class="btn btn-outline-success">Profile</button></a>
-                    <a href="{% url 'users:logout' %}"><button class="btn btn-outline-success">Logout</button></a>
-                {% else %}
-                    <a href="{% url 'users:login' %}"><button class="btn btn-outline-success">Login / Register</button></a>
-                {% endif %}
-                <div class="weather-info">
-                    <p>Current temperature in {{ weather_data.city }}: {{ weather_data.temperature }}°C</p>
-                    <p>{{ weather_data.description }}</p>
-                </div>
-            </div>
-        </header>
-
-        <div class="row">
-
-            <nav class="col-md-3 col-lg-2 bg-light sidebar">
-                <ul class="nav flex-column">
-                    <hr class="p-0 m-0">
-                    {% for category in categories %}
-                        <li class="nav-item active">
-                            <a class="nav-link fw-bold " aria-current="page" href="{% url 'products:category_products' category.id %}">{{ category.name }}</a>
-                        </li>
-                        <hr class="p-0 m-0">
-                    {% endfor %}
-                </ul>
-
-
-                    <a class="fixed-bottom m-5" href="{% url 'about' %}">About Us</a>
-
-            </nav>
-
-
-            <main class="col-md-9 col-lg-10">
-                <h1>H&T Käsitöö</h1>
-                <p>All the woodwork you ever need.</p>
-{#                <div class="alert alert-secondary" role="alert">#}
-{#                    Warning Sign for Dogs, Funny Cat Signs#}
-{#                </div>#}
-                <div class="product-list bg-white p-3 border rounded">
-                    {% block content %}
-                        <!-- Content goes here -->
-                    {% endblock %}
-                </div>
-            </main>
         </div>
 
-        <footer class="row bg-light py-3 text-center">
-            <div class="col">
-                <p>Footer</p>
+        <div class="col-6">
+            <h4 class="text-center">All the Woodwork you will ever need</h4>
+            <form action="{% url 'products:search' %}" method="get" aria-label="Search for products">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" placeholder="Search for products"
+                           aria-label="Product search">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-3 text-end">
+            {% if user.is_authenticated %}
+                <a href="{% url 'shopping_cart:cart' %}">
+                    <button class="btn btn-outline-success">
+                        🛒
+                        <span class="badge bg-secondary">{{ cart_items_count }}</span>
+                    </button>
+                </a>
+                <a href="{% url 'users:user_orders' %}">
+                    <button class="btn btn-outline-success">Order History</button>
+                </a>
+                <a href="{% url 'users:profile' %}">
+                    <button class="btn btn-outline-success">Profile</button>
+                </a>
+                <a href="{% url 'users:logout' %}">
+                    <button class="btn btn-outline-success">Logout</button>
+                </a>
+            {% else %}
+                <a href="{% url 'users:login' %}">
+                    <button class="btn btn-outline-success">Login / Register</button>
+                </a>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="row">
+
+        <nav class="col-md-3 col-lg-2 bg-light sidebar">
+            <ul class="nav flex-column">
+                <hr class="p-0 m-0">
+                {% for category in categories %}
+                    <li class="nav-item active">
+                        <a class="nav-link fw-bold " aria-current="page"
+                           href="{% url 'products:category_products' category.id %}">{{ category.name }}</a>
+                    </li>
+                    <hr class="p-0 m-0">
+                {% endfor %}
+            </ul>
+<!-- Weather Card Section -->
+<section class="mt-4">
+    <div class="card bg-light text-dark" id="weather-card" style="border-radius: 20px; position: relative;">
+        <div class="position-relative">
+            <img id="seasonal-image" src="{% static 'spring.jpg' %}" class="card-img-top img-fluid"
+                 alt="weather" style="max-height: 150px; object-fit: cover; border-radius: 20px;">
+
+            <div class="overlay"
+                 style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); border-radius: 20px;"></div>
+
+            <div class="card-img-overlay d-flex flex-column justify-content-end p-2"
+                 style="border-radius: 15px; z-index: 2;">
+                <h6 class="mb-1" style="font-size: 0.9rem; font-weight: 600;" id="city">{{ weather_data.city }}</h6>
+                <p class="h6 my-1"
+                   style="font-size: 1.2rem; font-weight: 600;" id="temperature">{{ weather_data.temperature }}°C</p>
+                <p class="mb-1" style="font-size: 0.8rem; font-weight: 600;">Feels Like:
+                    <strong id="feels-like-value">{{ weather_data.feels_like }}°C</strong></p>
+                <p class="mb-1"
+                   style="font-size: 0.8rem; font-weight: 600;" id="description">{{ weather_data.description }}</p>
             </div>
-        </footer>
+        </div>
+    </div>
+    <div id="status" style="margin-top: 10px; color: white;"></div>
+</section>
+
+<script>
+    async function fetchWeatherData(lat, lon) {
+        const apiKey = 'WEATHER_API_KEY';
+        const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+
+        try {
+            const response = await fetch(weatherUrl);
+            const data = await response.json();
+
+            if (data.cod === 200) {
+                document.getElementById('city').textContent = data.name;
+                document.getElementById('temperature').textContent = `${data.main.temp}°C`;
+                document.getElementById('feels-like-value').textContent = `${data.main.feels_like}°C`;
+                document.getElementById('description').textContent = data.weather[0].description;
+                setSeasonalBackground();
+            } else {
+                console.error('Error fetching weather data:', data.message);
+            }
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+        }
+    }
+
+    function geoFindMe() {
+        const status = document.querySelector("#status");
+
+        if (!navigator.geolocation) {
+            status.textContent = "Geolocation is not supported by your browser";
+        } else {
+            status.textContent = "Locating…";
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+
+        function success(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            status.textContent = "Location found.";
+            fetchWeatherData(latitude, longitude);
+        }
+
+        function error() {
+            status.textContent = "Unable to retrieve your location";
+        }
+    }
+
+    function setSeasonalBackground() {
+        const seasonalImage = document.getElementById('seasonal-image');
+        const month = new Date().getMonth();
+
+        if (month === 11 || month === 0 || month === 1) {
+            seasonalImage.src = '{% static "winter.jpg" %}';
+        } else if (month >= 2 && month <= 4) {
+            seasonalImage.src = '{% static "spring.jpg" %}';
+        } else if (month >= 5 && month <= 7) {
+            seasonalImage.src = '{% static "summer.jpg" %}';
+        } else {
+            seasonalImage.src = '{% static "fall.jpg" %}';
+        }
+
+        const overlay = document.querySelector('.card-img-overlay');
+        overlay.style.color = (month === 11 || month === 0 || month === 1 || month >= 8) ? '#FFFFFF' : '#000000';
+    }
+
+    window.onload = () => {
+        setSeasonalBackground();
+        geoFindMe();
+    };
+
+    document.getElementById('refresh-btn').addEventListener('click', () => {
+        const status = document.querySelector("#status");
+        status.textContent = "Refreshing...";
+        geoFindMe();
+    });
+</script>
+<!-- End of Weather Card Section -->
+
+
+
+            <a class="fixed-bottom m-5" href="{% url 'about' %}">About Us</a>
+
+        </nav>
+
+
+        <main class="col-md-9 col-lg-10">
+
+            {#                <div class="alert alert-secondary" role="alert">#}
+            {#                    Warning Sign for Dogs, Funny Cat Signs#}
+            {#                </div>#}
+            <div class="product-list bg-white p-3 border rounded">
+                {% block content %}
+                    <!-- Content goes here -->
+                {% endblock %}
+            </div>
+        </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="row bg-light py-3 text-center">
+        <div class="col">
+            <p>Footer</p>
+        </div>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

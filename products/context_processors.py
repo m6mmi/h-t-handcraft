@@ -37,9 +37,11 @@ def get_weather(request):
         data = response.json()
 
         if response.status_code == 200:
+
             weather_data = {
                 'temperature': data['main']['temp'],
-                'description': data['weather'][0]['description'],
+                'feels_like': data['main']['feels_like'],
+                'description': data['weather'][0]['description'].capitalize(),
                 'city': data['name'],
             }
         else:
@@ -48,7 +50,7 @@ def get_weather(request):
             }
     except Exception as e:
         weather_data = {
-            'error': str(e)
+            'error': f"Error: {str(e)}"
         }
 
     return {
