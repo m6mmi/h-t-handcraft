@@ -7,11 +7,13 @@
       <div class="col-md-4">
         <div class="card">
           <a href="{% url 'products:detail' product.id %}">
-              <img src="{{ product.image_path }}" alt="{{ product.title }}" class="product-list-image">
+              {% if product.image_path.url is not None %}
+                    <img src="{{ product.image_path.url }}" alt="{{ product.title }}" class="card-img-top">
+              {% endif %}
               <div class="card-body">
                 <h2 class="mb-0 text-muted">{{ product.title }}</h2>
                 <p class="text-muted small">{{ product.description }}</p>
-                <p class="text-muted small">Price: ${{ product.price }}</p>
+                <p class="text-muted small">Price: {{ product.price }} €</p>
                 <p class="text-secondary small">Stock: {{ product.stock }}</p>
                 {% if user.is_authenticated %}
                   <form action="{% url 'products:add_to_cart' product.id %}" method="post">
@@ -26,33 +28,6 @@
     {% endfor %}
   </div>
 </div>
- <div class="container">
-        <div class="row">
-            {% for product in products %}
-                <div class="col-md-3 mb-3">
-                    <div class="card h-100">
-                        <a href="{% url 'products:detail' product.id %}" class="text-decoration-none">
-                            {% if product.image_path.url is not None %}
-                                <img src="{{ product.image_path.url }}" alt="{{ product.title }}" class="card-img-top">
-                            {% endif %}
-                            <div class="card-body">
-                                <h3 class="mb-0 text-muted">{{ product.title }}</h3>
-                                <p class="text-muted small">{{ product.description }}</p>
-                                <p class="text-primary small">Price: ${{ product.price }}</p>
-                                <p class="text-secondary small">Stock: {{ product.stock }}</p>
-                                {% if user.is_authenticated %}
-                                    <form action="{% url 'products:add_to_cart' product.id %}" method="post">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-outline-success">Add to cart</button>
-                                    </form>
-                                {% endif %}
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
 
 <!-- Pagination -->
 {% if is_paginated %}

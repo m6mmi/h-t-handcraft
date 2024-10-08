@@ -1,3 +1,5 @@
+from unicodedata import category
+
 from django.db import models
 
 
@@ -21,4 +23,5 @@ class Product(models.Model):
     weight = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        category_name = Category.objects.get(id=self.category.id)
+        return f'{category_name} --- {self.title}, {self.image_path}'
