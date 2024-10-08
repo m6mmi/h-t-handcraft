@@ -133,3 +133,7 @@ footer {
     z-index: 1000;
     margin: 0;
 }
+.custom-font {
+    font-family: 'Caveat', cursive;
+    font-size: 35px;
+}
