@@ -8,13 +8,18 @@
     <p>{{ product.description }}</p>
     <p>Price: ${{ product.price }}</p>
     <p>Stock: {{ product.stock }}</p>
-    <div class="flex">
+
+    <!-- Flex container to hold the buttons -->
+    <div class="d-flex justify-content-start">
         {% if user.is_authenticated %}
-          <form action="{% url 'products:add_to_cart' product.id %}" method="post">
+          <form action="{% url 'products:add_to_cart' product.id %}" method="post" class="me-3">
             {% csrf_token %}
-            <button type="submit" class="btn btn-outline-success">Add to cart</button>
+            <!-- Add to cart button with green color (Bootstrap btn-success) -->
+            <button type="submit" class="btn btn-success">Add to cart</button>
           </form>
         {% endif %}
-        <a href="{{ back_url }}"><button class="btn btn-outline-success">Back to categories</button></a>
+
+        <!-- Back to categories button with blue color (Bootstrap btn-primary) -->
+        <a href="{{ back_url }}"><button class="btn btn-primary">Back to categories</button></a>
     </div>
 {% endblock %}
