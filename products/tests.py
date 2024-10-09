@@ -77,14 +77,14 @@ def test_update_product():
 @pytest.mark.django_db
 def test_delete_product():
     # Create a category
-    category = Category.objects.create(name="Electronics")
+    category = Category.objects.create(name="Kassid")
 
     # Create a product
     product = Product.objects.create(
-        title="Smartphone",
-        description="A smartphone with many features",
-        price=799.99,
-        stock=50,
+        title="Kuri kass",
+        description="Kuri kass",
+        price=13,
+        stock=2,
         category=category,
     )
 
