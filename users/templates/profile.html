@@ -30,20 +30,32 @@
                 <h2 class="h5 text-secondary">Last Order Information</h2>
                 <div class="card shadow border-light">
                     <div class="card-body">
-                        {% if last_order %}
-                            <p><strong>Order ID:</strong> {{ last_order.id }}</p>
-                            <p><strong>Order Date:</strong> {{ last_order.date }}</p>
-                            <p><strong>Total Amount:</strong> {{ last_order.total_amount }}</p>
-                            <p><strong>Status:</strong> {{ last_order.status }}</p>
-                            <p><strong>Items:</strong></p>
-                            <ul>
-                                {% for item in last_order.items %}
-                                    <li>{{ item.name }} ({{ item.quantity }})</li>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <p>No recent orders found.</p>
-                        {% endif %}
+                        <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Order nr</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'users:order' order.id %}">
+                                            {{ order.id|stringformat:"06d" }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {% if order.confirmation %}
+                                            <span class="badge bg-success">Confirmed</span>
+                                        {% else %}
+                                            <span class="badge bg-warning">Not confirmed</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                     </div>
                 </div>
             </section>
@@ -51,7 +63,7 @@
     </div>
 
     <section class="text-center">
-        <h2 class="h5 text-secondary">Account Actions</h2>
+        <h2 class="h5 text-secondary">Account actions</h2>
         <div class="d-flex justify-content-center flex-wrap">
             <a class="btn custom-btn mx-2" href="{% url 'users:update_profile' %}">Edit Profile</a>
             <a class="btn custom-btn mx-2" href="{% url 'users:logout' %}">Logout</a>

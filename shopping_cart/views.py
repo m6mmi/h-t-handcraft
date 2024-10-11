@@ -21,7 +21,8 @@ class OrderView(LoginRequiredMixin, View):
         total_price = cart_items.aggregate(total_price=Sum(F('quantity') * F('product__price')))
         return render(request, 'order.html', {
             'cart_items': cart_items,
-            'total_price': total_price
+            'total_price': total_price,
+            'order_id': order_id,
         })
 
 

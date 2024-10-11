@@ -2,13 +2,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate, logout, get_user
 from django.views.generic import DetailView, UpdateView
 
 from .forms import RegistrationForm, UserUpdateForm
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
-from .models import User
+from .models import User, Order
 
 
 class RegisterView(View):
@@ -71,6 +71,11 @@ class UserProfileView(LoginRequiredMixin, DetailView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['orders'] = Order.objects.filter(user=self.request.user, cart__is_active=False).order_by('-id')[:5]
+        return context
 
 
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
