@@ -22,7 +22,7 @@
               {% if user.is_authenticated %}
                 <form action="{% url 'products:add_to_cart' product.id %}" method="post" class="mt-auto">
                   {% csrf_token %}
-                  <button type="submit" class="btn btn-dark">Add to cart</button>
+                  <button type="submit" class="btn btn-secondary">Add to cart</button>
                 </form>
               {% endif %}
             </div>
