@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'checkout.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1 class="checkout-title">Checkout</h1>
+
 <div class="checkout-container">
+<h1 class="checkout-title text-center">Checkout</h1>
   <div class="checkout-summary">
     <h5 class="checkout-summary-title">User Information</h5>
     <form method="post">
