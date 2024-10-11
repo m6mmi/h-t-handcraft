@@ -1,7 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for item in cart_items %}
-            <h4>{{ item }}</h4>
-    {% endfor %}
+    <div class="order-container">
+        {% if cart_items %}
+            <h2>Order Items</h2>
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                        <tr>
+                            <td>{{ item.product.title }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.product.price }} €</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h4>Total: {{ total_price }} €</h4>
+        {% else %}
+            <h4 class="text-muted">No items found in order.</h4>
+        {% endif %}
+    </div>
 {% endblock %}

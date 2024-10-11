@@ -131,7 +131,8 @@ STATIC_URL = 'templates/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static'),
                     os.path.join(BASE_DIR, 'users/templates/static'),
                     os.path.join(BASE_DIR, 'templates/img'),
-                    os.path.join(BASE_DIR, 'products/templates/static')]
+                    os.path.join(BASE_DIR, 'products/templates/static'),
+                    os.path.join(BASE_DIR, 'shopping_cart/templates/static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field

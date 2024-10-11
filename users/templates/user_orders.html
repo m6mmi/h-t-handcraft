@@ -1,9 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for order in orders %}
-        <a href="{% url 'users:order' order.id %}">
-            <h4>{{ order }}</h4>
-        </a>
-    {% endfor %}
+    <div class="orders-container">
+        {% if orders %}
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Order Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td class="order-cell">
+                                <a href="{% url 'users:order' order.id %}" class="order-link">
+                                    {{ order }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h4 class="text-muted">No orders found.</h4>
+        {% endif %}
+    </div>
 {% endblock %}
