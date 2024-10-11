@@ -1,6 +1,6 @@
 H&T Handcraft is our SDA Python course "PythonRemoteEE23" final project.
 
-This project was made to sell handcraft product from e-shop. The user can search products, add products to cart and checkout.
+This project was made to sell handcraft products from e-shop. The user can search products, add products to cart and checkout.
 
 
 Technology
@@ -11,7 +11,7 @@ PyCharm 2023.2.3 (Professional Edition) / Python 3.12.0
 
 Django 5.1.1
 
-PostgreSQL 
+PostgreSQL 16.4
 
 Installation
 
