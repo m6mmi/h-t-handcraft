@@ -1,6 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}  <!-- Add this line to load the static files -->
 
 {% block content %}
-    <h1>Index</h1>
-    <p>This is the index page</p>
+    <h1>Welcome to Our E-Shop</h1>
+    <p>Check out some of our random products below:</p>
+
+    <div class="row">
+        {% for product in random_products %}
+            <div class="col-md-4">
+                <div class="card h-100">>
+                    <a href="{% url 'products:detail' product.id %}">
+                        {% if product.image_path %}
+                            <img src="{{ product.image_path.url }}" class="card-img-top" alt="{{ product.title }}">
+                        {% else %}
+                            <img src="{% static 'images/default-product.jpg' %}" class="card-img-top" alt="Default Image">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.title }}</h5>
+                            <p class="card-text">{{ product.description|truncatewords:20 }}</p>
+                            <p class="text-primary">Price: €{{ product.price }}</p>
+                            <p class="text-secondary">Stock: {{ product.stock }}</p>
+                            <a href="{% url 'products:detail' product.id %}" class="btn btn-secondary">View Product</a>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
