@@ -1,4 +1,4 @@
-H&T Handcraft is our SDA Python course "PythonRemoteEE23" final project.
+"H&T Handcraft" is our SDA Python course "PythonRemoteEE23" final project.
 
 This project was made to sell handcraft products from e-shop. The user can search products, add products to cart and checkout.
 

@@ -12,28 +12,25 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 15px; /* Adjust spacing between rows for better layout */
 }
 
-.product-image {
-  height: 200px;
-  object-fit: cover; /* Ensures the image fits the container without distortion */
+.col-md-4 {
+    padding: 10px; /* Add horizontal padding between boxes */
 }
 
-.card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%; /* Ensures the content stretches to fill the card */
-}
-
+/* Product card styling */
 .card {
     background-color: #faf7f2;
     border-radius: 10px;
-    margin: 15px;
+    margin-bottom: 10px; /* Adjust vertical space between cards */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Ensure cards are of the same height */
 }
-
 
 .card:hover {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
@@ -100,6 +97,7 @@ body {
 .text-muted {
     color: #6c757d;
 }
+
 .price {
     color: #5a5a5a;
 }
