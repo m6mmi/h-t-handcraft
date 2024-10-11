@@ -68,10 +68,12 @@ footer {
     color: #6c757d;
 }
 
+
+
 .container {
     padding: 20px;
 }
-/* Logout-profile- order history- cart */
+
 .btn-outline-success {
     color: #6c5e53;
     border-color: #d1c4b8;
@@ -132,4 +134,7 @@ footer {
     z-index: 1000;
     margin: 0;
 }
-
+.custom-font {
+    font-family: 'Caveat', cursive;
+    font-size: 35px;
+}
