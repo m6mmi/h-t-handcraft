@@ -48,7 +48,7 @@ Installation
     python manage.py runserver
 
 
-Products can be imported to e-shop by script via CSV file import_csv.py example file ht_products.csv
+Products can be imported to e-shop by script via CSV file import_csv.py example file  ht_products.csv
 
 In this project, we utilize Class-Based Views (CBVs) extensively, including Django's generic views such as 
 ListView, DetailView, and TemplateView. These provide an organized and reusable way to handle typical operations 
@@ -61,12 +61,11 @@ to enhance the user experience.
 Testing
 
 To test code go tests.py and run  "pytest products/tests.py"
+
 Credits
 
 This project was made as a collaboration by:
 
 Janek Sitsmann
-
 Triinu 
-
 Indrek Kuusk
