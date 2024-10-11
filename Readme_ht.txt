@@ -67,5 +67,5 @@ Credits
 This project was made as a collaboration by:
 
 Janek Sitsmann
-Triinu 
+Triinu Niklus
 Indrek Kuusk
