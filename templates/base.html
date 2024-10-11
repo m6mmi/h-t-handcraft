@@ -40,23 +40,23 @@
         <div class="col-3 text-end">
             {% if user.is_authenticated %}
                 <a href="{% url 'shopping_cart:cart' %}">
-                    <button class="btn btn-outline-success">
+                    <button class="btn btn-default">
                         🛒
                         <span class="badge bg-secondary">{{ cart_items_count }}</span>
                     </button>
                 </a>
                 <a href="{% url 'users:user_orders' %}">
-                    <button class="btn btn-outline-success">Order History</button>
+                    <button class="btn btn-default">Order History</button>
                 </a>
                 <a href="{% url 'users:profile' %}">
-                    <button class="btn btn-outline-success">Profile</button>
+                    <button class="btn btn-default">Profile</button>
                 </a>
                 <a href="{% url 'users:logout' %}">
-                    <button class="btn btn-outline-success">Logout</button>
+                    <button class="btn btn-default">Logout</button>
                 </a>
             {% else %}
                 <a href="{% url 'users:login' %}">
-                    <button class="btn btn-outline-success">Login / Register</button>
+                    <button class="btn btn-checkout">Login / Register</button>
                 </a>
             {% endif %}
         </div>

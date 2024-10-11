@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{%  load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'cart.css' %}">
+{% endblock %}
+
 {% block content %}
     <div class="cart-container">
         {% if cart_items %}
@@ -39,7 +45,7 @@
             </table>
             <div class="mt-3">
                 <a href="{% url 'shopping_cart:checkout' %}">
-                    <button class="btn btn-outline-success">Checkout</button>
+                    <button class="btn btn-checkout">Checkout</button>
                 </a>
             </div>
         {% else %}

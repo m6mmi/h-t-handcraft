@@ -74,12 +74,12 @@ footer {
     padding: 20px;
 }
 
-.btn-outline-success {
+.btn-default {
     color: #6c5e53;
     border-color: #d1c4b8;
 }
 
-.btn-outline-success:hover {
+.btn-default:hover {
     background-color: #d6c9b7;
     color: #4a4a4a;
     border-color: #d1c4b8;
