@@ -2,6 +2,7 @@ H&T Handcraft is our SDA Python course "PythonRemoteEE23" final project.
 
 This project was made to sell handcraft product from e-shop. The user can search products, add products to cart and checkout.
 
+
 Technology
 
 This project is based on:
@@ -47,7 +48,7 @@ Installation
     python manage.py runserver
 
 
-
+Products can be imported to e-shop by script via CSV file import_csv.py example file ht_products.csv
 
 In this project, we utilize Class-Based Views (CBVs) extensively, including Django's generic views such as 
 ListView, DetailView, and TemplateView. These provide an organized and reusable way to handle typical operations 
