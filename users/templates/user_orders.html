@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
+
+{%  block style %}
+    <link rel="stylesheet" href="{% static 'css/user_orders.css' %}">
+{% endblock %}
 
 {% block content %}
     <div class="orders-container">
