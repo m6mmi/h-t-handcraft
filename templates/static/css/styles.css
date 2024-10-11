@@ -68,21 +68,6 @@ footer {
     color: #6c757d;
 }
 
-.product-image {
-  height: 200px;
-  object-fit: cover;
-}
-
-.card {
-  height: 100%;
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
 
 
 .container {

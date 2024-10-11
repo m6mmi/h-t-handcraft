@@ -14,6 +14,18 @@ body {
     justify-content: center;
 }
 
+.product-image {
+  height: 200px;
+  object-fit: cover; /* Ensures the image fits the container without distortion */
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Ensures the content stretches to fill the card */
+}
+
 .card {
     background-color: #faf7f2;
     border-radius: 10px;
@@ -21,6 +33,7 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     width: 300px;
 }
+
 
 .card:hover {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
