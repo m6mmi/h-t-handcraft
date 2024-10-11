@@ -34,6 +34,8 @@ class ProductDetailView(DetailView):
 # class IndexView(View):
 #     def get(self, request):
 #         return render(request, 'index.html')
+
+
 class IndexView(View):
     def get(self, request):
         # Fetch all products, shuffle them, and select a few random ones (e.g., 5 products)
