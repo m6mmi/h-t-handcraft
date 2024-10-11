@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView
-
+from random import shuffle
 from shopping_cart.models import Cart, CartProduct
 from .models import Product, Category
 
@@ -30,10 +30,18 @@ class ProductDetailView(DetailView):
         context['back_url'] = self.request.META['HTTP_REFERER']
         return context
 
-
+#
+# class IndexView(View):
+#     def get(self, request):
+#         return render(request, 'index.html')
 class IndexView(View):
     def get(self, request):
-        return render(request, 'index.html')
+        # Fetch all products, shuffle them, and select a few random ones (e.g., 5 products)
+        products = list(Product.objects.all())
+        shuffle(products)
+        random_products = products[:5]  # Display 5 random products
+
+        return render(request, 'index.html', {'random_products': random_products})
 
 
 class AddToCart(LoginRequiredMixin, View):

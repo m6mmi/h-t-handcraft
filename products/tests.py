@@ -35,7 +35,7 @@ def test_read_product():
         title="Kuri kass",
         description="Kuri kass",
         price=7,
-        stock=5,
+        stock=9,
         category=category,
     )
 
@@ -50,7 +50,7 @@ def test_read_product():
 @pytest.mark.django_db
 def test_update_product():
     # Create a category
-    category = Category.objects.create(name="Kassid_2")
+    category = Category.objects.create(name="Kassid")
 
     # Create a product
     product = Product.objects.create(
@@ -84,7 +84,7 @@ def test_delete_product():
         title="Kuri kass",
         description="Kuri kass",
         price=13,
-        stock=2,
+        stock=7,
         category=category,
     )
 

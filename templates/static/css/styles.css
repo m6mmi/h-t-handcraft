@@ -68,10 +68,27 @@ footer {
     color: #6c757d;
 }
 
+.product-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card {
+  height: 100%;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+
 .container {
     padding: 20px;
 }
-/* Logout-profile- order history- cart */
+
 .btn-outline-success {
     color: #6c5e53;
     border-color: #d1c4b8;
