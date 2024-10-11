@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+{% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="col-md-4">
@@ -23,7 +27,7 @@
                     <button type="submit" class="btn btn-secondary"> Add to cart</button>
                   </form>
                 {% endif %}
-                <a href="{{ back_url }}" class="btn btn-secondary ms-3">⬅︎ Back to categories</a>
+                <a href="{{ back_url }}" class="btn back-to-categories-btn">⬅︎ Back to categories</a>
             </div>
         </div>
     </div>

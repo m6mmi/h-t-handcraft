@@ -1,0 +1,11 @@
+.back-to-categories-btn {
+    background-color: #eae3d2;
+    color: #6c5e53;
+    border: 1px solid #d1c4b8;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.back-to-categories-btn:hover {
+    background-color: #d6c9b7;
+    color: #4a4a4a;
+}

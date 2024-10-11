@@ -41,7 +41,7 @@ class IndexView(View):
         # Fetch all products, shuffle them, and select a few random ones (e.g., 5 products)
         products = list(Product.objects.all())
         shuffle(products)
-        random_products = products[:21]  # Display 20 random products
+        random_products = products[:6]  # Display 20 random products
 
         return render(request, 'index.html', {'random_products': random_products})
 
