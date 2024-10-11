@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
 <div class="container">
   <div class="row">
@@ -7,8 +9,10 @@
       <div class="col-md-4">
         <div class="card h-100">
           <a href="{% url 'products:detail' product.id %}">
-            {% if product.image_path.url is not None %}
-              <img src="{{ product.image_path.url }}" alt="{{ product.title }}" class="card-img-top product-image">
+            {% if product.image_path %}
+                <img src="{{ product.image_path.url }}" class="card-img-top" alt="{{ product.title }}">
+            {% else %}
+                <img src="{% static 'img/default_image.png' %}" class="card-img-top" alt="Default Image">
             {% endif %}
             <div class="card-body d-flex flex-column">
               <h2 class="mb-0 text-muted">{{ product.title }}</h2>

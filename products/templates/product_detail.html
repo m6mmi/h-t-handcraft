@@ -1,25 +1,30 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
-    <h1>{{ product.title }}</h1>
-    {% if product.image_path.url is not None %}
-        <img src="{{ product.image_path.url }}" alt="{{ product.title }}" class="product-list-image">
-    {% endif %}
-    <p>{{ product.description }}</p>
-    <p>Price: €{{ product.price }}</p>
-    <p>Stock: {{ product.stock }}</p>
-
-    <!-- Flex container to hold the buttons -->
-    <div class="d-flex justify-content-start">
-        {% if user.is_authenticated %}
-          <form action="{% url 'products:add_to_cart' product.id %}" method="post" class="me-3">
-            {% csrf_token %}
-            <!-- Add to cart button with green color (Bootstrap btn-success) -->
-            <button type="submit" class="btn btn-dark">Add to cart</button>
-          </form>
-        {% endif %}
-
-        <!-- Back to categories button with blue color (Bootstrap btn-primary) -->
-        <a href="{{ back_url }}"><button class="btn btn-secondary">Back to categories</button></a>
+    <div class="row">
+        <div class="col-md-4">
+            {% if product.image_path %}
+                <img src="{{ product.image_path.url }}" class="card-img-top" alt="{{ product.title }}">
+            {% else %}
+                <img src="{% static 'img/default_image.png' %}" class="card-img-top" alt="Default Image">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h1>{{ product.title }}</h1>
+            <p>{{ product.description }}</p>
+            <p>Price: €{{ product.price }}</p>
+            <p>Stock: {{ product.stock }}</p>
+            <div class="d-flex justify-content-start">
+                {% if user.is_authenticated %}
+                  <form action="{% url 'products:add_to_cart' product.id %}" method="post" class="me-3">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-secondary"> Add to cart</button>
+                  </form>
+                {% endif %}
+                <a href="{{ back_url }}" class="btn btn-secondary ms-3">⬅︎ Back to categories</a>
+            </div>
+        </div>
     </div>
 {% endblock %}
