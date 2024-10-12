@@ -9,7 +9,7 @@
         {% for product in random_products %}
             <div class="col-md-4 h-100">
                 <div class="card h-100">
-                    <a href="{% url 'products:detail' product.id %}">
+                    <a href="{% url 'products:detail' product.id %}" class="text-decoration-none">
                         {% if product.image_path %}
                             <img src="{{ product.image_path.url }}" class="card-img-top" alt="{{ product.title }}">
                         {% else %}

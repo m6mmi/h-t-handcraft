@@ -79,6 +79,10 @@ footer {
     border-color: #d1c4b8;
 }
 
+.main-button-group a {
+    text-decoration: none;
+}
+
 .btn-default:hover {
     background-color: #d6c9b7;
     color: #4a4a4a;
