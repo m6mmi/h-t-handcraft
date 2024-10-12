@@ -68,3 +68,14 @@
     object-fit: cover;
     border-radius: 5px 5px 0 0;
 }
+
+.card-img-top {
+  height: 180px; /* Set a fixed height for the image */
+  width: 100%;
+  object-fit: scale-down; /* Crop the image to fit the container */
+  object-position: top; /* Display the top part of the image */
+}
+
+.card-body {
+    height: 250px;
+}
