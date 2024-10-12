@@ -2,9 +2,6 @@
 {% load static %}  <!-- Add this line to load the static files -->
 
 {% block content %}
-    <h1>Welcome to Our E-Shop</h1>
-    <p>Check out some of our random products below:</p>
-
     <div class="row">
         {% for product in random_products %}
             <div class="col-md-4 h-100">

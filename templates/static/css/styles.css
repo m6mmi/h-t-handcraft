@@ -67,27 +67,37 @@ footer {
 .text-muted {
     color: #6c757d;
 }
+.btn-default {
+    background-color: #e0d4c7;
+    color: #594f47;
+    border-color: #b0a49a;
+}
 
+.btn-default:hover {
+    background-color: #d3c6b5;
+    color: #3e3e3e;
+    border-color: #b0a49a;
+}
+.btn-default-custom {
+    background-color: #e0d4c7;
+    color: #594f47;
+    border-color: #b0a49a;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
 
-
+.btn-default-custom:hover {
+    background-color: #d3c6b5;
+    color: #3e3e3e;
+    border-color: #b0a49a;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+}
 .container {
     padding: 20px;
 }
-
-.btn-default {
-    color: #6c5e53;
-    border-color: #d1c4b8;
-}
-
 .main-button-group a {
     text-decoration: none;
 }
 
-.btn-default:hover {
-    background-color: #d6c9b7;
-    color: #4a4a4a;
-    border-color: #d1c4b8;
-}
 /* Kategooriad */
 .nav-link {
     color: #6c5e53;

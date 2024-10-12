@@ -5,7 +5,6 @@
 <div class="container mt-5">
     <header class="text-center mb-4">
         <h1 class="header-title">{{ user_profile.username }}'s Profile</h1>
-        <p class="lead text-muted">Manage your personal information and account settings.</p>
     </header>
 
     <div class="row">
@@ -63,7 +62,6 @@
     </div>
 
     <section class="text-center">
-        <h2 class="h5 text-secondary">Account actions</h2>
         <div class="d-flex justify-content-center flex-wrap">
             <a class="btn custom-btn mx-2" href="{% url 'users:update_profile' %}">Edit Profile</a>
             <a class="btn custom-btn mx-2" href="{% url 'users:logout' %}">Logout</a>
