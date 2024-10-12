@@ -16,48 +16,48 @@
       {% csrf_token %}
       <div class="checkout-form">
         <div class="form-group">
-          <label for="first_name">Eesnimi:</label>
+          <label for="first_name">Eesnimi</label>
           <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" required/>
         </div>
 
         <div class="form-group">
-          <label for="last_name">Perekonna nimi:</label>
+          <label for="last_name">Perekonnanimi</label>
           <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" required/>
         </div>
 
         <div class="form-group">
-          <label for="email">E-Mail:</label>
+          <label for="email">E-Mail</label>
           <input type="email" id="email" name="email" value="{{ user.email }}" required/>
         </div>
 
         <h6 class="checkout-summary-title">Aadress</h6>
         <div class="form-group">
-          <label for="address">Aadress:</label>
+          <label for="address">Aadress</label>
           <input type="text" id="address" name="address" value="{{ contact.address }}" required/>
         </div>
 
         <div class="form-group">
-          <label for="city">Linn:</label>
+          <label for="city">Linn</label>
           <input type="text" id="city" name="city" value="{{ contact.city }}" required/>
         </div>
 
         <div class="form-group">
-          <label for="county">Maakond:</label>
+          <label for="county">Maakond</label>
           <input type="text" id="county" name="county" value="{{ contact.county }}" required/>
         </div>
 
         <div class="form-group">
-          <label for="zipcode">Postiinteks:</label>
+          <label for="zipcode">Postiinteks</label>
           <input type="text" id="zipcode" name="zipcode" value="{{ contact.zipcode }}" required/>
         </div>
 
         <div class="form-group">
-          <label for="country">Riik:</label>
+          <label for="country">Riik</label>
           <input type="text" id="country" name="country" value="{{ contact.country }}" required/>
         </div>
 
         <div class="form-group">
-          <label for="phone_number">Telefoni number:</label>
+          <label for="phone_number">Telefoni number</label>
           <input type="tel" id="phone_number" name="phone_number" value="{{ contact.phone_number }}" required/>
         </div>
 
