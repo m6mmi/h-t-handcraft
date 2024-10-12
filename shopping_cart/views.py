@@ -19,10 +19,16 @@ class OrderView(LoginRequiredMixin, View):
         order_id = self.kwargs.get('id')
         cart_items = CartProduct.objects.filter(cart_id__order=order_id, cart__is_active=False).order_by('-id')
         total_price = cart_items.aggregate(total_price=Sum(F('quantity') * F('product__price')))
+        try:
+            shipping = ShippingAddress.objects.get(order_id=order_id)
+        except ShippingAddress.DoesNotExist:
+            # Handle the case where the ShippingAddress object does not exist
+            shipping = None
         return render(request, 'order.html', {
             'cart_items': cart_items,
             'total_price': total_price,
             'order_id': order_id,
+            'shipping': shipping
         })
 
 
@@ -98,7 +104,7 @@ class ShippingAddressView(LoginRequiredMixin, View):
         phone_number = request.POST.get('phone_number')
 
         shipping = ShippingAddress()
-        shipping.order_id = Cart.objects.get(user_id=self.request.user, is_active=True).id
+        shipping.order_id = Order.objects.get(user_id=self.request.user, cart__is_active=True).id
         shipping.user = self.request.user
         shipping.first_name = first_name
         shipping.last_name = last_name
