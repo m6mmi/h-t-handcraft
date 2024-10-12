@@ -55,7 +55,7 @@
                 </a>
             {% else %}
                 <a href="{% url 'users:login' %}">
-                    <button class="btn btn-checkout">Login / Register</button>
+                    <button class="btn btn-default">Login / Register</button>
                 </a>
             {% endif %}
         </div>
@@ -74,8 +74,6 @@
                     <hr class="p-0 m-0">
                 {% endfor %}
             </ul>
-
-<!-- Weather Card Section -->
         <section class="mt-4">
             <div class="position-relative">
                 <img id="seasonal-image" src="{% static 'spring.jpg' %}" class="rounded fixed-size" alt="season">
@@ -168,12 +166,8 @@
                 geoFindMe();
             });
         </script>
-        <!-- End of Weather Card Section -->
-
             <a class="fixed-bottom m-5" href="{% url 'about' %}">About Us</a>
         </nav>
-
-
         <main class="col-md-8 col-lg-10">
             <div class="product-list bg-white p-3 border rounded">
                 {% block content %}
