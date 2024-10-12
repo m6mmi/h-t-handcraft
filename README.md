@@ -5,11 +5,10 @@ H&T Handcraft is an e-shop platform designed to sell handcrafted products. It al
 ![demo.png](demo.png)
 ---
 
-### Technologies Used  
-- **IDE**: PyCharm 2023.2.3 (Professional Edition)  
-- **Language**: Python 3.12.0  
-- **Framework**: Django 5.1.1  
-- **Database**: PostgreSQL 16.4  
+### Technologies Used
+- **Language**: Python 3.12
+- **Framework**: Django 5.1
+- **Database**: PostgresSQL 16.4  
 
 ---
 
@@ -21,41 +20,36 @@ H&T Handcraft is an e-shop platform designed to sell handcrafted products. It al
     cd h-t-handcraft  
     ```  
 
-2. **Install dependencies**:  
-    ```bash  
-    pip install -r requirements.txt  
-    ```  
-
-3. **Create a virtual environment**:  
+2. **Create a virtual environment**:  
     ```bash  
     python -m venv venv  
     source venv/bin/activate  # On Windows: venv\Scripts\activate  
     ```  
 
-4. **Install project dependencies**:  
+3. **Install project dependencies**:  
     ```bash  
     pip install -r requirements.txt  
     ```  
 
-5. **Configure the environment**:  
+4. **Configure the environment**:  
     ```bash  
     cp .env.example .env  
     ```  
 
-6. **Set up the database**:  
+5. **Set up the database**:  
     - Ensure PostgreSQL is installed and running.  
     - Create a database named `h_t_handcraft`.  
     - Update the `.env` file with your PostgreSQL credentials. (See example.env file)
 
-7. **Run the development server**:  
+6. **Run the development server**:  
     ```bash  
     python manage.py runserver  
     ```
 
 ---
 
-### Product Import via CSV  
-Products can be imported to the e-shop by running the script `import_csv.py`. Example CSV file: `ht_products.csv`.
+### Use fixtures instead CSV
+
 
 ---
 
