@@ -79,3 +79,8 @@
 .card-body {
     height: 250px;
 }
+
+.card {
+    max-width: 310px;
+    margin: 0 auto;
+}
