@@ -23,15 +23,9 @@ a:hover {
     color: #6c757d;
 }
 
-h2 {
-    color: #8b6a4b;
-}
 .card-body {
     background-color: #f8f9fa;
     border-radius: 8px;
     padding: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-.card-body p {
-    font-size: 1rem;
 }

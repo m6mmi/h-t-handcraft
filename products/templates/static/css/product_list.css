@@ -1,37 +1,3 @@
-body {
-    background-color: #f4f1ec;
-    font-family: 'Playfair Display', serif;
-    color: #5a5a5a;
-}
-
-.container {
-    padding: 20px;
-}
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 15px; /* Adjust spacing between rows for better layout */
-}
-
-.col-md-4 {
-    padding: 10px; /* Add horizontal padding between boxes */
-}
-
-/* Product card styling */
-.card {
-    background-color: #faf7f2;
-    border-radius: 10px;
-    margin-bottom: 10px; /* Adjust vertical space between cards */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    /*width: 300px;*/
-    /*display: flex;*/
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%; /* Ensure cards are of the same height */
-}
-
 .card:hover {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
@@ -43,19 +9,13 @@ body {
     object-fit: cover;
 }
 
-/*.card-body {*/
-/*    padding: 15px;*/
-/*}*/
-
 .card-body h2 {
     font-size: 1.2rem;
     color: #7a5d43;
     margin-bottom: 10px;
 }
 
-.card-body p {
-    margin: 5px 0;
-}
+
 
 .btn-add {
     background-color: #eae3d2;
@@ -94,10 +54,28 @@ body {
     color: #4a4a4a;
 }
 
-.text-muted {
-    color: #6c757d;
+.product-list {
+    min-height: 400px;
+    padding: 15px;
+    background-color: #faf7f2;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-.price {
-    color: #5a5a5a;
+.product-list-image {
+    display: inline-block;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+}
+
+.card-img-top {
+  height: 180px; /* Set a fixed height for the image */
+  width: 100%;
+  object-fit: scale-down; /* Crop the image to fit the container */
+  object-position: top; /* Display the top part of the image */
+}
+
+.card-body {
+    height: 250px;
 }

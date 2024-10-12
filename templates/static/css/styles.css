@@ -4,11 +4,6 @@ body {
     color: #5a5a5a;
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
 .sidebar {
     color: #6c5e53;
     padding-top: 20px;
@@ -18,14 +13,6 @@ body {
 h2 {
     font-weight: bold;
     color: #7a5d43;
-}
-
-.product-list {
-    min-height: 400px;
-    padding: 15px;
-    background-color: #faf7f2;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .custom-btn {
@@ -57,34 +44,40 @@ footer {
     max-width: 100px;
 }
 
-.product-list-image {
-    display: inline-block;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 5px 5px 0 0;
+.btn-default {
+    background-color: #e0d4c7;
+    color: #594f47;
+    border-color: #b0a49a;
 }
 
-.text-muted {
-    color: #6c757d;
+.btn-default:hover {
+    background-color: #d3c6b5;
+    color: #3e3e3e;
+    border-color: #b0a49a;
 }
 
+.btn-default-custom {
+    background-color: #e0d4c7;
+    color: #594f47;
+    border-color: #b0a49a;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
 
+.btn-default-custom:hover {
+    background-color: #d3c6b5;
+    color: #3e3e3e;
+    border-color: #b0a49a;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+}
 
 .container {
     padding: 20px;
 }
 
-.btn-default {
-    color: #6c5e53;
-    border-color: #d1c4b8;
+.main-button-group a {
+    text-decoration: none;
 }
 
-.btn-default:hover {
-    background-color: #d6c9b7;
-    color: #4a4a4a;
-    border-color: #d1c4b8;
-}
-/* Kategooriad */
 .nav-link {
     color: #6c5e53;
     font-weight: bold;
@@ -95,7 +88,7 @@ footer {
     color: #4a4038;
     text-decoration: underline;
 }
-/* Otsinguriba */
+
 .nav-item.active .nav-link {
     color: #8b6a4b;
 }
