@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/update_profile.css' %}">
+{% endblock %}
+
 {% block content %}
     <header>
         <h1 class="page-title">Muuda oma profiili</h1>
