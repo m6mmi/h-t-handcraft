@@ -2,7 +2,7 @@
 
 ### Overview  
 H&T Handcraft is an e-shop platform designed to sell handcrafted products. It allows users to search for products, add them to the cart, and complete the checkout process smoothly.
-
+![demo.png](demo.png)
 ---
 
 ### Technologies Used  
