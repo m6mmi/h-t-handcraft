@@ -9,7 +9,6 @@ class Address(models.Model):
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)
     address = models.CharField(max_length=50, blank=False)
-    #apartment_number = models.CharField(max_length=10, null=True, blank=True)
     city = models.CharField(max_length=50, blank=False)
     zipcode = models.CharField(max_length=10, blank=False)
     county = models.CharField(max_length=25, blank=False)

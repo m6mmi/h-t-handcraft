@@ -14,5 +14,4 @@ urlpatterns = [
     path("orders/", UserOrders.as_view(), name="user_orders"),
     path("order/<int:id>/", OrderView.as_view(), name="order"),
     path('profile/update/', UserProfileUpdateView.as_view(), name='update_profile'),
-
 ]

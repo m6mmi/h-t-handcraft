@@ -11,7 +11,7 @@
 <div class="checkout-container">
 <h1 class="checkout-title text-center">Kinnita tellimus</h1>
   <div class="checkout-summary">
-    <h5 class="checkout-summary-title">Tellija informatsioon</h5>
+    <h5 class="checkout-summary-title">Saaja informatsioon</h5>
     <form method="post">
       {% csrf_token %}
       <div class="checkout-form">
@@ -23,11 +23,6 @@
         <div class="form-group">
           <label for="last_name">Perekonnanimi</label>
           <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" required/>
-        </div>
-
-        <div class="form-group">
-          <label for="email">E-Mail</label>
-          <input type="email" id="email" name="email" value="{{ user.email }}" required/>
         </div>
 
         <h6 class="checkout-summary-title">Aadress</h6>
@@ -61,7 +56,7 @@
           <input type="tel" id="phone_number" name="phone_number" value="{{ contact.phone_number }}" required/>
         </div>
 
-        <button type="submit" class="checkout-confirm-btn">Kinnita tellija andmed</button>
+        <button type="submit" class="checkout-confirm-btn">Kinnita</button>
       </div>
     </form>
   </div>

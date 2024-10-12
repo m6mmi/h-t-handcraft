@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
-from users.models import Order
+from users.models import Order, ShippingAddress
 from .models import Cart, CartProduct
 
 
@@ -66,7 +66,6 @@ class Checkout(LoginRequiredMixin, View):
         country = request.POST.get('country')
         phone_number = request.POST.get('phone_number')
 
-        # Create a new order
         order = Order()
         order.cart = Cart.objects.get(user_id=self.request.user, is_active=True)
         order.user = self.request.user
@@ -81,9 +80,40 @@ class Checkout(LoginRequiredMixin, View):
         order.phone_number = phone_number
         order.save()
 
+        return redirect(reverse('shopping_cart:shipping'))
+
+
+class ShippingAddressView(LoginRequiredMixin, View):
+    def get(self, request, **kwargs):
+        return render(request, 'shipping.html')
+
+    def post(self, request):
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        county = request.POST.get('county')
+        zipcode = request.POST.get('zipcode')
+        country = request.POST.get('country')
+        phone_number = request.POST.get('phone_number')
+
+        shipping = ShippingAddress()
+        shipping.order_id = Cart.objects.get(user_id=self.request.user, is_active=True).id
+        shipping.user = self.request.user
+        shipping.first_name = first_name
+        shipping.last_name = last_name
+        shipping.address = address
+        shipping.city = city
+        shipping.county = county
+        shipping.zipcode = zipcode
+        shipping.country = country
+        shipping.phone_number = phone_number
+        shipping.save()
+
         # CSet cart to inactive
         cart = Cart.objects.get(user_id=self.request.user, is_active=True)
         cart.is_active = False
         cart.save()
 
         return redirect(reverse('users:user_orders'))
+
