@@ -67,7 +67,16 @@ H&T Handcraft is an e-shop platform designed to sell handcrafted products. It al
 
 ---
 
-### Use fixtures instead CSV
+### Add products into the database
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+```bash
+python manage.py loaddata fixtures_products.json
+```
 
 
 ---
@@ -88,6 +97,6 @@ pytest products/tests.py
 ### Credits
 This project is a collaboration by:
 
-- Janek Sitsmann
-- Triinu Niklus
-- Indrek Kuusk
+- Janek Sitsmann (https://github.com/m6mmi) (Project Manager)
+- Triinu Niklus (https://github.com/TriinuN)
+- Indrek Kuusk (https://github.com/indrekkuusk)
