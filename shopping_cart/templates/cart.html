@@ -12,10 +12,10 @@
             <table class="table table-striped table-hover cart-table">
                 <thead>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                        <th>Price €</th>
-                        <th>Total €</th>
+                        <th>Toode</th>
+                        <th>Kogus</th>
+                        <th>Hind €</th>
+                        <th>Kokku €</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,16 +45,16 @@
             </table>
             <div class="mt-3">
                 <a href="{% url 'shopping_cart:checkout' %}">
-                    <button class="btn btn-checkout">Checkout</button>
+                    <button class="btn btn-checkout">Kinnita tellimus</button>
                 </a>
             </div>
         {% else %}
-            <h4 class="text-muted">No items in cart</h4>
+            <h4 class="text-muted">Tooteid ei ole listud ostukorvi</h4>
         {% endif %}
 
         {% if not user.is_authenticated %}
             <a href="{% url 'users:login' %}">
-                <button class="btn btn-primary">Login / Register</button>
+                <button class="btn btn-primary">Logi sisse / Registreeri</button>
             </a>
         {% endif %}
     </div>

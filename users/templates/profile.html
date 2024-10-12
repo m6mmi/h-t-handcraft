@@ -4,21 +4,21 @@
 
 <div class="container mt-5">
     <header class="text-center mb-4">
-        <h1 class="header-title">{{ user_profile.username }}'s Profile</h1>
+        <h1 class="header-title">{{ user_profile.username }}'s profiil</h1>
     </header>
 
     <div class="row">
         <div class="col-md-6 mb-5">
             <section>
-                <h2 class="h5 text-secondary">Personal Information</h2>
+                <h2 class="h5 text-secondary">Personaalne informatsioon</h2>
                 <div class="card shadow border-light">
                     <div class="card-body">
-                        <p><strong>Username:</strong> {{ user_profile.username }}</p>
-                        <p><strong>Name:</strong> {{ user_profile.first_name }}</p>
-                        <p><strong>Last Name:</strong> {{ user_profile.last_name }}</p>
+                        <p><strong>Kasutajanimi:</strong> {{ user_profile.username }}</p>
+                        <p><strong>Eesnimi:</strong> {{ user_profile.first_name }}</p>
+                        <p><strong>Perekonnanimi:</strong> {{ user_profile.last_name }}</p>
                         <p><strong>Email:</strong> {{ user_profile.email }}</p>
-                        <p><strong>Phone Number:</strong> {{ user_profile.phone_number }}</p>
-                        <p><strong>Account Created At:</strong> {{ user_profile.created_at }}</p>
+                        <p><strong>Telefoni number:</strong> {{ user_profile.phone_number }}</p>
+                        <p><strong>Kasutaja loodud:</strong> {{ user_profile.created_at }}</p>
                     </div>
                 </div>
             </section>
@@ -26,14 +26,14 @@
 
         <div class="col-md-6 mb-5">
             <section>
-                <h2 class="h5 text-secondary">Last Order Information</h2>
+                <h2 class="h5 text-secondary">Viimane tellimus</h2>
                 <div class="card shadow border-light">
                     <div class="card-body">
                         <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Order nr</th>
-                                <th>Status</th>
+                                <th>Tellimuse nr</th>
+                                <th>Staatus</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,9 +46,9 @@
                                     </td>
                                     <td>
                                         {% if order.confirmation %}
-                                            <span class="badge bg-success">Confirmed</span>
+                                            <span class="badge bg-success">Kinnitatud</span>
                                         {% else %}
-                                            <span class="badge bg-warning">Not confirmed</span>
+                                            <span class="badge bg-warning">Kinnitamata</span>
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -63,9 +63,9 @@
 
     <section class="text-center">
         <div class="d-flex justify-content-center flex-wrap">
-            <a class="btn custom-btn mx-2" href="{% url 'users:update_profile' %}">Edit Profile</a>
-            <a class="btn custom-btn mx-2" href="{% url 'users:logout' %}">Logout</a>
-            <a class="btn custom-btn mx-2" href="{% url 'users:change_password' %}">Change Password</a>
+            <a class="btn custom-btn mx-2" href="{% url 'users:update_profile' %}">Muuda profiili</a>
+            <a class="btn custom-btn mx-2" href="{% url 'users:logout' %}">Logi välja</a>
+            <a class="btn custom-btn mx-2" href="{% url 'users:change_password' %}">Muuda parool</a>
         </div>
     </section>
 </div>

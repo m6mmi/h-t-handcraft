@@ -17,12 +17,12 @@
             <div class="card-body d-flex flex-column">
               <h2 class="mb-0 text-muted">{{ product.title }}</h2>
               <p class="text-muted small flex-grow-1">{{ product.description|truncatewords:20 }}</p>
-              <p class="text-muted small">Price: {{ product.price }} €</p>
-              <p class="text-secondary small">Stock: {{ product.stock }}</p>
+              <p class="text-muted small">Hind: {{ product.price }}€</p>
+              <p class="text-secondary small">Laojääk: {{ product.stock }}</p>
               {% if user.is_authenticated %}
                 <form action="{% url 'products:add_to_cart' product.id %}" method="post" class="mt-auto">
                   {% csrf_token %}
-                  <button type="submit" class="btn btn-secondary">Add to cart</button>
+                  <button type="submit" class="btn btn-secondary">Lisa ostukorvi</button>
                 </form>
               {% endif %}
             </div>

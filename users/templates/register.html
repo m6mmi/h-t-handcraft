@@ -9,18 +9,18 @@
 {% block content %}
     <div class="container mt-3">
         <header class="text-center mb-4">
-            <h1>Register</h1>
+            <h1>Registreeri</h1>
         </header>
 
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn custom-btn">Register</button>
+            <button type="submit" class="btn custom-btn">Registreeri</button>
         </form>
 
         <div class="text-center mt-4">
-            <p>Already have an account?</p>
-            <a href="{% url 'users:login' %}" class="link-button">Login</a>
+            <p>Kasutaja juba olemas?</p>
+            <a href="{% url 'users:login' %}" class="link-button">Logi sisse</a>
         </div>
     </div>
 {% endblock %}

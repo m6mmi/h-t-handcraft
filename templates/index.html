@@ -15,9 +15,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ product.title }}</h5>
                             <p class="card-text">{{ product.description|truncatewords:20 }}</p>
-                            <p class="text-primary">Price: €{{ product.price }}</p>
-                            <p class="text-secondary">Stock: {{ product.stock }}</p>
-                            <a href="{% url 'products:detail' product.id %}" class="btn btn-secondary">View Product</a>
+                            <p class="text-primary">Hind: {{ product.price }}€</p>
+                            <p class="text-secondary">Laojääk: {{ product.stock }}</p>
+                            <a href="{% url 'products:detail' product.id %}" class="btn btn-secondary">Vaata lähemalt</a>
                         </div>
                     </a>
                 </div>

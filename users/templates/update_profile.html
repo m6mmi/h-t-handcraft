@@ -2,13 +2,13 @@
 
 {% block content %}
     <header>
-        <h1 class="page-title">Edit Your Profile</h1>
+        <h1 class="page-title">Muuda oma parooli</h1>
     </header>
 
     <form method="POST" class="profile-edit-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="custom-btn">Save Changes</button>
+        <button type="submit" class="custom-btn">Salvesta</button>
     </form>
-<a href="{% url 'users:profile' %}" class="custom-back-btn">Back to Profile</a>
+<a href="{% url 'users:profile' %}" class="custom-back-btn">Tagasi profiilile</a>
 {% endblock %}

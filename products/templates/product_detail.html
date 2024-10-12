@@ -18,16 +18,16 @@
         <div class="col-md-8">
             <h1>{{ product.title }}</h1>
             <p>{{ product.description }}</p>
-            <p>Price: €{{ product.price }}</p>
-            <p>Stock: {{ product.stock }}</p>
+            <p>Hind: {{ product.price }}€</p>
+            <p>Laojääk: {{ product.stock }}</p>
             <div class="d-flex justify-content-start">
                 {% if user.is_authenticated %}
                   <form action="{% url 'products:add_to_cart' product.id %}" method="post" class="me-3">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-secondary"> Add to cart</button>
+                    <button type="submit" class="btn btn-secondary">Lisa ostukorvi</button>
                   </form>
                 {% endif %}
-                <a href="{{ back_url }}" class="btn back-to-categories-btn">⬅︎ Back to categories</a>
+                <a href="{{ back_url }}" class="btn back-to-categories-btn">⬅︎ Tagasi</a>
             </div>
         </div>
     </div>

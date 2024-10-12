@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ee">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,12 +27,12 @@
         </div>
 
         <div class="col-6">
-            <h4 class="text-center custom-font">All the Woodwork you will ever need</h4>
-            <form action="{% url 'products:search' %}" method="get" aria-label="Search for products">
+            <h4 class="text-center custom-font">Kogu puutöö, mida iial vajad</h4>
+            <form action="{% url 'products:search' %}" method="get" aria-label="Otsing">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="q" placeholder="Search for products"
+                    <input type="text" class="form-control" name="q" placeholder="Otsing"
                            aria-label="Product search">
-                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    <button class="btn btn-outline-secondary" type="submit">Otsi</button>
                 </div>
             </form>
         </div>
@@ -45,17 +45,17 @@
                     </button>
                 </a>
                 <a href="{% url 'users:user_orders' %}">
-                    <button class="btn btn-default">Order History</button>
+                    <button class="btn btn-default">Tellimused</button>
                 </a>
                 <a href="{% url 'users:profile' %}">
-                    <button class="btn btn-default">Profile</button>
+                    <button class="btn btn-default">Profiil</button>
                 </a>
                 <a href="{% url 'users:logout' %}">
-                    <button class="btn btn-default-custom">Logout</button>
+                    <button class="btn btn-default-custom">Logi välja</button>
                 </a>
             {% else %}
                 <a href="{% url 'users:login' %}">
-                    <button class="btn btn-default">Login / Register</button>
+                    <button class="btn btn-default">Logi sisse / Registreeri</button>
                 </a>
             {% endif %}
         </div>
