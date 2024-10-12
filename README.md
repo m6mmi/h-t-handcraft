@@ -12,6 +12,19 @@ H&T Handcraft is an e-shop platform designed to sell handcrafted products. It al
 
 ---
 
+### Features  
+
+- **Class-Based Views (CBVs)**:  
+  Extensive use of Django's generic views (`ListView`, `DetailView`, `TemplateView`, etc.) for product listings, details, and static pages.  
+- **Custom Views**:  
+  Custom views such as `IndexView` for the homepage and `AddToCart` for managing the cart.  
+- **Authentication**:  
+  `LoginRequiredMixin` is used to restrict certain views to authenticated users.  
+- **Pagination**:  
+  Pagination is used in product listings, with random product selection for the homepage to enhance the user experience.
+
+---
+
 ### Installation Steps  
 
 1. **Clone the repository**:  
@@ -45,6 +58,12 @@ H&T Handcraft is an e-shop platform designed to sell handcrafted products. It al
     ```bash  
     python manage.py runserver  
     ```
+   
+7. **Create a superuser**:
+
+    ```bash
+    python manage.py createsuperuser
+    ```
 
 ---
 
@@ -53,26 +72,17 @@ H&T Handcraft is an e-shop platform designed to sell handcrafted products. It al
 
 ---
 
-### Features  
-
-- **Class-Based Views (CBVs)**:  
-  Extensive use of Django's generic views (`ListView`, `DetailView`, `TemplateView`, etc.) for product listings, details, and static pages.  
-- **Custom Views**:  
-  Custom views such as `IndexView` for the homepage and `AddToCart` for managing the cart.  
-- **Authentication**:  
-  `LoginRequiredMixin` is used to restrict certain views to authenticated users.  
-- **Pagination**:  
-  Pagination is used in product listings, with random product selection for the homepage to enhance the user experience.
-
----
 
 ### Testing  
 
-To run the tests, use the following command:  
+To run the tests, use the following command:
+
 ```bash  
 pytest products/tests.py  
 
 ```
+
+---
 
 
 ### Credits
