@@ -48,6 +48,7 @@ def get_weather(request):
             weather_data = {
                 'error': 'Could not retrieve weather data'
             }
+
     except Exception as e:
         weather_data = {
             'error': f"Error: {str(e)}"

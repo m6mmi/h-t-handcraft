@@ -22,7 +22,6 @@ class OrderView(LoginRequiredMixin, View):
         try:
             shipping = ShippingAddress.objects.get(order_id=order_id)
         except ShippingAddress.DoesNotExist:
-            # Handle the case where the ShippingAddress object does not exist
             shipping = None
         return render(request, 'order.html', {
             'cart_items': cart_items,
@@ -116,7 +115,6 @@ class ShippingAddressView(LoginRequiredMixin, View):
         shipping.phone_number = phone_number
         shipping.save()
 
-        # CSet cart to inactive
         cart = Cart.objects.get(user_id=self.request.user, is_active=True)
         cart.is_active = False
         cart.save()

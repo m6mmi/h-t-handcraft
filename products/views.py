@@ -28,20 +28,15 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['back_url'] = self.request.META['HTTP_REFERER']
-        return context
 
-#
-# class IndexView(View):
-#     def get(self, request):
-#         return render(request, 'index.html')
+        return context
 
 
 class IndexView(View):
     def get(self, request):
-        # Fetch all products, shuffle them, and select a few random ones (e.g., 5 products)
         products = list(Product.objects.all())
         shuffle(products)
-        random_products = products[:6]  # Display 20 random products
+        random_products = products[:8]
 
         return render(request, 'index.html', {'random_products': random_products})
 
