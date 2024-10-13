@@ -18,7 +18,7 @@
         <div class="col-md-8">
             <h1>{{ product.title }}</h1>
             <p>{{ product.description }}</p>
-            <p>Hind: {{ product.price }}€</p>
+            <p>Hind: €{{ product.price }}</p>
             <p>Laojääk: {{ product.stock }}</p>
             <div class="d-flex justify-content-start">
                 {% if user.is_authenticated %}

@@ -4,10 +4,7 @@ from products.models import Product, Category
 
 @pytest.mark.django_db
 def test_create_product():
-    # Create a category
     category = Category.objects.create(name="Kassid")
-
-    # Create a product
     product = Product.objects.create(
         title="Kuri kass",
         description="Kuri kass",
@@ -20,7 +17,6 @@ def test_create_product():
         weight=0.4,
     )
 
-    # Check if product is created successfully
     assert product.id is not None
     assert product.title == "Kuri kass"
 
@@ -102,8 +98,20 @@ def test_list_products():
     category = Category.objects.create(name="Kassid_3")
 
     # Create multiple products
-    Product.objects.create(title="Puust piimakauss kassile", description="Puust piimakauss kassile kaunistustega", price=18, stock=9, category=category)
-    Product.objects.create(title="Purõja pini", description="Purõja pini, kae perra tulõ õkva su mano!", price=19, stock=7, category=category)
+    Product.objects.create(
+        title="Puust piimakauss kassile",
+        description="Puust piimakauss kassile kaunistustega",
+        price=18,
+        stock=9,
+        category=category
+    )
+    Product.objects.create(
+        title="Purõja pini",
+        description="Purõja pini, kae perra tulõ õkva su mano!",
+        price=19,
+        stock=7,
+        category=category
+    )
 
     # Retrieve all products
     products = Product.objects.all()
