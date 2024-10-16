@@ -71,7 +71,13 @@
                 {% endfor %}
             </ul>
             {% include 'weather.html' %}
-            <a class="fixed-bottom" href="{% url 'about' %}" style="margin: 0 0 150px 70px">Meist</a>
+            <div class="fixed-bottom d-flex flex-column" style="margin: 0 0 150px 70px">
+                <a href="{% url 'about' %}" class="me-3">Meist</a>
+                <a href="{% url 'users:feedback' %}" class="me-3">Tagasiside</a>
+                <a href="{% url 'users:feedback_list' %}" class="mt-0.5">Jäetud tagasiside</a>
+            </div>
+
+
         </nav>
         <main class="col-md-8 col-lg-10">
             <div class="product-list bg-white p-3 border rounded">

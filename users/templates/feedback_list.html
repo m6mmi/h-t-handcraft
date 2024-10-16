@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/feedback_list.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-center">Lisatud tagasisided</h1>
+  <table class="table">
+    <thead>
+      <tr>
+          <th>Kuupäev</th>
+        <th>Nimi</th>
+        <th>Tagasiside</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for feedback in feedbacks %}
+      <tr>
+        <td>{{ feedback.created_at }}</td>
+        <td>{{ feedback.name }}</td>
+        <td>{{ feedback.message }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+>
