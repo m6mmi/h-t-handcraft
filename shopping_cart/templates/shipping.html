@@ -9,56 +9,86 @@
 {% block content %}
 
 <div class="checkout-container">
-<h1 class="checkout-title text-center">Kinnita tellimus</h1>
-  <div class="checkout-summary">
-    <h5 class="checkout-summary-title">Saaja informatsioon</h5>
-    <form method="post">
-      {% csrf_token %}
-      <div class="checkout-form">
-        <div class="form-group">
-          <label for="first_name">Eesnimi</label>
-          <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" required/>
-        </div>
+<h1 class="checkout-title text-center">Saatmine</h1>
 
-        <div class="form-group">
-          <label for="last_name">Perekonnanimi</label>
-          <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" required/>
-        </div>
-
-        <h6 class="checkout-summary-title">Aadress</h6>
-        <div class="form-group">
-          <label for="address">Aadress</label>
-          <input type="text" id="address" name="address" value="{{ contact.address }}" required/>
-        </div>
-
-        <div class="form-group">
-          <label for="city">Linn</label>
-          <input type="text" id="city" name="city" value="{{ contact.city }}" required/>
-        </div>
-
-        <div class="form-group">
-          <label for="county">Maakond</label>
-          <input type="text" id="county" name="county" value="{{ contact.county }}" required/>
-        </div>
-
-        <div class="form-group">
-          <label for="zipcode">Postiinteks</label>
-          <input type="text" id="zipcode" name="zipcode" value="{{ contact.zipcode }}" required/>
-        </div>
-
-        <div class="form-group">
-          <label for="country">Riik</label>
-          <input type="text" id="country" name="country" value="{{ contact.country }}" required/>
-        </div>
-
-        <div class="form-group">
-          <label for="phone_number">Telefoni number</label>
-          <input type="tel" id="phone_number" name="phone_number" value="{{ contact.phone_number }}" required/>
-        </div>
-
-        <button type="submit" class="checkout-confirm-btn">Kinnita</button>
+<div class="checkout-summary">
+  <div class="row">
+    <div class="col">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="shipping" id="shipping-itella" value="itella" checked>
+        <label class="form-check-label" for="shipping-itella">
+          Itella
+        </label>
       </div>
-    </form>
+    </div>
+    <div class="col">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="shipping" id="shipping-omniva" value="omniva">
+        <label class="form-check-label" for="shipping-omniva">
+          Omniva
+        </label>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="shipping" id="shipping-dpd" value="dpd">
+        <label class="form-check-label" for="shipping-dpd">
+          DPD
+        </label>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="shipping" id="shipping-address" value="address">
+        <label class="form-check-label" for="shipping-address">
+          Aadress
+        </label>
+      </div>
+    </div>
+  </div>
+  <div id="itella-container">
+      {% include "shipping_options/itella.html" %}
+  </div>
+  <div id="omniva-container" style="display: none;">
+    <!-- Omniva content here -->
+      Omniva
+  </div>
+  <div id="dpd-container" style="display: none;">
+      DPD
+    <!-- DPD content here -->
+  </div>
+  <div id="address-container" style="display: none;">
+      {% include "shipping_options/aadress.html" %}
   </div>
 </div>
+
+
+
+
+
+</div>
+
+<script src="{% static 'js/shipping_choice.js' %}"></script>
+<script type="text/javascript" src="https://itella.ee/widget/smartpost-terminals.js" charset="utf-8"></script>
+<script type="text/javascript">
+  var smartLocation = new SmartLocation(
+    {
+      target_id:  "target_id2",
+      placeid_name: "sp_id2",
+      placename_name: "sp_name2",
+
+      show_infotext: false,
+      show_logo: false,
+      show_city: false,
+      show_address: false,
+      show_opened: false,
+      show_description: false,
+      show_default: true,
+
+      text_place:       "",
+      text_default_item: "-- Vali Pakiautomaat --"
+    }
+  );
+</script>
+
 {% endblock %}
