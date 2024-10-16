@@ -1,54 +1,70 @@
-.page-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #7a5d43;
-    margin-bottom: 20px;
-}
-
-.profile-edit-form {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.btn {
-    background-color: #eae3d2;
-    color: #4a4a4a;
-    border-radius: 5px;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    border: 1px solid #d1c4b8;
-}
-
-.btn:hover {
-    background-color: #d6c9b7;
-    color: #3a3a3a;
-}
-.custom-btn {
-    background-color: #eae3d2;
-    color: #4a4a4a;
-    border-radius: 5px;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    border: 1px solid #d1c4b8;
-    padding: 10px 20px;
-}
-
-.custom-btn:hover {
-    background-color: #d6c9b7;
-    color: #3a3a3a;
-}
-.custom-back-btn {
+.profile-container {
     background-color: #f0e6d2;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
     color: #5a5a5a;
-    border: 1px solid #d1c4b8;
-    padding: 10px 20px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.page-title {
+    color: #7a5d43;
+    font-size: 1.75rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.profile-edit-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #8b6a4b;
+    background-color: #faf7f2;
+    color: #5a5a5a;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.profile-edit-form input:focus {
+    border-color: #7a5d43;
+    outline: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.custom-save-btn {
+    background-color: #d1b8a3;
+    color: #4a4a4a;
     border-radius: 5px;
+    border: 1px solid #7a5d43;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.custom-save-btn:hover {
+    background-color: #c6a58c;
+    color: #4a4a4a;
+}
+
+.custom-back-btn {
+    background-color: #d1b8a3;
+    color: #4a4a4a;
+    border-radius: 5px;
+    border: 1px solid #7a5d43;
+    padding: 10px 20px;
     text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .custom-back-btn:hover {
-    background-color: #d6c9b7;
-    color: #3a3a3a;
+    background-color: #c6a58c;
+    color: #4a4a4a;
 }
+
