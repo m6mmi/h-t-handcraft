@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    {% block style %}
-    {% endblock %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    {% block style %}{% endblock %}
 </head>
 <body class="bg-light">
 <div class="container-fluid">
@@ -17,78 +17,134 @@
         <div class="col-3">
             <div class="logo">
                 <a href="{% url 'index' %}">
-                    <img class="logo-img" src="{% static 'img/logo_no_background.png' %}" alt="Logo">
+                    <img class="logo-img img-fluid" src="{% static 'img/logo_no_background.png' %}" alt="Logo">
                 </a>
             </div>
         </div>
 
-        <div class="col-6">
+        <!-- Full search bar (Desktop only) -->
+        <div class="col-6 d-none d-md-block">
             <h4 class="text-center custom-font">Kogu puutöö, mida iial vajad</h4>
             <form action="{% url 'products:search' %}" method="get" aria-label="Otsing">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="q" placeholder="Otsing"
-                           aria-label="Product search">
+                    <input type="text" class="form-control" name="q" placeholder="Otsing" aria-label="Product search">
                     <button class="btn btn-outline-secondary" type="submit">Otsi</button>
                 </div>
             </form>
         </div>
-        <div class="col-3 text-end main-button-group">
-            {% if user.is_authenticated %}
-                <a href="{% url 'shopping_cart:cart' %}">
-                    <button class="btn btn-default">
-                        🛒
-                        <span class="badge bg-secondary">{{ cart_items_count }}</span>
-                    </button>
-                </a>
-                <a href="{% url 'users:user_orders' %}">
-                    <button class="btn btn-default">Tellimused</button>
-                </a>
-                <a href="{% url 'users:profile' %}">
-                    <button class="btn btn-default">Profiil</button>
-                </a>
-                <a href="{% url 'users:logout' %}">
-                    <button class="btn btn-default-custom">Logi välja</button>
-                </a>
-            {% else %}
-                <a href="{% url 'users:login' %}">
-                    <button class="btn btn-default">Logi sisse / Registreeri</button>
-                </a>
-            {% endif %}
+
+        <!-- Magnifier icon (Mobile only) -->
+        <div class="col-6 text-end d-block d-md-none">
+            <h4 class="text-center custom-font">Kogu puutöö, mida iial vajad</h4>
+            <button class="btn" id="search-icon" aria-label="Search">
+                <i class="bi bi-search"></i> <!-- Bootstrap Icons for magnifying glass -->
+            </button>
+        </div>
+
+        <!-- Full menu for desktop, collapsed menu for mobile -->
+        <div class="col-3 text-end">
+            <!-- Navbar Toggler for Mobile -->
+            <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Full Menu (Desktop) -->
+            <div class="d-none d-md-flex main-button-group">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'shopping_cart:cart' %}">
+                        <button class="btn btn-default">🛒 <span class="badge bg-secondary">{{ cart_items_count }}</span></button>
+                    </a>
+                    <a href="{% url 'users:user_orders' %}"><button class="btn btn-default">Tellimused</button></a>
+                    <a href="{% url 'users:profile' %}"><button class="btn btn-default">Profiil</button></a>
+                    <a href="{% url 'users:logout' %}"><button class="btn btn-default-custom">Logi välja</button></a>
+                {% else %}
+                    <a href="{% url 'users:login' %}"><button class="btn btn-default">Logi sisse / Registreeri</button></a>
+                {% endif %}
+            </div>
         </div>
     </header>
 
-    <div class="row">
+    <!-- Collapsed Menu for Mobile -->
+    <div class="collapse d-md-none" id="navbarMenu">
+        <ul class="nav flex-column">
+            {% if user.is_authenticated %}
+                <li class="nav-item"><a href="{% url 'shopping_cart:cart' %}" class="nav-link">🛒 Ostukorv</a></li>
+                <li class="nav-item"><a href="{% url 'users:user_orders' %}" class="nav-link">Tellimused</a></li>
+                <li class="nav-item"><a href="{% url 'users:profile' %}" class="nav-link">Profiil</a></li>
+                <li class="nav-item"><a href="{% url 'users:logout' %}" class="nav-link">Logi välja</a></li>
+            {% else %}
+                <li class="nav-item"><a href="{% url 'users:login' %}" class="nav-link">Logi sisse / Registreeri</a></li>
+            {% endif %}
+        </ul>
+    </div>
 
+    <div class="row">
+        <!-- Left-side menu (Sidebar) -->
         <nav class="col-md-3 col-lg-2 bg-light sidebar">
             <ul class="nav flex-column">
                 <hr class="p-0 m-0">
                 {% for category in categories %}
                     <li class="nav-item active">
-                        <a class="nav-link fw-bold " aria-current="page"
-                           href="{% url 'products:category_products' category.id %}">{{ category.name }}</a>
+                        <a class="nav-link fw-bold" aria-current="page" href="{% url 'products:category_products' category.id %}">{{ category.name }}</a>
                     </li>
                     <hr class="p-0 m-0">
                 {% endfor %}
             </ul>
             {% include 'weather.html' %}
-            <a class="fixed-bottom" href="{% url 'about' %}" style="margin: 0 0 150px 70px">Meist</a>
         </nav>
-        <main class="col-md-8 col-lg-10">
+
+        <main class="col-md-9 col-lg-10">
             <div class="product-list bg-white p-3 border rounded">
                 {% block content %}
-                    <!-- Content goes here -->
                 {% endblock %}
             </div>
         </main>
     </div>
-    <footer class="row bg-light py-3 text-center fixed-bottom">
+
+    <footer class="row bg-light py-3 text-center">
         <div class="col">
+            <a href="{% url 'about' %}" style="margin: 0 0 150px 70px">Meist</a>
             | Janek: <a href="https://www.linkedin.com/in/janek-s-752a392b0/">LinkedIn</a> |
             Triinu: <a href="https://www.linkedin.com/in/triinu-n-9b1309262/">LinkedIn</a> |
             Indrek: <a href="https://www.linkedin.com/in/indrek-kuusk-2aa9a874/">LinkedIn</a> |
         </div>
     </footer>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript for dynamic search bar (replaces magnifying glass icon) -->
+<script>
+    document.getElementById('search-icon').addEventListener('click', function() {
+        // Create a form element
+        var form = document.createElement('form');
+        form.setAttribute('action', "{% url 'products:search' %}");
+        form.setAttribute('method', 'get');
+
+        // Create a search input
+        var searchInput = document.createElement('input');
+        searchInput.setAttribute('type', 'text');
+        searchInput.setAttribute('name', 'q');
+        searchInput.setAttribute('placeholder', 'Otsi...');
+        searchInput.classList.add('form-control');
+
+        // Append the search input to the form
+        form.appendChild(searchInput);
+
+        // Append the form to the parent (replacing the magnifier icon)
+        this.parentElement.replaceChild(form, this);
+
+        // Focus the search input immediately for a better user experience
+        searchInput.focus();
+
+        // Add an event listener to submit the form when "Enter" is pressed
+        searchInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                form.submit();
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

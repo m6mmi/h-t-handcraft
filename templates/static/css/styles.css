@@ -41,7 +41,7 @@ footer {
 }
 
 .logo-img {
-    max-width: 100px;
+    max-width: 200px;
 }
 
 .btn-default {
@@ -120,8 +120,8 @@ footer {
 
 /* Weather*/
 .fixed-size {
-    width: 160px;
-    height: 120px;
+    width: 270px;
+    height: 160px;
     filter: brightness(0.5);
     opacity: 0.8;
     border-radius: 20px;
@@ -132,3 +132,22 @@ footer {
     font-family: 'Caveat', cursive;
     font-size: 35px;
 }
+
+
+
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+    #search-icon {
+        font-size: 1.5rem;
+        color: #5a5a5a;
+    }
+
+    .navbar-toggler {
+        background-color: transparent;
+    }
+
+    .navbar-toggler-icon {
+        color: #5a5a5a;
+    }
+}
+

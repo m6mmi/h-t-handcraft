@@ -1,6 +1,4 @@
-.card:hover {
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-}
+
 
 .product-list-image {
     width: 100%;
@@ -77,10 +75,10 @@
 }
 
 .card-body {
-    height: 250px;
+    height: 260px;
 }
 
 .card {
-    max-width: 310px;
+    max-width: 360px;
     margin: 0 auto;
 }

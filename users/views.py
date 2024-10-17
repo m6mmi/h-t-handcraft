@@ -4,11 +4,11 @@ from django.views import View
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout
 from django.views.generic import DetailView, UpdateView
-
+from django.contrib import messages
 from .forms import RegistrationForm, UserUpdateForm
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
-from .models import User, Order
+from .models import User, Order, Feedback
 
 
 class RegisterView(View):
@@ -86,3 +86,24 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+class FeedbackView(View):
+    def get(self, request):
+        return render(request, 'feedback.html')
+
+    def post(self, request):
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        Feedback.objects.create(name=name, email=email, message=message)
+
+        messages.success(request, 'Thank you for your feedback!')
+        return redirect('users:feedback_list')
+
+
+class FeedbackListView(View):
+    def get(self, request):
+        feedbacks = Feedback.objects.all().order_by('-created_at')
+        return render(request, 'feedback_list.html', {'feedbacks': feedbacks})
