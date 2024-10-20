@@ -1,0 +1,38 @@
+<div class="m-3">
+    <h5 class="checkout-summary-title">Itella</h5>
+    <form method="post" action="{% url 'shopping_cart:itella' %}">
+        {% csrf_token %}
+        <div class="checkout-form">
+            <div class="form-group">
+                <div id="target_id2"></div>
+            </div>
+            <div class="form-group">
+                <label for="phone_number">Telefoni number</label>
+                <input type="tel" class="form-control" id="phone_number" name="phone_number" required>
+            </div>
+            <button type="submit" class="checkout-confirm-btn">Kinnita</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="https://itella.ee/widget/smartpost-terminals.js" charset="utf-8"></script>
+<script type="text/javascript">
+  var smartLocation = new SmartLocation(
+    {
+      target_id:  "target_id2",
+      placeid_name: "sp_id2",
+      placename_name: "sp_name2",
+
+      show_infotext: false,
+      show_logo: false,
+      show_city: false,
+      show_address: false,
+      show_opened: false,
+      show_description: false,
+      show_default: true,
+
+      text_place:       "",
+      text_default_item: "-- Vali Pakiautomaat --"
+    }
+  );
+</script>

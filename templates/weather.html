@@ -20,7 +20,7 @@
 <script>
     async function fetchWeatherData(lat, lon) {
         const apiKey = 'WEATHER_API_KEY';
-        const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+        const weatherUrl = `http://api.openweathermap.org/data/3.0/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
 
         try {
             const response = await fetch(weatherUrl);
@@ -86,9 +86,9 @@
         geoFindMe();
     };
 
-    document.getElementById('refresh-btn').addEventListener('click', () => {
-        const status = document.querySelector("#status");
-        status.textContent = "Refreshing...";
-        geoFindMe();
-    });
+    {#document.getElementById('refresh-btn').addEventListener('click', () => {#}
+    {#    const status = document.querySelector("#status");#}
+    {#    status.textContent = "Refreshing...";#}
+    {#    geoFindMe();#}
+    {#});#}
 </script>

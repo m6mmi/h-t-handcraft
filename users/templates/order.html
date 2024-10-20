@@ -3,77 +3,7 @@
 {% block content %}
     <div class="row">
         <div class="col-md-8">
-            <h2 class="mt-3">Tellimus {{ order_id|stringformat:"06d" }}</h2>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>Toode</th>
-                        <th>Kogus</th>
-                        <th>Hind</th>
-                        <th>Kokku</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in cart_items %}
-                        <tr>
-                            <td><a href="{% url 'products:detail' item.product.id %}">{{ item.product.title }}</a></td>
-                            <td>
-                                {{ item.quantity }}
-                            </td>
-                            <td>{{ item.product.price }}</td>
-                            <td>{{ item.total_item_price }}</td>
-                        </tr>
-                    {% endfor %}
-                    <tr>
-                        <td class="fw-bold" colspan="3">Kokku</td>
-                        <td class="fw-bold">{{ total_price.total_price }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            {% if not user.is_authenticated %}
-                <a href="{% url 'users:login' %}">
-                    <button class="btn btn-primary">Logi sisse / Registreeri</button>
-                </a>
-            {% endif %}
-        </div>
-        <div class="col-md-4">
-    <div class="card">
-        <div class="card-header">
-            <h2>Saaja aadress</h2>
-        </div>
-        <div class="card-body">
-            <table class="table table-striped">
-                <tbody>
-                    <tr>
-                        <th>Eesnimi:</th>
-                        <td>{{ shipping.first_name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Perekonnanimi:</th>
-                        <td>{{ shipping.last_name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Aadress:</th>
-                        <td>{{ shipping.address }}</td>
-                    </tr>
-                    <tr>
-                        <th>Linn:</th>
-                        <td>{{ shipping.city }}</td>
-                    </tr>
-                    <tr>
-                        <th>Postiinteks:</th>
-                        <td>{{ shipping.zipcode }}</td>
-                    </tr>
-                    <tr>
-                        <th>Maakond:</th>
-                        <td>{{ shipping.country }}</td>
-                    </tr>
-                    <tr>
-                        <th>Telefoni number:</th>
-                        <td>{{ shipping.phone_number }}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <h2 class="mt-3">Tellimus {{ order_id|stringformat:"06d" }} ei leitud</h2>
         </div>
     </div>
 </div>
