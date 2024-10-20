@@ -8,9 +8,10 @@ const omnivaContainer = document.getElementById('omniva-container');
 const dpdContainer = document.getElementById('dpd-container');
 const addressContainer = document.getElementById('address-container');
 
-itellaRadio.checked = true;
-itellaContainer.style.display = 'block';
-omnivaContainer.style.display = 'none';
+itellaRadio.checked = false;
+omnivaRadio.checked = true;
+itellaContainer.style.display = 'none';
+omnivaContainer.style.display = 'block';
 dpdContainer.style.display = 'none';
 addressContainer.style.display = 'none';
 
@@ -51,5 +52,4 @@ addressRadio.addEventListener('change', () => {
 });
 
 
-omnivaContainer.innerHTML = '<p>Work in Progress</p>';
 dpdContainer.innerHTML = '<p>Work in Progress</p>';
