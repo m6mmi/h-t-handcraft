@@ -1,9 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, FormView
 from random import shuffle
+
+from h_t_handcraft import settings
 from shopping_cart.models import Cart, CartProduct
+from .forms import InquiryForm
 from .models import Product, Category
 
 
@@ -77,3 +83,25 @@ class ProductSearchView(ListView):
             return Product.objects.filter(title__icontains=query)
         else:
             return Product.objects.none()
+
+
+class CustomProductRequestView(SuccessMessageMixin, FormView):
+    template_name = 'custom_product_request.html'
+    form_class = InquiryForm
+    success_url = reverse_lazy('products:thank_you')
+    success_message = "Sinu soov on saadetud!"
+
+    def form_valid(self, form):
+        name = form.cleaned_data['name']
+        email = form.cleaned_data['email']
+        message = form.cleaned_data['message']
+
+        subject = f"Uus oma kirjeldusega toote soov"
+        full_message = f"Kiri on saadetud {name} ({email})poolt:\n\n{message} "
+        send_mail(subject, full_message, settings.DEFAULT_FROM_EMAIL, ['triinu.niklus@gmail.com'])
+
+        return super().form_valid(form)
+
+
+class ThankYouView(TemplateView):
+    template_name = 'thank_you.html'

@@ -29,7 +29,7 @@ def cart_items_count(request):
 
 def get_weather(request):
     api_key = WEATHER_API_KEY
-    location = "Tallinn"
+    location = "Tartu"
     weather_url = f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={api_key}&units=metric"
 
     try:
