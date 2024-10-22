@@ -1,0 +1,34 @@
+<div class="m-3">
+    <h5 class="checkout-summary-title">Omniva</h5>
+    <form method="post" action="{% url 'shopping_cart:omniva' %}">
+        {% csrf_token %}
+        <div class="checkout-form">
+            <div class="form-group">
+                <div id="omniva_container2"></div>
+            </div>
+            <div class="form-group">
+                <label for="phone_number">Telefoni number</label>
+                <input type="tel" class="form-control" id="phone_number" name="phone_number" required>
+            </div>
+            <button type="submit" class="checkout-confirm-btn">Kinnita</button>
+        </div>
+    </form>
+
+
+
+</div>
+
+<script type="text/javascript" src="https://www.omniva.ee/widget/widget.js"></script>
+<script>
+    var wd2 = new OmnivaWidget({
+        compact_mode: true,
+        show_offices: false,
+        custom_html: false,
+        id: 2,
+        selection_value: '',
+        show_logo: false,
+        text: {"widget_select_label":""},
+    });
+
+
+</script>

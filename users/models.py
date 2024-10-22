@@ -33,6 +33,20 @@ class ShippingAddress(Address, models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
 
+class Itella(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    box_name = models.CharField(max_length=50, blank=False)
+    phone_number = models.CharField(max_length=15, null=False, blank=False)
+
+
+class Omniva(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    box_name = models.CharField(max_length=50, blank=False)
+    phone_number = models.CharField(max_length=15, null=False, blank=False)
+
+
 class Feedback(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
