@@ -96,9 +96,15 @@ class CustomProductRequestView(SuccessMessageMixin, FormView):
         email = form.cleaned_data['email']
         message = form.cleaned_data['message']
 
-        subject = f"Uus oma kirjeldusega toote soov"
-        full_message = f"Kiri on saadetud {name} ({email})poolt:\n\n{message} "
-        send_mail(subject, full_message, settings.DEFAULT_FROM_EMAIL, ['triinu.niklus@gmail.com'])
+        subject_to_seller = f"Uus oma kirjeldusega toote soov"
+        full_message_to_seller = f"Kiri on saadetud {name} ({email})poolt:\n\n{message} "
+        send_mail(subject_to_seller, full_message_to_seller, settings.DEFAULT_FROM_EMAIL,
+                  ['triinu.niklus@gmail.com'])
+
+        subject_to_client = "H&T Käsitöö. Erilahendusega toode!"
+        full_message_to_client = (f"{name},\n\nAitäh, me oleme kätte saanud sinu soovi erilahenduse kirjeldusega! "
+                                  f"Keskmiselt vastame 1tööpäeva jooksul. \n\nSinu kirjeldus:\n{message}")
+        send_mail(subject_to_client, full_message_to_client, settings.DEFAULT_FROM_EMAIL, [email])
 
         return super().form_valid(form)
 
