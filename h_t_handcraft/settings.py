@@ -62,11 +62,11 @@ WSGI_APPLICATION = 'h_t_handcraft.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": config("DB_ENGINE", "django.db.backends.postgresql"),
-        "NAME": config("DB_NAME", "dio_backend"),
-        "USER": config("DB_USER", "postgres"),
-        "PASSWORD": config("DB_PASSWORD", "password"),
-        "HOST": config("DB_HOST", "127.0.0.1"),
+        "ENGINE": config("DB_ENGINE"),
+        "NAME": config("DB_NAME"),
+        "USER": config("DB_USER"),
+        "PASSWORD": config("DB_PASSWORD"),
+        "HOST": config("DB_HOST"),
         "PORT": "5432",
     }
 }
@@ -101,9 +101,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static'),
                     os.path.join(BASE_DIR, 'products/templates/static'),
                     os.path.join(BASE_DIR, 'shopping_cart/templates/static')]
 
-MEDIA_ROOT = [os.path.join(BASE_DIR, 'products/img'),
-              os.path.join(BASE_DIR, 'media')]
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'products/img')
+MEDIA_URL = '/products/img/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
