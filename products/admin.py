@@ -12,6 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 
 
-@admin.register(GalleryImage)
 class GalleryImageAdmin(admin.ModelAdmin):
     list_display = ('title', 'image')
+
+admin.site.register(GalleryImage, GalleryImageAdmin)
