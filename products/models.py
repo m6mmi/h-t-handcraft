@@ -23,3 +23,11 @@ class Product(models.Model):
     def __str__(self):
         category_name = Category.objects.get(id=self.category.id)
         return f'{category_name} --- {self.title}, {self.image_path}'
+
+
+class GalleryImage(models.Model):
+    title = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='gallery/')
+
+    def __str__(self):
+        return self.title

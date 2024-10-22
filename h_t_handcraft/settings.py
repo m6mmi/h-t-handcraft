@@ -2,6 +2,7 @@ import os.path
 from pathlib import Path
 from decouple import config
 import certifi
+from django.template.context_processors import media
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -100,7 +101,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static'),
                     os.path.join(BASE_DIR, 'products/templates/static'),
                     os.path.join(BASE_DIR, 'shopping_cart/templates/static')]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'products/img')
+MEDIA_ROOT = [os.path.join(BASE_DIR, 'products/img'),
+              os.path.join(BASE_DIR, 'media')]
 MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

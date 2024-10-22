@@ -69,7 +69,14 @@
                     </li>
                     <hr class="p-0 m-0">
                 {% endfor %}
+
+            <li class="nav-item active">
+                <a class="nav-link fw-bold" aria-current="page"
+                   href="{% url 'products:custom_product_request' %}">Erilahendused</a>
+            </li>
+            <hr class="p-0 m-0">
             </ul>
+
             {% include 'weather.html' %}
             <div class="fixed-bottom d-flex flex-column" style="margin: 0 0 150px 70px">
                 <a href="{% url 'about' %}" class="me-3">Meist</a>

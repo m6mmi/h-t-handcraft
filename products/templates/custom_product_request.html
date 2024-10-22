@@ -1,21 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="custom-product-request">
-    <h1>Avalda oma soov</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Täida ankeet</h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="custom-btn">Saada</button>
+            </form>
+        </div>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-        <button type="submit">Saada oma kirjeldus</button>
-    </form>
+        <div class="col-md-6">
+            <h3>Erilahendusega toote tellimine</h3>
+            <p>
+                Kui sul on spetsiifiline nägemus või idee, mida sa tahaksid meie kaudu ellu viia, täida allolev
+                vorm ja anna meile oma ideest teada. Me võtame sinuga ühendust ühe tööpäeva jooksul, et arutada
+                täpsemaid üksikasju ja vajadusel pakkuda konsultatsiooni.
+            </p>
+            <ul>
+                <li>Kirjelda oma ideed võimalikult detailselt.</li>
+                <li>Vajadusel lisa pilt või joonis oma kavandist.</li>
+                <li>Meie meeskond annab endast parima, et realiseerida sinu nägemus.</li>
+            </ul>
+        </div>
+    </div>
 
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-  </div>
+    <hr>
+    <div class="row">
+        <h3>Näidised</h3>
+        <div class="gallery">
+            <div class="row">
+                {% for image in gallery_images %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="{{ image.image.url }}" class="card-img-top" alt="{{ image.title }}">
+                            <div class="card-body">
+                                <p class="card-text">{{ image.title }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>Ühtegi pilti pole veel lisatud.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
