@@ -15,4 +15,5 @@ admin.site.register(Product, ProductAdmin)
 class GalleryImageAdmin(admin.ModelAdmin):
     list_display = ('title', 'image')
 
+
 admin.site.register(GalleryImage, GalleryImageAdmin)
