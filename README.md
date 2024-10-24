@@ -65,8 +65,14 @@ H&T Handcraft is an e-shop platform designed to sell handcrafted products. It al
     python manage.py createsuperuser
     ```
 
----
+8. **Admin panel**
 
+Access the admin panel at /admin to 
+- Manage products
+- Categories 
+- User orders
+
+---
 ### Add products into the database
 
 ```bash
