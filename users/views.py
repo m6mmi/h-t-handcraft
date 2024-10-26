@@ -1,4 +1,3 @@
-import logging
 import os
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import EmailMultiAlternatives
@@ -234,6 +233,6 @@ class InvoiceView(View):
         try:
             email.attach_file(pdf_file)
             email.send()
-            logging.info(f"E-kiri saadetud {order.user.email} koos arvega {pdf_file}.")
+            print(f"E-kiri saadetud {order.user.email} koos arvega {pdf_file}.")
         except Exception as e:
-            logging.error(f"Ei saanud saata e-kirja: {e}")
+            print(f"Ei saanud saata e-kirja: {e}")
