@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPD Paki automaadid</title>
+</head>
+<body>
+<h1>DPD Paki automaadid</h1>
+<ul id="automaatide-nimekiri">
+    <!-- Automaadid laaditakse siia -->
+</ul>
+
+<script>
+    async function laadijaAutomaatideNimekiri() {
+        try {
+            const vastus = await fetch('https://api.dpd.com.pl/api/v1/automaats', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Vajadusel lisa autentimise päised
+                }
+            });
+
+            if (!vastus.ok) {
+                throw new Error('Võrgutõrge');
+            }
+
+            const automaadid = await vastus.json();
+            const nimekiriElement = document.getElementById('automaatide-nimekiri');
+
+            automaadid.forEach(automaat => {
+                const item = document.createElement('li');
+                item.textContent = automaat.name; // Oleta, et vastuse objektis on `name` väli
+                nimekiriElement.appendChild(item);
+            });
+        } catch (viga) {
+            console.error('Tekkis tõrge: ', viga);
+        }
+    }
+
+    laadijaAutomaatideNimekiri();
+</script>
+</body>
+</html>

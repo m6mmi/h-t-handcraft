@@ -141,18 +141,18 @@ class InvoiceView(View):
     def generate_pdf(self, order):
         try:
             filename = f'Arve_{order.id}.pdf'
-            filepath = os.path.join(settings.MEDIA_ROOT, filename)
+            filepath = os.path.join(settings.INVOICE_PATH, filename)
 
             # PDF loomine
             doc = SimpleDocTemplate(filepath, pagesize=letter)
             styles = getSampleStyleSheet()
             elements = []
 
-            # # Logo
-            # logo_path = os.path.join(settings.MEDIA_ROOT, 'img/logo.png')
-            # elements.append(Spacer(1, 12))
-            # elements.append(Image(logo_path, width=200, height=100))
-            # elements.append(Spacer(1, 12))
+            # Logo
+            logo_path = os.path.join(settings.STATIC_ROOT, 'logo.png')
+            elements.append(Spacer(1, 12))
+            elements.append(Image(logo_path, width=200, height=100))
+            elements.append(Spacer(1, 12))
 
             # Pealkiri
             title = Paragraph(f'Tellimus nr: {order.id}', styles['Title'])
@@ -200,15 +200,15 @@ class InvoiceView(View):
 
             doc.build(elements)
 
-            logging.info(f"PDF genereeritud: {filepath}")
+            print(f"PDF genereeritud: {filepath}")
             return filepath
         except Exception as e:
-            logging.error(f"Ei saanud PDF genereerida: {e}")
+            print(f"Ei saanud PDF genereerida: {e}")
             return None
 
     def send_order_confirmation(self, order, pdf_file):
         if not pdf_file:
-            logging.error("PDF-fail, mida lisada puudub.")
+            print("PDF-fail, mida lisada puudub.")
             return
 
         subject = f'Tellimuse kinnitus #{order.id}'

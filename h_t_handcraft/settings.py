@@ -101,7 +101,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static'),
                     os.path.join(BASE_DIR, 'products/templates/static'),
                     os.path.join(BASE_DIR, 'shopping_cart/templates/static')]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'products/img')
+STATIC_ROOT = os.path.join(BASE_DIR, 'templates/static/img')
+
+MEDIA_ROOT = [os.path.join(BASE_DIR, 'products/img')]
 MEDIA_URL = '/products/img/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -122,42 +124,44 @@ os.environ['SSL_CERT_FILE'] = certifi.where()
 
 WEATHER_API_KEY = config('WEATHER_API_KEY')
 
-LOGGING_DIR = os.path.join(BASE_DIR, 'logs')
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(LOGGING_DIR, 'django_debug.log'),
-            'formatter': 'verbose',
-        },
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file', 'console'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        'h_t_handcraft': {
-            'handlers': ['file', 'console'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-    },
-}
+INVOICE_PATH = os.path.join(BASE_DIR, 'invoices')
+
+# LOGGING_DIR = os.path.join(BASE_DIR, 'logs')
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {message}',
+#             'style': '{',
+#         },
+#         'simple': {
+#             'format': '{levelname} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': os.path.join(LOGGING_DIR, 'django_debug.log'),
+#             'formatter': 'verbose',
+#         },
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'simple',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file', 'console'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#         'h_t_handcraft': {
+#             'handlers': ['file', 'console'],
+#             'level': 'DEBUG',
+#             'propagate': False,
+#         },
+#     },
+# }

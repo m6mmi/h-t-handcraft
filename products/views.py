@@ -104,7 +104,7 @@ class CustomProductRequestView(SuccessMessageMixin, FormView):
             subject=subject_to_seller,
             body=full_message_to_seller,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            to=['triinu.niklus@gmail.com']
+            to=['SELLER_EMAIL']
         )
 
         if image:
