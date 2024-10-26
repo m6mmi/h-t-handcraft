@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.views import View
 
 from users.models import Order, ShippingAddress, Address, Itella, Omniva
+from users.views import InvoiceView
 from .models import Cart, CartProduct
 
 
@@ -121,6 +122,10 @@ class Checkout(LoginRequiredMixin, View):
         order.country = country
         order.phone_number = phone_number
         order.save()
+
+        invoice_view = InvoiceView()
+        pdf_file_path = invoice_view.generate_pdf(order)
+        invoice_view.send_order_confirmation(order, pdf_file_path)
 
         return redirect(reverse('shopping_cart:shipping'))
 

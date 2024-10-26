@@ -1,7 +1,7 @@
 from django.urls import path
 from shopping_cart.views import UserOrders, OrderView
 from .views import RegisterView, LoginView, LogoutView, ChangePasswordView, UserProfileView, UserProfileUpdateView, \
-    FeedbackView, FeedbackListView
+    FeedbackView, FeedbackListView, InvoiceView
 
 app_name = "users"
 
@@ -16,4 +16,5 @@ urlpatterns = [
     path('profile/update/', UserProfileUpdateView.as_view(), name='update_profile'),
     path('feedback/', FeedbackView.as_view(), name='feedback'),
     path('feedback/list/', FeedbackListView.as_view(), name='feedback_list'),
+    path('invoice/<int:order_id>/', InvoiceView.as_view(), name='invoice'),
 ]
