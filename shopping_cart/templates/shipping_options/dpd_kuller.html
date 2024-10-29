@@ -1,6 +1,6 @@
 <div class="m-3">
     <h5 class="checkout-summary-title">Saaja informatsioon</h5>
-    <form method="post">
+    <form method="post" action="{% url 'shopping_cart:dpd' %}">
       {% csrf_token %}
       <div class="checkout-form">
         <div class="form-group">
