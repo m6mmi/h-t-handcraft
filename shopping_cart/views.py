@@ -7,6 +7,7 @@ from django.views import View
 from users.models import Order, ShippingAddress, Address, Itella, Omniva
 from users.views import InvoiceView
 from .models import Cart, CartProduct
+from .utils import send_invoice_email
 
 
 class UserOrders(LoginRequiredMixin, View):
@@ -123,10 +124,6 @@ class Checkout(LoginRequiredMixin, View):
         order.phone_number = phone_number
         order.save()
 
-        invoice_view = InvoiceView()
-        pdf_file_path = invoice_view.generate_pdf(order)
-        invoice_view.send_order_confirmation(order, pdf_file_path)
-
         return redirect(reverse('shopping_cart:shipping'))
 
 
@@ -160,6 +157,7 @@ class Shipping(LoginRequiredMixin, View):
         shipping.save()
 
         cart = Cart.objects.get(user_id=self.request.user, is_active=True)
+        send_invoice_email(self.request.user)
         cart.is_active = False
         cart.save()
 
@@ -179,8 +177,10 @@ class ShippingItella(LoginRequiredMixin, View):
         itella.save()
 
         cart = Cart.objects.get(user_id=self.request.user, is_active=True)
+        send_invoice_email(self.request.user)
         cart.is_active = False
         cart.save()
+
         return redirect(reverse('users:user_orders'))
 
 
@@ -197,7 +197,9 @@ class ShippingIOmniva(LoginRequiredMixin, View):
         omniva.save()
 
         cart = Cart.objects.get(user_id=self.request.user, is_active=True)
+        send_invoice_email(self.request.user)
         cart.is_active = False
         cart.save()
+
         return redirect(reverse('users:user_orders'))
 

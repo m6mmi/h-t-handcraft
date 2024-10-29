@@ -2,13 +2,6 @@
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
-.product-list-image {
-    width: 100%;
-    height: 200px;
-    border-radius: 10px 10px 0 0;
-    object-fit: cover;
-}
-
 .card-body h2 {
     font-size: 1.2rem;
     color: #7a5d43;
@@ -60,13 +53,6 @@
     background-color: #faf7f2;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.product-list-image {
-    display: inline-block;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 5px 5px 0 0;
 }
 
 .card-img-top {

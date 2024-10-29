@@ -148,7 +148,7 @@ class InvoiceView(View):
             elements = []
 
             # Logo
-            logo_path = os.path.join(settings.STATIC_ROOT, 'logo.png')
+            logo_path = os.path.join(settings.LOGO_ROOT, 'logo.png')
             elements.append(Spacer(1, 12))
             elements.append(Image(logo_path, width=200, height=100))
             elements.append(Spacer(1, 12))
