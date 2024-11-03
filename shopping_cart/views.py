@@ -132,7 +132,7 @@ class ShippingAddressView(LoginRequiredMixin, View):
         cart_total = CartProduct.objects.filter(cart__is_active=True,
                                                 cart__user=self.request.user
                                                 ).aggregate(cart_total=Sum(F('quantity') * F('product__price')))
-        print(cart_total)
+
         return render(request, 'shipping.html', cart_total)
 
 

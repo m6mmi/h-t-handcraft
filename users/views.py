@@ -1,4 +1,3 @@
-import logging
 import os
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import EmailMultiAlternatives
@@ -12,7 +11,6 @@ from django.contrib import messages
 from reportlab.lib.units import cm
 
 from h_t_handcraft import settings
-from shopping_cart.models import CartProduct
 from .forms import RegistrationForm, UserUpdateForm
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
@@ -151,7 +149,7 @@ class InvoiceView(View):
             elements = []
 
             # Leheküljemall pangainfo jaoks
-            def add_footer(canvas, doc):
+            def add_footer(canvas):
                 canvas.saveState()
                 footer_text = "Panga nimi: [Panga nimi] | Pangakonto number: [Pangakonto IBAN]"
                 canvas.setFont("Helvetica", 10)
