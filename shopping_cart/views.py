@@ -12,7 +12,7 @@ from .utils import send_invoice_email
 
 class UserOrders(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
-        orders = Order.objects.filter(user_id=self.request.user, cart__is_active=False)
+        orders = Order.objects.filter(user_id=self.request.user, cart__is_active=False).order_by("id")
         return render(request, 'user_orders.html', {'orders': orders})
 
 
@@ -129,10 +129,17 @@ class Checkout(LoginRequiredMixin, View):
 
 class ShippingAddressView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
-        return render(request, 'shipping.html')
+        cart_total = CartProduct.objects.filter(cart__is_active=True,
+                                                cart__user=self.request.user
+                                                ).aggregate(cart_total=Sum(F('quantity') * F('product__price')))
+
+        return render(request, 'shipping.html', cart_total)
 
 
-class Shipping(LoginRequiredMixin, View):
+class ShippingDPD(LoginRequiredMixin, View):
+    def get(self, request, **kwargs):
+        return render(request, 'shipping_options/dpd_kuller.html')
+
     def post(self, request):
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
