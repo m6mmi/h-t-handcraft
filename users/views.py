@@ -146,13 +146,11 @@ class InvoiceView(View):
             # Set up file path
             filename = f'Arve_{order.id}.pdf'
             filepath = os.path.join(settings.INVOICE_PATH, filename)
-            print(f"File path set to: {filepath}")
 
             # Create document and elements
             doc = SimpleDocTemplate(filepath, pagesize=A4)
             styles = getSampleStyleSheet()
             elements = []
-            print("Document and elements initialized.")
 
             # Define footer function
             def add_footer(canvas, doc):
@@ -164,34 +162,23 @@ class InvoiceView(View):
                 canvas.drawString(2 * cm, 1.5 * cm, seller_info)
                 canvas.restoreState()
 
-            # Add logo
+            # Add logo and invoice info in one row
             logo_path = './templates/static/img/logo_no_background.png'
             try:
-                elements.append(Image(logo_path, width=3.5 * cm, height=3 * cm, hAlign='LEFT'))
-                print(f"Logo added: {logo_path}")
+                logo = Image(logo_path, width=3.5 * cm, height=3 * cm, hAlign='LEFT')
             except Exception as e:
-                print(f"Logo error: {e}")
-            elements.append(Spacer(1, 0.5 * cm))
-            print("Logo and spacer added.")
+                raise ValueError(f"Logo laadimise viga: {e}")
 
             # Calculate payment due date (3 days from order date)
             payment_due_date = order.date_ordered + timedelta(days=3)
-            print(f"Payment due date: {payment_due_date}")
 
-            # Add invoice and customer information
-            customer_info = f"""
-            <b>Tellija:</b> {order.first_name} {order.last_name}<br/>
-            """
+            # Prepare customer and invoice info
             invoice_info = f"""
+            <b>Tellija:</b> {order.first_name} {order.last_name}<br/>
             <b>Arve nr:</b> {order.id}<br/>
             <b>Kuupäev:</b> {order.date_ordered.strftime("%d.%m.%Y")}<br/>
             <b>Maksetähtaeg:</b> {payment_due_date.strftime("%d.%m.%Y")}<br/>
             """
-            elements.append(Paragraph(customer_info, styles["Normal"]))
-            elements.append(Paragraph(invoice_info, styles["Normal"]))
-            print("Invoice and customer info added.")
-
-            # Add delivery info
             shipping_info = "Tarneviis: "
             if hasattr(order, 'shippingaddress'):
                 shipping_info += "DPD Kuller"
@@ -201,11 +188,19 @@ class InvoiceView(View):
                 shipping_info += f"Omniva ({order.omniva.box_name})"
             else:
                 shipping_info += "Puudub"
+            invoice_info += f"<b>{shipping_info}</b>"
 
-            elements.append(Spacer(1, 0.5 * cm))
-            elements.append(Paragraph(shipping_info, styles["Normal"]))
-            elements.append(Spacer(1, 1 * cm))
-            print("Delivery info added.")
+            # Create table with logo and invoice info
+            header_table = Table(
+                [[logo, Paragraph(invoice_info, styles["Normal"])]],
+                colWidths=[5 * cm, 12 * cm]
+            )
+            header_table.setStyle(TableStyle([
+                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                ('ALIGN', (1, 0), (1, 0), 'RIGHT'),
+            ]))
+            elements.append(header_table)
+            elements.append(Spacer(1, 3 * cm))
 
             # Table of items with headers
             data = [[
@@ -215,7 +210,6 @@ class InvoiceView(View):
                 "Summa"
             ]]
             total_sum = 0
-            print("Populating table data...")
 
             # Populate table data
             for cart_product in CartProduct.objects.filter(cart=order.cart):
@@ -227,11 +221,9 @@ class InvoiceView(View):
                     f"{summa:.2f} EUR"
                 ])
                 total_sum += summa
-                print(f"Added product: {cart_product.product.description}, Total sum: {total_sum}")
 
             # Add total row
             data.append(["", "", "Kokku", f"{total_sum:.2f} EUR"])
-            print(f"Total row added: Kokku {total_sum:.2f} EUR")
 
             # Create and style table
             table = Table(data, colWidths=[7 * cm, 3 * cm, 3 * cm, 3 * cm])
@@ -248,20 +240,13 @@ class InvoiceView(View):
                 ('BACKGROUND', (-1, -1), (-1, -1), colors.lightgrey),
             ]))
             elements.append(table)
-            print("Table created and added.")
 
             # Build the document
-            if elements:
-                doc.build(elements, onFirstPage=add_footer, onLaterPages=add_footer)
-                print(f"PDF successfully generated: {filepath}")
-                return filepath
-            else:
-                print("Error: No content added to PDF elements.")
-                return None
+            doc.build(elements, onFirstPage=add_footer, onLaterPages=add_footer)
+            return filepath
 
         except Exception as e:
-            print(f"Ei saanud PDF genereerida: {e}")
-            return None
+            raise ValueError(f"Ei saanud PDF genereerida: {e}")
 
     def send_order_confirmation(self, order, pdf_file):
         if not pdf_file:
