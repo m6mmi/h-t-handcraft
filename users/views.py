@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from decimal import Decimal
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import EmailMultiAlternatives
@@ -142,69 +143,98 @@ class InvoiceView(View):
 
     def generate_pdf(self, order):
         try:
-            # Step 1: Set up file path
+            # Set up file path
             filename = f'Arve_{order.id}.pdf'
             filepath = os.path.join(settings.INVOICE_PATH, filename)
-            print(f"Filepath set to: {filepath}")
+            print(f"File path set to: {filepath}")
 
-            # Step 2: Create the document
+            # Create document and elements
             doc = SimpleDocTemplate(filepath, pagesize=A4)
             styles = getSampleStyleSheet()
             elements = []
-            print("Document and stylesheet initialized.")
+            print("Document and elements initialized.")
 
-            # Step 3: Add footer template
+            # Define footer function
             def add_footer(canvas, doc):
-                try:
-                    print("Adding footer...")
-                    canvas.saveState()
-                    footer_text = "Panga nimi: [Panga nimi] | Pangakonto number: [Pangakonto IBAN]"
-                    canvas.setFont("Helvetica", 10)
-                    canvas.drawString(2 * cm, 1 * cm, footer_text)  # 2 cm from left, 1 cm from bottom
-                    canvas.restoreState()
-                    print("Footer added successfully.")
-                except Exception as e:
-                    print(f"Error in add_footer: {e}")
-                    raise
+                canvas.saveState()
+                canvas.setFont("Helvetica", 9)
+                footer_text = "Pank: [Panga nimi] | Pangakonto: [IBAN] | Saaja: [pangakonto omanik]"
+                seller_info = "Müüja nimi: H&T Käsitöö | Telefon: +372 53304239 | E-post: kunst.on.moes@online.ee"
+                canvas.drawString(2 * cm, 2 * cm, footer_text)
+                canvas.drawString(2 * cm, 1.5 * cm, seller_info)
+                canvas.restoreState()
 
+            # Add logo
+            logo_path = './templates/static/img/logo_no_background.png'
             try:
-                doc.build(elements)
+                elements.append(Image(logo_path, width=3.5 * cm, height=3 * cm, hAlign='LEFT'))
+                print(f"Logo added: {logo_path}")
             except Exception as e:
-                print(f"Error during doc.build: {e}")
-
-            doc.addPageTemplates([PageTemplate(id='FooterTemplate', onPage=add_footer)])
-            print("Footer template added.")
-
-            # Step 4: Add logo
-            logo_path = './templates/static/img/logo.png'
-            print(f"Logo path using Django static files: {logo_path}")
+                print(f"Logo error: {e}")
             elements.append(Spacer(1, 0.5 * cm))
-            elements.append(Image(logo_path, width=5 * cm, height=2.5 * cm))
-            elements.append(Spacer(1, 0.5 * cm))
-            print("Logo added using Django static helper.")
+            print("Logo and spacer added.")
 
-            # Step 5: Add title and date
-            elements.append(Paragraph(f'Arve nr: {order.id}', styles['Title']))
+            # Calculate payment due date (3 days from order date)
+            payment_due_date = order.date_ordered + timedelta(days=3)
+            print(f"Payment due date: {payment_due_date}")
+
+            # Add invoice and customer information
+            customer_info = f"""
+            <b>Tellija:</b> {order.first_name} {order.last_name}<br/>
+            """
+            invoice_info = f"""
+            <b>Arve nr:</b> {order.id}<br/>
+            <b>Kuupäev:</b> {order.date_ordered.strftime("%d.%m.%Y")}<br/>
+            <b>Maksetähtaeg:</b> {payment_due_date.strftime("%d.%m.%Y")}<br/>
+            """
+            elements.append(Paragraph(customer_info, styles["Normal"]))
+            elements.append(Paragraph(invoice_info, styles["Normal"]))
+            print("Invoice and customer info added.")
+
+            # Add delivery info
+            shipping_info = "Tarneviis: "
+            if hasattr(order, 'shippingaddress'):
+                shipping_info += "DPD Kuller"
+            elif hasattr(order, 'itella'):
+                shipping_info += f"Itella ({order.itella.box_name})"
+            elif hasattr(order, 'omniva'):
+                shipping_info += f"Omniva ({order.omniva.box_name})"
+            else:
+                shipping_info += "Puudub"
+
             elements.append(Spacer(1, 0.5 * cm))
-            elements.append(Paragraph(f'Kuupäev: {order.date_ordered.strftime("%d-%m-%Y")}', styles['Normal']))
+            elements.append(Paragraph(shipping_info, styles["Normal"]))
             elements.append(Spacer(1, 1 * cm))
-            print("Title and date added.")
+            print("Delivery info added.")
 
-            # Step 6: Create table data
-            data = [["Kirjeldus", "Kogus", "Hind", "Summa"]]
-            print("Starting to populate table data...")
+            # Table of items with headers
+            data = [[
+                Paragraph("Kirjeldus", styles["Normal"]),
+                "Kogus",
+                "Hind",
+                "Summa"
+            ]]
+            total_sum = 0
+            print("Populating table data...")
+
+            # Populate table data
             for cart_product in CartProduct.objects.filter(cart=order.cart):
                 summa = cart_product.quantity * Decimal(cart_product.product.price)
                 data.append([
-                    cart_product.product.description,
+                    Paragraph(cart_product.product.description, styles["Normal"]),  # Wrap text
                     cart_product.quantity,
                     f"{cart_product.product.price:.2f} EUR",
                     f"{summa:.2f} EUR"
                 ])
-            print("Table data populated:", data)
+                total_sum += summa
+                print(f"Added product: {cart_product.product.description}, Total sum: {total_sum}")
 
-            # Step 7: Style the table
-            table = Table(data, colWidths=[5 * cm, 3 * cm, 3 * cm, 3 * cm])
+            # Add total row
+            data.append(["", "", "Kokku", f"{total_sum:.2f} EUR"])
+            print(f"Total row added: Kokku {total_sum:.2f} EUR")
+
+            # Create and style table
+            table = Table(data, colWidths=[7 * cm, 3 * cm, 3 * cm, 3 * cm])
             table.setStyle(TableStyle([
                 ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#4F81BD")),
                 ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
@@ -214,14 +244,20 @@ class InvoiceView(View):
                 ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
                 ('BACKGROUND', (0, 1), (-1, -1), colors.whitesmoke),
                 ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+                ('FONTNAME', (-1, -1), (-1, -1), 'Helvetica-Bold'),
+                ('BACKGROUND', (-1, -1), (-1, -1), colors.lightgrey),
             ]))
             elements.append(table)
-            print("Table styled and added to elements.")
+            print("Table created and added.")
 
-            # Step 8: Build the document
-            doc.build(elements)
-            print(f"PDF successfully generated: {filepath}")
-            return filepath
+            # Build the document
+            if elements:
+                doc.build(elements, onFirstPage=add_footer, onLaterPages=add_footer)
+                print(f"PDF successfully generated: {filepath}")
+                return filepath
+            else:
+                print("Error: No content added to PDF elements.")
+                return None
 
         except Exception as e:
             print(f"Ei saanud PDF genereerida: {e}")
@@ -235,7 +271,7 @@ class InvoiceView(View):
         subject = f'Tellimuse kinnitus #{order.id}'
 
         html_content = f"""
-        <p>Tere, {order.user.first_name}!</p>
+        <p>Tere, {order.first_name}!</p>
         <p>Aitäh, et tellisite!</p>
         <p>Oleme Teie tellimuse kätte saanud. Kui olete arve tasunud paneme paki 3 tööpäeva jooksul teele.</p>
         <p>Siin on teie tellimuse andmed:</p>
