@@ -201,10 +201,11 @@ class InvoiceView(View):
             )
             header_row.setStyle(TableStyle([
                 ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-                ('ALIGN', (1, 0), (1, 0), 'RIGHT'),
+                ('ALIGN', (1, 0), (1, 0), 'CENTER'),  # Pealkiri keskele
+                ('TOPPADDING', (1, 0), (1, 0), 1 * cm),  # Pealkirja allapoole toomine
             ]))
             elements.append(header_row)
-            elements.append(Spacer(1, 0.5 * cm))
+            elements.append(Spacer(1, 1.5 * cm))  # Lisaruum logo ja ülejäänud sisu vahel
 
             # Maksetähtaeg
             payment_due_date = order.date_ordered + timedelta(days=3)
