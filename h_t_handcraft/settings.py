@@ -105,8 +105,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static'),
 MEDIA_ROOT = os.path.join(BASE_DIR, 'products/img')
 MEDIA_URL = '/products/img/'
 
-LOGO_ROOT = os.path.join(BASE_DIR, 'templates/static/img')
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'users:login'
@@ -120,6 +118,7 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+SELLER_EMAIL = config('EMAIL_HOST_USER')
 
 os.environ['SSL_CERT_FILE'] = certifi.where()
 
