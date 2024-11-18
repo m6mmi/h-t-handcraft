@@ -163,7 +163,7 @@ class InvoiceView(View):
                 canvas.restoreState()
 
             # Add logo and invoice info in one row
-            logo_path = './templates/static/img/logo_no_background.png'
+            logo_path = './templates/static/img/logo_no_2.png'
             try:
                 logo = Image(logo_path, width=3.5 * cm, height=3 * cm, hAlign='LEFT')
             except Exception as e:
