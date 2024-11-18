@@ -26,11 +26,19 @@ class Order(Address, models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f'Order id: {self.id}, order date: {self.date_ordered.strftime("%Y-%m-%d")}, cart: {self.cart.id}'
+        return (
+            f'Order id: {self.id}, '
+            f'order date: {self.date_ordered.strftime("%Y-%m-%d")}, '
+            f'cart: {self.cart.id}, '
+            f'{self.user.first_name} {self.user.last_name}'
+        )
 
 
 class ShippingAddress(Address, models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Tellija: {self.user.first_name} {self.user.last_name}, {self.order.date_ordered}'
 
 
 class Itella(models.Model):
@@ -39,12 +47,18 @@ class Itella(models.Model):
     box_name = models.CharField(max_length=50, blank=False)
     phone_number = models.CharField(max_length=15, null=False, blank=False)
 
+    def __str__(self):
+        return f'Tellia: {self.user.first_name} {self.user.last_name}, {self.box_name}, {self.phone_number}'
+
 
 class Omniva(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     box_name = models.CharField(max_length=50, blank=False)
     phone_number = models.CharField(max_length=15, null=False, blank=False)
+
+    def __str__(self):
+        return f'Tellia: {self.user.first_name} {self.user.last_name}, {self.box_name}, {self.phone_number}'
 
 
 class Feedback(models.Model):

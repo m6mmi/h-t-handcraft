@@ -23,5 +23,5 @@ class CartProduct(models.Model):
 
     def __str__(self):
         user = self.cart.user
-        return (f'[{user.first_name} {user.last_name}], {self.product.title}, {self.product.price}, '
-                f'{self.product.stock}, {self.product.description}')
+        return (f'[Tellija: {user.first_name} {user.last_name}], {self.product.title}, Hind: €{self.product.price}, '
+                f'Kogus: {self.quantity} tk.')

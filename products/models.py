@@ -22,7 +22,7 @@ class Product(models.Model):
 
     def __str__(self):
         category_name = Category.objects.get(id=self.category.id)
-        return f'{category_name} --- {self.title}, {self.image_path}'
+        return f'{category_name} --- {self.title}, Laos: {self.stock}'
 
 
 class GalleryImage(models.Model):
