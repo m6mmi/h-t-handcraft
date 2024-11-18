@@ -143,66 +143,102 @@ class InvoiceView(View):
 
     def generate_pdf(self, order):
         try:
-            # Set up file path
+            # Määrame faili asukoha
             filename = f'Arve_{order.id}.pdf'
             filepath = os.path.join(settings.INVOICE_PATH, filename)
 
-            # Create document and elements
+            # Loo PDF
             doc = SimpleDocTemplate(filepath, pagesize=A4)
             styles = getSampleStyleSheet()
             elements = []
 
-            # Define footer function
+            # Jaluse funktsioon
             def add_footer(canvas, doc):
                 canvas.saveState()
                 canvas.setFont("Helvetica", 9)
-                footer_text = "Pank: [Panga nimi] | Pangakonto: [IBAN] | Saaja: [pangakonto omanik]"
-                seller_info = "Müüja nimi: H&T Käsitöö | Telefon: +372 53304239 | E-post: kunst.on.moes@online.ee"
-                canvas.drawString(2 * cm, 2 * cm, footer_text)
-                canvas.drawString(2 * cm, 1.5 * cm, seller_info)
+
+                # Jalus
+                footer_data = [
+                    [
+                        "Tartumaa, Kastre vald\nKurepalu\nFIE Ragne Hanko",
+                        "Telefon: +372 53304239\nE-post: kunst.on.moes@online.ee\nFacebook: H&T Käsitöö",
+                        "Arvelduskonto nr\nEE204204278626434500\nRAGNE HANKO"
+                    ]
+                ]
+
+                footer_table = Table(
+                    footer_data,
+                    colWidths=[5 * cm, 7 * cm, 5 * cm]
+                )
+                footer_table.setStyle(TableStyle([
+                    ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+                    ('FONTSIZE', (0, 0), (-1, -1), 9),
+                    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                ]))
+
+                width, height = A4
+                footer_table.wrapOn(canvas, width, height)
+                footer_table.drawOn(canvas, 2 * cm, 1 * cm)
+
                 canvas.restoreState()
 
-            # Add logo and invoice info in one row
+            # Logo
             logo_path = './templates/static/img/logo_no_2.png'
             try:
                 logo = Image(logo_path, width=3.5 * cm, height=3 * cm, hAlign='LEFT')
             except Exception as e:
                 raise ValueError(f"Logo laadimise viga: {e}")
 
-            # Calculate payment due date (3 days from order date)
-            payment_due_date = order.date_ordered + timedelta(days=3)
+            # Pealkiri
+            invoice_title = Paragraph(f"<b>ARVE NR {order.id}</b>", styles["Title"])
 
-            # Prepare customer and invoice info
-            invoice_info = f"""
-            <b>Tellija:</b> {order.first_name} {order.last_name}<br/>
-            <b>Arve nr:</b> {order.id}<br/>
-            <b>Kuupäev:</b> {order.date_ordered.strftime("%d.%m.%Y")}<br/>
-            <b>Maksetähtaeg:</b> {payment_due_date.strftime("%d.%m.%Y")}<br/>
-            """
-            shipping_info = "Tarneviis: "
-            if hasattr(order, 'shippingaddress'):
-                shipping_info += "DPD Kuller"
-            elif hasattr(order, 'itella'):
-                shipping_info += f"Itella ({order.itella.box_name})"
-            elif hasattr(order, 'omniva'):
-                shipping_info += f"Omniva ({order.omniva.box_name})"
-            else:
-                shipping_info += "Puudub"
-            invoice_info += f"<b>{shipping_info}</b>"
-
-            # Create table with logo and invoice info
-            header_table = Table(
-                [[logo, Paragraph(invoice_info, styles["Normal"])]],
-                colWidths=[5 * cm, 12 * cm]
+            # Logo ja pealkirja paigutus
+            header_row = Table(
+                [
+                    [logo, invoice_title]
+                ],
+                colWidths=[4 * cm, 12 * cm]
             )
-            header_table.setStyle(TableStyle([
+            header_row.setStyle(TableStyle([
                 ('VALIGN', (0, 0), (-1, -1), 'TOP'),
                 ('ALIGN', (1, 0), (1, 0), 'RIGHT'),
             ]))
-            elements.append(header_table)
-            elements.append(Spacer(1, 3 * cm))
+            elements.append(header_row)
+            elements.append(Spacer(1, 0.5 * cm))
 
-            # Table of items with headers
+            # Maksetähtaeg
+            payment_due_date = order.date_ordered + timedelta(days=3)
+
+            # Saaja
+            recipient_info = f"""
+            <b>Tellija:</b> {order.first_name} {order.last_name}<br/>
+            <b>Tellija kontakt:</b> {order.phone_number}<br/>
+            <b>Kuupäev:</b> {order.date_ordered.strftime("%d.%m.%Y")}<br/>
+            <b>Maksetähtaeg:</b> {payment_due_date.strftime("%d.%m.%Y")}<br/>
+            """
+
+            # Saatja
+            sender_info = f"""
+            <b>Saatja:</b> FIE Ragne Hanko<br/>
+            <b>Registrikood:</b> 14460580<br/>
+            """
+
+            # Saaja ja saatja andmete paigutus
+            info_table = Table(
+                [
+                    [Paragraph(recipient_info, styles["Normal"]), Paragraph(sender_info, styles["Normal"])]
+                ],
+                colWidths=[10 * cm, 6 * cm]
+            )
+            info_table.setStyle(TableStyle([
+                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                ('ALIGN', (0, 0), (0, 0), 'LEFT'),
+                ('ALIGN', (1, 0), (1, 0), 'RIGHT'),
+            ]))
+            elements.append(info_table)
+            elements.append(Spacer(1, 2 * cm))
+
+            # Kirjelduste tabeli päis
             data = [[
                 Paragraph("Kirjeldus", styles["Normal"]),
                 "Kogus",
@@ -211,37 +247,35 @@ class InvoiceView(View):
             ]]
             total_sum = 0
 
-            # Populate table data
+            # Tabeli sisu
             for cart_product in CartProduct.objects.filter(cart=order.cart):
                 summa = cart_product.quantity * Decimal(cart_product.product.price)
                 data.append([
-                    Paragraph(cart_product.product.description, styles["Normal"]),  # Wrap text
+                    Paragraph(cart_product.product.description, styles["Normal"]),
                     cart_product.quantity,
                     f"{cart_product.product.price:.2f} EUR",
                     f"{summa:.2f} EUR"
                 ])
                 total_sum += summa
 
-            # Add total row
+            # Kokkuvõtte rida
             data.append(["", "", "Kokku", f"{total_sum:.2f} EUR"])
 
-            # Create and style table
+            # Loome ja kujundame tabeli
             table = Table(data, colWidths=[7 * cm, 3 * cm, 3 * cm, 3 * cm])
             table.setStyle(TableStyle([
-                ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#4F81BD")),
-                ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+                ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
                 ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
                 ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
                 ('FONTSIZE', (0, 0), (-1, 0), 10),
                 ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-                ('BACKGROUND', (0, 1), (-1, -1), colors.whitesmoke),
                 ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
                 ('FONTNAME', (-1, -1), (-1, -1), 'Helvetica-Bold'),
                 ('BACKGROUND', (-1, -1), (-1, -1), colors.lightgrey),
             ]))
             elements.append(table)
 
-            # Build the document
+            # PDF genereerimine
             doc.build(elements, onFirstPage=add_footer, onLaterPages=add_footer)
             return filepath
 
