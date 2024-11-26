@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-
 {% load static %}
+{% load i18n %}
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
@@ -12,22 +12,22 @@
             {% if product.image_path %}
                 <img src="{{ product.image_path.url }}" class="card-img-top" alt="{{ product.title }}">
             {% else %}
-                <img src="{% static 'img/default_image.png' %}" class="card-img-top" alt="Default Image">
+                <img src="{% static 'img/default_image.png' %}" class="card-img-top" alt="{% trans 'Default Image' %}">
             {% endif %}
         </div>
         <div class="col-md-8">
             <h1>{{ product.title }}</h1>
             <p>{{ product.description }}</p>
-            <p>Hind: €{{ product.price }}</p>
-            <p>Laojääk: {{ product.stock }}</p>
+            <p>{% trans "Hind" %}: €{{ product.price }}</p>
+            <p>{% trans "Laojääk" %}: {{ product.stock }}</p>
             <div class="d-flex justify-content-start">
                 {% if user.is_authenticated %}
-                  <form action="{% url 'products:add_to_cart' product.id %}" method="post" class="me-3">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-secondary">Lisa ostukorvi</button>
-                  </form>
+                    <form action="{% url 'products:add_to_cart' product.id %}" method="post" class="me-3">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-secondary">{% trans "Lisa ostukorvi" %}</button>
+                    </form>
                 {% endif %}
-                <a href="{{ back_url }}" class="btn back-to-categories-btn">⬅︎ Tagasi</a>
+                <a href="{{ back_url }}" class="btn back-to-categories-btn">{% trans "⬅︎ Tagasi" %}</a>
             </div>
         </div>
     </div>

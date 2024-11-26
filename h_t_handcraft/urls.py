@@ -3,9 +3,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-
 from h_t_handcraft.views import AboutUsView, TermsAndConditionsView
 from products.views import IndexView
+from django.conf.urls.i18n import i18n_patterns
+from django.views.i18n import set_language
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
@@ -24,6 +25,9 @@ urlpatterns = [
     (template_name="password_reset_done.html"), name='password_reset_complete'),
     path('products/', include('products.urls', namespace='products')),
 ]
-
+urlpatterns += i18n_patterns(
+    path('set-language/', set_language, name='set_language'),
+    prefix_default_language=True
+)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-
 {% load static %}
+{% load i18n %}
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
@@ -9,18 +9,18 @@
 {% block content %}
     <div class="container mt-3">
         <header class="text-center mb-4">
-            <h1>Registreeri</h1>
+            <h1>{% trans "Registreeri" %}</h1>
         </header>
 
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn custom-btn">Registreeri</button>
+            <button type="submit" class="btn custom-btn">{% trans "Registreeri" %}</button>
         </form>
 
         <div class="text-center mt-4">
-            <p>Kasutaja juba olemas?</p>
-            <a href="{% url 'users:login' %}" class="link-button">Logi sisse</a>
+            <p>{% trans "Kasutaja juba olemas?" %}</p>
+            <a href="{% url 'users:login' %}" class="link-button">{% trans "Logi sisse" %}</a>
         </div>
     </div>
 {% endblock %}

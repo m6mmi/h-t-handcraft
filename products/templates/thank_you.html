@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+
 {% block content %}
   <div class="thank-you-message">
-    <h1>Aitäh!</h1>
-    <p>Oleme sinu soovi koos informatsiooniga kätte saanud, võtame sinuga esimesel võimalusel ühendust.</p>
+    <h1>{% trans "Aitäh!" %}</h1>
+    <p>{% trans "Oleme sinu soovi koos informatsiooniga kätte saanud, võtame sinuga esimesel võimalusel ühendust." %}</p>
   </div>
 {% endblock %}

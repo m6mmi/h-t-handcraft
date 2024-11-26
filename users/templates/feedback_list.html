@@ -1,17 +1,19 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/feedback_list.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="container mt-5">
-  <h1 class="text-center">Lisatud tagasisided</h1>
+  <h1 class="text-center">{% trans 'Lisatud tagasisided' %}</h1>
   <table class="table">
     <thead>
       <tr>
-          <th>Kuupäev</th>
-        <th>Nimi</th>
-        <th>Tagasiside</th>
+          <th>{% trans 'Kuupäev' %}</th>
+        <th>{% trans 'Nimi' %}</th>
+        <th>{% trans 'Tagasiside' %}</th>
       </tr>
     </thead>
     <tbody>
@@ -26,4 +28,3 @@
   </table>
 </div>
 {% endblock %}
->

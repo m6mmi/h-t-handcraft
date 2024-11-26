@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load i18n %}
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/update_profile.css' %}">
@@ -10,15 +11,15 @@
     <div class="profile-page">
         <div class="profile-container">
             <header>
-                <h1 class="page-title">Muuda oma profiili</h1>
+                <h1 class="page-title">{% trans "Muuda oma profiili" %}</h1>
             </header>
 
             <form method="POST" class="profile-edit-form">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="button-container">
-                    <button type="submit" class="custom-save-btn">Salvesta</button>
-                    <a href="{% url 'users:profile' %}" class="custom-back-btn">Tagasi</a>
+                    <button type="submit" class="custom-save-btn">{% trans "Salvesta" %}</button>
+                    <a href="{% url 'users:profile' %}" class="custom-back-btn">{% trans "Tagasi" %}</a>
                 </div>
             </form>
         </div>

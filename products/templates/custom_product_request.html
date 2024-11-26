@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/custom_product_request.css' %}">
@@ -9,34 +10,31 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h3>Täida ankeet</h3>
+                <h3>{% trans "Täida ankeet" %}</h3>
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit" class="custom-btn">Saada</button>
+                    <button type="submit" class="custom-btn">{% trans "Saada" %}</button>
                 </form>
             </div>
 
             <div class="col-md-6">
-                <h3>Erilahendusega toote tellimine</h3>
+                <h3>{% trans "Erilahendusega toote tellimine" %}</h3>
                 <p>
-                    Kui sul on spetsiifiline nägemus või idee, mida sa tahaksid meie kaudu ellu viia, täida
-                    vorm ja anna meile oma ideest teada. Me võtame sinuga ühendust ühe tööpäeva jooksul, et arutada
-                    täpsemaid üksikasju ja vajadusel pakkuda konsultatsiooni.
+                    {% trans "Kui sul on spetsiifiline nägemus või idee, mida sa tahaksid meie kaudu ellu viia, täida vorm ja anna meile oma ideest teada. Me võtame sinuga ühendust ühe tööpäeva jooksul, et arutada täpsemaid üksikasju ja vajadusel pakkuda konsultatsiooni." %}
                 </p>
                 <ul>
-                    <li>Kõiki silte ja tooteid, mis on kategooriates nimetatud on selle ankeedi abil võimalik oma
-                        tekstiga tellida.</li>
-                    <li>Kirjelda oma ideed võimalikult detailselt.</li>
-                    <li>Vajadusel lisa pilt või joonis oma kavandist.</li>
-                    <li>Meie meeskond annab endast parima, et realiseerida sinu nägemus.</li>
+                    <li>{% trans "Kõiki silte ja tooteid, mis on kategooriates nimetatud, on selle ankeedi abil võimalik oma tekstiga tellida." %}</li>
+                    <li>{% trans "Kirjelda oma ideed võimalikult detailselt." %}</li>
+                    <li>{% trans "Vajadusel lisa pilt või joonis oma kavandist." %}</li>
+                    <li>{% trans "Meie meeskond annab endast parima, et realiseerida sinu nägemus." %}</li>
                 </ul>
             </div>
         </div>
 
         <hr>
         <div class="row">
-            <h3>Näidised</h3>
+            <h3>{% trans "Näidised" %}</h3>
             <div class="gallery">
                 <div class="row">
                     {% for image in gallery_images %}
@@ -49,7 +47,7 @@
                             </div>
                         </div>
                     {% empty %}
-                        <p>Ühtegi pilti pole veel lisatud.</p>
+                        <p>{% trans "Ühtegi pilti pole veel lisatud." %}</p>
                     {% endfor %}
                 </div>
             </div>

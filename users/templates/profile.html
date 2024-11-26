@@ -1,30 +1,29 @@
 {% extends 'base.html' %}
-
 {% load static %}
+{% load i18n %}
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% endblock %}
 
 {% block content %}
-
 <div class="container mt-5">
     <header class="text-center mb-4">
-        <h1 class="header-title">{{ user_profile.username }} profiil</h1>
+        <h1 class="header-title">{{ user_profile.username }} {% trans "profiil" %}</h1>
     </header>
 
     <div class="row">
         <div class="col-md-6 mb-5">
             <section>
-                <h2 class="h5 text-secondary">Personaalne informatsioon</h2>
+                <h2 class="h5 text-secondary">{% trans "Personaalne informatsioon" %}</h2>
                 <div class="card shadow border-light">
                     <div class="card-body">
-                        <p><strong>Kasutajanimi:</strong> {{ user_profile.username }}</p>
-                        <p><strong>Eesnimi:</strong> {{ user_profile.first_name }}</p>
-                        <p><strong>Perekonnanimi:</strong> {{ user_profile.last_name }}</p>
-                        <p><strong>Email:</strong> {{ user_profile.email }}</p>
-                        <p><strong>Telefoni number:</strong> {{ user_profile.phone_number }}</p>
-                        <p><strong>Kasutaja loodud:</strong> {{ user_profile.created_at }}</p>
+                        <p><strong>{% trans "Kasutajanimi:" %}</strong> {{ user_profile.username }}</p>
+                        <p><strong>{% trans "Eesnimi:" %}</strong> {{ user_profile.first_name }}</p>
+                        <p><strong>{% trans "Perekonnanimi:" %}</strong> {{ user_profile.last_name }}</p>
+                        <p><strong>{% trans "Email:" %}</strong> {{ user_profile.email }}</p>
+                        <p><strong>{% trans "Telefoni number:" %}</strong> {{ user_profile.phone_number }}</p>
+                        <p><strong>{% trans "Kasutaja loodud:" %}</strong> {{ user_profile.created_at }}</p>
                     </div>
                 </div>
             </section>
@@ -33,10 +32,9 @@
 
     <section class="text-center">
         <div class="d-flex justify-content-center flex-wrap">
-            <a class="btn btn-edit-profile mx-2" href="{% url 'users:update_profile' %}">Muuda profiili</a>
-            <a class="btn btn-edit-profile mx-2" href="{% url 'users:change_password' %}">Muuda parool</a>
+            <a class="btn btn-edit-profile mx-2" href="{% url 'users:update_profile' %}">{% trans "Muuda profiili" %}</a>
+            <a class="btn btn-edit-profile mx-2" href="{% url 'users:change_password' %}">{% trans "Muuda parool" %}</a>
         </div>
     </section>
 </div>
-
 {% endblock %}

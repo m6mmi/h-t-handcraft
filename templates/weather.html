@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 
 <section class="mt-4">
@@ -8,7 +9,7 @@
             <h6 class="mb-1" style="font-size: 0.9rem; font-weight: 600;" id="city">{{ weather_data.city }}</h6>
             <p class="h6 my-1"
                style="font-size: 1.2rem; font-weight: 600;" id="temperature">{{ weather_data.temperature }}°C</p>
-            <p class="mb-1" style="font-size: 0.8rem; font-weight: 600;">Tajutav t:
+            <p class="mb-1" style="font-size: 0.8rem; font-weight: 600;">{% trans 'Tajutav' %}:
                 <strong id="feels-like-value">{{ weather_data.feels_like }}°C</strong></p>
             <p class="mb-1"
                style="font-size: 0.8rem; font-weight: 600;" id="description">{{ weather_data.description }}</p>
@@ -20,7 +21,7 @@
 <script>
     async function fetchWeatherData(lat, lon) {
         const apiKey = 'WEATHER_API_KEY';
-        const weatherUrl = `http://api.openweathermap.org/data/3.0/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+        const weatherUrl = `http://api.openweathermap.org/data/3.0/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}&lang={{ LANGUAGE_CODE }}`;
 
         try {
             const response = await fetch(weatherUrl);
@@ -44,9 +45,9 @@
         const status = document.querySelector("#status");
 
         if (!navigator.geolocation) {
-            status.textContent = "Geolocation is not supported by your browser";
+            status.textContent = "{% trans 'Geolocation is not supported by your browser' %}";
         } else {
-            status.textContent = "Locating…";
+            status.textContent = "{% trans 'Locating…' %}";
             navigator.geolocation.getCurrentPosition(success, error);
         }
 
@@ -54,12 +55,12 @@
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
 
-            status.textContent = "Location found.";
+            status.textContent = "{% trans 'Location found.' %}";
             fetchWeatherData(latitude, longitude);
         }
 
         function error() {
-            status.textContent = "Unable to retrieve your location";
+            status.textContent = "{% trans 'Unable to retrieve your location' %}";
         }
     }
 
@@ -85,10 +86,4 @@
         setSeasonalBackground();
         geoFindMe();
     };
-
-    {#document.getElementById('refresh-btn').addEventListener('click', () => {#}
-    {#    const status = document.querySelector("#status");#}
-    {#    status.textContent = "Refreshing...";#}
-    {#    geoFindMe();#}
-    {#});#}
 </script>

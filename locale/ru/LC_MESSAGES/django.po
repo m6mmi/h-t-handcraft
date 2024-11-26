@@ -1,0 +1,575 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-26 14:28+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: products/templates/custom_product_request.html:13
+msgid "Täida ankeet"
+msgstr "Заполните анкету"
+
+#: products/templates/custom_product_request.html:17
+#: users/templates/feedback.html:26
+msgid "Saada"
+msgstr "Отправить"
+
+#: products/templates/custom_product_request.html:22
+msgid "Erilahendusega toote tellimine"
+msgstr "Заказ продукта на заказ"
+
+#: products/templates/custom_product_request.html:24
+msgid ""
+"Kui sul on spetsiifiline nägemus või idee, mida sa tahaksid meie kaudu ellu "
+"viia, täida vorm ja anna meile oma ideest teada. Me võtame sinuga ühendust "
+"ühe tööpäeva jooksul, et arutada täpsemaid üksikasju ja vajadusel pakkuda "
+"konsultatsiooni."
+msgstr ""
+"Если у вас есть конкретная идея или видение, которое вы хотите реализовать с "
+"нашей помощью, заполните форму и сообщите нам о своей идее. Мы свяжемся с "
+"вами в течение одного рабочего дня, чтобы обсудить детали и, если "
+"необходимо, предложить консультацию."
+
+#: products/templates/custom_product_request.html:27
+msgid ""
+"Kõiki silte ja tooteid, mis on kategooriates nimetatud, on selle ankeedi "
+"abil võimalik oma tekstiga tellida."
+msgstr ""
+"Все товары и ярлыки, указанные в категориях, могут быть заказаны с вашим "
+"текстом через эту анкету."
+
+#: products/templates/custom_product_request.html:28
+msgid "Kirjelda oma ideed võimalikult detailselt."
+msgstr "Опишите вашу идею как можно подробнее."
+
+#: products/templates/custom_product_request.html:29
+msgid "Vajadusel lisa pilt või joonis oma kavandist."
+msgstr "При необходимости добавьте изображение или чертеж вашего дизайна."
+
+#: products/templates/custom_product_request.html:30
+msgid "Meie meeskond annab endast parima, et realiseerida sinu nägemus."
+msgstr "Наша команда сделает все возможное, чтобы реализовать ваше видение."
+
+#: products/templates/custom_product_request.html:37
+msgid "Näidised"
+msgstr "Примеры"
+
+#: products/templates/custom_product_request.html:50
+msgid "Ühtegi pilti pole veel lisatud."
+msgstr "Изображения пока не добавлены."
+
+#: products/templates/product_detail.html:15
+#: products/templates/product_list.html:18
+msgid "Default Image"
+msgstr "Изображение по умолчанию"
+
+#: products/templates/product_detail.html:21
+#: products/templates/product_list.html:24 templates/index.html:25
+#: users/templates/itella_order.html:13 users/templates/omniva_order.html:13
+#: users/templates/order_address.html:13
+msgid "Hind"
+msgstr "Цена"
+
+#: products/templates/product_detail.html:22
+#: products/templates/product_list.html:23 templates/index.html:24
+msgid "Laojääk"
+msgstr "Остаток на складе"
+
+#: products/templates/product_detail.html:27
+#: products/templates/product_list.html:28
+msgid "Lisa ostukorvi"
+msgstr "Добавить в корзину"
+
+#: products/templates/product_detail.html:30
+msgid "⬅︎ Tagasi"
+msgstr "⬅︎ Назад"
+
+#: products/templates/product_list.html:40
+msgid "Page navigation"
+msgstr "Навигация по страницам"
+
+#: products/templates/product_list.html:44
+msgid "First"
+msgstr "Первый"
+
+#: products/templates/product_list.html:49
+msgid "Previous"
+msgstr "Предыдущий"
+
+#: products/templates/product_list.html:61
+msgid "Next"
+msgstr "Следующий"
+
+#: products/templates/product_list.html:66
+msgid "Last"
+msgstr "Последний"
+
+#: products/templates/thank_you.html:7
+msgid "Aitäh!"
+msgstr "Спасибо!"
+
+#: products/templates/thank_you.html:8
+msgid ""
+"Oleme sinu soovi koos informatsiooniga kätte saanud, võtame sinuga esimesel "
+"võimalusel ühendust."
+msgstr ""
+"Мы получили вашу просьбу с информацией и свяжемся с вами при первой "
+"возможности."
+
+#: shopping_cart/templates/cart.html:16 users/templates/itella_order.html:11
+#: users/templates/omniva_order.html:11 users/templates/order_address.html:11
+msgid "Toode"
+msgstr "Продукт"
+
+#: shopping_cart/templates/cart.html:17 users/templates/itella_order.html:12
+#: users/templates/omniva_order.html:12 users/templates/order_address.html:12
+msgid "Kogus"
+msgstr "Количество"
+
+#: shopping_cart/templates/cart.html:18
+msgid "Hind €"
+msgstr "Цена €"
+
+#: shopping_cart/templates/cart.html:19
+msgid "Kokku €"
+msgstr "Итого €"
+
+#: shopping_cart/templates/cart.html:29
+msgid "-"
+msgstr "-"
+
+#: shopping_cart/templates/cart.html:34
+msgid "+"
+msgstr "+"
+
+#: shopping_cart/templates/cart.html:42
+#: shopping_cart/templates/shipping.html:44
+#: users/templates/itella_order.html:14 users/templates/itella_order.html:29
+#: users/templates/omniva_order.html:14 users/templates/omniva_order.html:29
+#: users/templates/order_address.html:14 users/templates/order_address.html:27
+msgid "Kokku"
+msgstr "Итого"
+
+#: shopping_cart/templates/cart.html:49
+#: shopping_cart/templates/checkout.html:14
+msgid "Kinnita tellimus"
+msgstr "Подтвердить заказ"
+
+#: shopping_cart/templates/cart.html:53
+msgid "Tooteid ei ole listud ostukorvi"
+msgstr "Нет товаров в корзине"
+
+#: shopping_cart/templates/cart.html:58 templates/base.html:66
+#: users/templates/itella_order.html:36 users/templates/omniva_order.html:36
+#: users/templates/order_address.html:34 users/templates/user_orders.html:40
+msgid "Logi sisse / Registreeri"
+msgstr "Войти / Зарегистрироваться"
+
+#: shopping_cart/templates/checkout.html:16
+msgid "Tellija informatsioon"
+msgstr "Информация о покупателе"
+
+#: shopping_cart/templates/checkout.html:21
+#: users/templates/order_address.html:51
+msgid "Eesnimi"
+msgstr "Имя"
+
+#: shopping_cart/templates/checkout.html:26
+#: users/templates/order_address.html:55
+msgid "Perekonnanimi"
+msgstr "Фамилия"
+
+#: shopping_cart/templates/checkout.html:31
+msgid "E-Mail"
+msgstr "Электронная почта"
+
+#: shopping_cart/templates/checkout.html:35
+#: shopping_cart/templates/checkout.html:37
+#: users/templates/order_address.html:59
+msgid "Aadress"
+msgstr "Адрес"
+
+#: shopping_cart/templates/checkout.html:42
+#: users/templates/order_address.html:63
+msgid "Linn"
+msgstr "Город"
+
+#: shopping_cart/templates/checkout.html:47
+#: users/templates/order_address.html:71
+msgid "Maakond"
+msgstr "Область"
+
+#: shopping_cart/templates/checkout.html:52
+#: users/templates/order_address.html:67
+msgid "Postiinteks"
+msgstr "Почтовый индекс"
+
+#: shopping_cart/templates/checkout.html:57
+msgid "Riik"
+msgstr "Страна"
+
+#: shopping_cart/templates/checkout.html:62
+#: users/templates/itella_order.html:57 users/templates/omniva_order.html:57
+#: users/templates/order_address.html:75
+msgid "Telefoni number"
+msgstr "Номер телефона"
+
+#: shopping_cart/templates/checkout.html:66
+msgid "Kinnita tellija andmed"
+msgstr "Подтвердить данные покупателя"
+
+#: shopping_cart/templates/shipping.html:13
+#: shopping_cart/templates/shipping.html:43
+msgid "Saatmine"
+msgstr "Доставка"
+
+#: shopping_cart/templates/shipping.html:42
+msgid "Vahesumma"
+msgstr "Промежуточная сумма"
+
+#: templates/base.html:28
+msgid "Sinu ideed, meie teostus – sinu mõtted, meie teod!"
+msgstr "Твои идеи, наше исполнение — твои мысли, наши действия!"
+
+#: templates/base.html:29
+msgid "Otsing"
+msgstr "Поиск"
+
+#: templates/base.html:31
+msgid "Otsi tooteid..."
+msgstr "Ищите продукты..."
+
+#: templates/base.html:31
+msgid "Product search"
+msgstr "Поиск продукта"
+
+#: templates/base.html:32
+msgid "Otsi"
+msgstr "Искать"
+
+#: templates/base.html:56 users/templates/user_orders.html:6
+msgid "Tellimused"
+msgstr "Заказы"
+
+#: templates/base.html:59
+msgid "Profiil"
+msgstr "Профиль"
+
+#: templates/base.html:62
+msgid "Logi välja"
+msgstr "Выйти"
+
+#: templates/base.html:86
+msgid "Erilahendused"
+msgstr "Индивидуальные решения"
+
+#: templates/base.html:94
+msgid "Meist"
+msgstr "О нас"
+
+#: templates/base.html:95 users/templates/feedback.html:10
+#: users/templates/feedback_list.html:16
+msgid "Tagasiside"
+msgstr "Обратная связь"
+
+#: templates/base.html:96
+msgid "Jäetud tagasiside"
+msgstr "Оставленная обратная связь"
+
+#: templates/base.html:111
+msgid "Janek"
+msgstr "Янек"
+
+#: templates/base.html:112
+msgid "Triinu"
+msgstr "Триину"
+
+#: templates/base.html:113
+msgid "Indrek"
+msgstr "Индрек"
+
+#: templates/index.html:19
+msgid "Vaikimisi pilt"
+msgstr "Изображение по умолчанию"
+
+#: templates/index.html:26
+msgid "Vaata lähemalt"
+msgstr "Посмотреть подробнее"
+
+#: templates/weather.html:12
+msgid "Tajutav"
+msgstr "Ощущаемая"
+
+#: templates/weather.html:48
+msgid "Geolocation is not supported by your browser"
+msgstr "Ваш браузер не поддерживает геолокацию"
+
+#: templates/weather.html:50
+msgid "Locating…"
+msgstr "Поиск местоположения…"
+
+#: templates/weather.html:58
+msgid "Location found."
+msgstr "Местоположение найдено."
+
+#: templates/weather.html:63
+msgid "Unable to retrieve your location"
+msgstr "Не удалось получить ваше местоположение"
+
+#: users/templates/change_password.html:13
+#: users/templates/password_reset_form.html:7
+msgid "Muuda parooli"
+msgstr "Изменить пароль"
+
+#: users/templates/change_password.html:22
+msgid "Muuda"
+msgstr "Изменить"
+
+#: users/templates/change_password.html:23 users/templates/feedback.html:27
+msgid "Katkesta"
+msgstr "Отменить"
+
+#: users/templates/feedback.html:14 users/templates/feedback_list.html:15
+msgid "Nimi"
+msgstr "Имя"
+
+#: users/templates/feedback.html:18
+msgid "Email"
+msgstr "Электронная почта"
+
+#: users/templates/feedback.html:22
+msgid "Sinu tagasiside"
+msgstr "Ваш отзыв"
+
+#: users/templates/feedback_list.html:10
+msgid "Lisatud tagasisided"
+msgstr "Добавленные отзывы"
+
+#: users/templates/feedback_list.html:14
+msgid "Kuupäev"
+msgstr "Дата"
+
+#: users/templates/itella_order.html:7 users/templates/omniva_order.html:7
+#: users/templates/order.html:7 users/templates/order_address.html:7
+msgid "Tellimus"
+msgstr "Заказ"
+
+#: users/templates/itella_order.html:43 users/templates/omniva_order.html:43
+#: users/templates/order_address.html:41
+msgid "Saaja andmed"
+msgstr "Данные получателя"
+
+#: users/templates/itella_order.html:49 users/templates/omniva_order.html:49
+#: users/templates/order_address.html:47
+msgid "Saatmise viis"
+msgstr "Способ доставки"
+
+#: users/templates/itella_order.html:50
+msgid "Itella"
+msgstr "Itella"
+
+#: users/templates/itella_order.html:53 users/templates/omniva_order.html:53
+msgid "Pakiautomaat"
+msgstr "Пакетоматы"
+
+#: users/templates/login.html:12 users/templates/login.html:34
+#: users/templates/password_reset_done.html:16 users/templates/register.html:23
+msgid "Logi sisse"
+msgstr "Войти"
+
+#: users/templates/login.html:24 users/templates/profile.html:21
+msgid "Kasutajanimi:"
+msgstr "Имя пользователя:"
+
+#: users/templates/login.html:25
+msgid "Sisesta enda kasutajanimi"
+msgstr "Введите ваше имя пользователя"
+
+#: users/templates/login.html:29
+msgid "Parool:"
+msgstr "Пароль:"
+
+#: users/templates/login.html:30
+msgid "Sisesta enda parool"
+msgstr "Введите ваш пароль"
+
+#: users/templates/login.html:38
+msgid "Unustasid parooli?"
+msgstr "Забыли пароль?"
+
+#: users/templates/login.html:39
+msgid "Kasutaja puudub?"
+msgstr "Пользователь не найден?"
+
+#: users/templates/login.html:39
+msgid "Registreeri siin"
+msgstr "Зарегистрируйтесь здесь"
+
+#: users/templates/omniva_order.html:50
+msgid "Omniva"
+msgstr "Omniva"
+
+#: users/templates/order.html:7
+msgid "ei leitud"
+msgstr "не найдено"
+
+#: users/templates/password_reset_done.html:8
+msgid "Parool uuendatud"
+msgstr "Пароль обновлен"
+
+#: users/templates/password_reset_done.html:10
+msgid "Sinu parool on muudetud. Nüüd saad sisselogida."
+msgstr "Ваш пароль изменен. Теперь вы можете войти."
+
+#: users/templates/password_reset_form.html:9
+msgid "Palun sisesta uus parool."
+msgstr "Пожалуйста, введите новый пароль."
+
+#: users/templates/password_reset_form.html:15
+msgid "Kinnita"
+msgstr "Подтвердить"
+
+#: users/templates/password_reset_sent.html:7
+#: users/templates/reset_password.html:8
+msgid "Parooli taastamine"
+msgstr "Восстановление пароля"
+
+#: users/templates/password_reset_sent.html:8
+msgid ""
+"Oleme saatnud Teile juhised oma parooli seadistamiseks, kui Teie sisestatud "
+"e-posti aadress on kontoga seotud. Peaksite need saama mõne hetke pärast."
+msgstr ""
+"Мы отправили вам инструкции по настройке пароля, если введенный вами адрес "
+"электронной почты связан с вашей учетной записью. Вы должны получить их "
+"через несколько минут."
+
+#: users/templates/password_reset_sent.html:11
+msgid ""
+"Kui te ei saa e-kirja, kontrollige, et olete sisestanud registreerimiseks "
+"kasutatud aadressi ja vaadake oma rämpsposti kausta."
+msgstr ""
+"Если вы не получили письмо, проверьте, что вы ввели адрес электронной почты, "
+"который использовался при регистрации, и посмотрите в папке для спама."
+
+#: users/templates/password_reset_sent.html:15
+msgid "Tagasi pealehele"
+msgstr "Вернуться на главную страницу"
+
+#: users/templates/profile.html:12
+msgid "profiil"
+msgstr "профиль"
+
+#: users/templates/profile.html:18
+msgid "Personaalne informatsioon"
+msgstr "Личная информация"
+
+#: users/templates/profile.html:22
+msgid "Eesnimi:"
+msgstr "Имя:"
+
+#: users/templates/profile.html:23
+msgid "Perekonnanimi:"
+msgstr "Фамилия:"
+
+#: users/templates/profile.html:24
+msgid "Email:"
+msgstr "Электронная почта:"
+
+#: users/templates/profile.html:25
+msgid "Telefoni number:"
+msgstr "Номер телефона:"
+
+#: users/templates/profile.html:26
+msgid "Kasutaja loodud:"
+msgstr "Пользователь создан:"
+
+#: users/templates/profile.html:35
+msgid "Muuda profiili"
+msgstr "Изменить профиль"
+
+#: users/templates/profile.html:36
+msgid "Muuda parool"
+msgstr "Изменить пароль"
+
+#: users/templates/register.html:12 users/templates/register.html:18
+msgid "Registreeri"
+msgstr "Зарегистрироваться"
+
+#: users/templates/register.html:22
+msgid "Kasutaja juba olemas?"
+msgstr "Пользователь уже существует?"
+
+#: users/templates/reset_password.html:10
+msgid ""
+"Unustasid enda parooli? Sisesta email, millega registeerisid konto ja "
+"saadame Sulle lingi parooli taastamiseks."
+msgstr ""
+"Забыли пароль? Введите email, с которым вы регистрировались, и мы отправим "
+"вам ссылку для восстановления пароля."
+
+#: users/templates/reset_password.html:17
+msgid "Saada email"
+msgstr "Отправить email"
+
+#: users/templates/reset_password.html:21
+msgid "Tagasi sisselogimise lehele"
+msgstr "Вернуться на страницу входа"
+
+#: users/templates/update_profile.html:14
+msgid "Muuda oma profiili"
+msgstr "Изменить свой профиль"
+
+#: users/templates/update_profile.html:21
+msgid "Salvesta"
+msgstr "Сохранить"
+
+#: users/templates/update_profile.html:22
+msgid "Tagasi"
+msgstr "Назад"
+
+#: users/templates/user_orders.html:10
+msgid "Tellimuse nr"
+msgstr "Номер заказа"
+
+#: users/templates/user_orders.html:11
+msgid "Tellimuse kuupäev"
+msgstr "Дата заказа"
+
+#: users/templates/user_orders.html:12
+msgid "Staatus"
+msgstr "Статус"
+
+#: users/templates/user_orders.html:28
+msgid "Kinnitatud"
+msgstr "Подтверждено"
+
+#: users/templates/user_orders.html:30
+msgid "Kinnitamata"
+msgstr "Не подтверждено"
+
+#~ msgid "Eesti"
+#~ msgstr "Эстония"
+
+#~ msgid "Inglise"
+#~ msgstr "Английский"
+
+#~ msgid "Vene"
+#~ msgstr "Русский"
+
+#~ msgid "Hispaania"
+#~ msgstr "Испанский"

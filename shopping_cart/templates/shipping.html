@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'checkout.css' %}">
@@ -9,7 +10,7 @@
 {% block content %}
 
 <div class="checkout-container">
-    <h1 class="checkout-title text-center">Saatmine</h1>
+    <h1 class="checkout-title text-center">{% trans "Saatmine" %}</h1>
     <div class="checkout-summary">
       <div class="row">
         <div class="col">
@@ -37,16 +38,11 @@
           </div>
         </div>
       </div>
-        <hr>
-            Vahesumma: €
-            <span id="total-cart-price">{{ cart_total }}</span>
-            <br>
-            Saatmine: €
-            <span id="shipping-price-container"></span>
-            <br>
-            Kokku: €
-            <span id="total-price-container"></span>
-        <hr>
+      <hr>
+      <p>{% trans "Vahesumma" %}: €<span id="total-cart-price">{{ cart_total }}</span></p>
+      <p>{% trans "Saatmine" %}: €<span id="shipping-price-container"></span></p>
+      <p>{% trans "Kokku" %}: €<span id="total-price-container"></span></p>
+      <hr>
       <div id="itella-container" style="display: none">
           {% include "shipping_options/itella.html" %}
       </div>

@@ -1,10 +1,11 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
-<html lang="ee">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H&T Käsitöö</title>
+    <title>{% block title %}H&T Käsitöö{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -13,6 +14,7 @@
 </head>
 <body class="bg-light">
 <div class="container-fluid">
+
     <header class="row bg-light py-3 align-items-center">
         <div class="col-3">
             <div class="logo">
@@ -22,17 +24,27 @@
             </div>
         </div>
 
-        <div class="col-6">
-            <h4 class="text-center custom-font">Sinu ideed, meie teostus – sinu mõtted, meie teod!</h4>
-            <form action="{% url 'products:search' %}" method="get" aria-label="Otsing">
+        <div class="col-6 text-center">
+            <h4 class="custom-font">{% trans "Sinu ideed, meie teostus – sinu mõtted, meie teod!" %}</h4>
+            <form action="{% url 'products:search' %}" method="get" aria-label="{% trans 'Otsing' %}">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="q" placeholder="Otsing"
-                           aria-label="Product search">
-                    <button class="btn btn-outline-secondary" type="submit">Otsi</button>
+                    <input type="text" class="form-control" name="q" placeholder="{% trans 'Otsi tooteid...' %}" aria-label="{% trans 'Product search' %}">
+                    <button class="btn btn-outline-secondary" type="submit">{% trans 'Otsi' %}</button>
                 </div>
             </form>
         </div>
+
         <div class="col-3 text-end main-button-group">
+
+            <form method="post" action="{% url 'set_language' %}" class="d-inline">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button type="submit" name="language" value="et" class="btn btn-outline-secondary">🇪🇪</button>
+                <button type="submit" name="language" value="en" class="btn btn-outline-secondary">🇬🇧</button>
+                <button type="submit" name="language" value="ru" class="btn btn-outline-secondary">🇷🇺</button>
+                <button type="submit" name="language" value="es" class="btn btn-outline-secondary">🇪🇸</button>
+            </form>
+
             {% if user.is_authenticated %}
                 <a href="{% url 'shopping_cart:cart' %}">
                     <button class="btn btn-default">
@@ -41,66 +53,68 @@
                     </button>
                 </a>
                 <a href="{% url 'users:user_orders' %}">
-                    <button class="btn btn-default">Tellimused</button>
+                    <button class="btn btn-default">{% trans "Tellimused" %}</button>
                 </a>
                 <a href="{% url 'users:profile' %}">
-                    <button class="btn btn-default">Profiil</button>
+                    <button class="btn btn-default">{% trans "Profiil" %}</button>
                 </a>
                 <a href="{% url 'users:logout' %}">
-                    <button class="btn btn-default-custom">Logi välja</button>
+                    <button class="btn btn-default-custom">{% trans "Logi välja" %}</button>
                 </a>
             {% else %}
                 <a href="{% url 'users:login' %}">
-                    <button class="btn btn-default">Logi sisse / Registreeri</button>
+                    <button class="btn btn-default">{% trans "Logi sisse / Registreeri" %}</button>
                 </a>
             {% endif %}
         </div>
     </header>
 
     <div class="row">
-
         <nav class="col-md-3 col-lg-2 bg-light sidebar">
             <ul class="nav flex-column">
                 <hr class="p-0 m-0">
                 {% for category in categories %}
                     <li class="nav-item active">
-                        <a class="nav-link fw-bold " aria-current="page"
-                           href="{% url 'products:category_products' category.id %}">{{ category.name }}</a>
+                        <a class="nav-link fw-bold" aria-current="page" href="{% url 'products:category_products' category.id %}">
+                            {% trans category.name %}
+                        </a>
                     </li>
                     <hr class="p-0 m-0">
                 {% endfor %}
-
-            <li class="nav-item active">
-                <a class="nav-link fw-bold" aria-current="page"
-                   href="{% url 'products:custom_product_request' %}">Erilahendused</a>
-            </li>
-            <hr class="p-0 m-0">
+                <li class="nav-item active">
+                    <a class="nav-link fw-bold" aria-current="page" href="{% url 'products:custom_product_request' %}">
+                        {% trans "Erilahendused" %}
+                    </a>
+                </li>
+                <hr class="p-0 m-0">
             </ul>
 
             {% include 'weather.html' %}
             <div class="fixed-bottom d-flex flex-column" style="margin: 0 0 150px 70px">
-                <a href="{% url 'about' %}" class="me-3">Meist</a>
-                <a href="{% url 'users:feedback' %}" class="me-3">Tagasiside</a>
-                <a href="{% url 'users:feedback_list' %}" class="mt-0.5">Jäetud tagasiside</a>
+                <a href="{% url 'about' %}" class="me-3">{% trans "Meist" %}</a>
+                <a href="{% url 'users:feedback' %}" class="me-3">{% trans "Tagasiside" %}</a>
+                <a href="{% url 'users:feedback_list' %}" class="mt-0.5">{% trans "Jäetud tagasiside" %}</a>
             </div>
         </nav>
+
 
         <main class="col-md-8 col-lg-10">
             <div class="product-list bg-white p-3 border rounded">
                 {% block content %}
-                    <!-- Content goes here -->
                 {% endblock %}
             </div>
         </main>
     </div>
-    <footer class="row bg-light py-3 text-center fixed-bottom">
+
+    <footer class="row bg-light py-3 text-center">
         <div class="col">
-            | Janek: <a href="https://www.linkedin.com/in/janek-sitsmann-752a392b0/" target="_blank">LinkedIn</a> |
-            Triinu: <a href="https://www.linkedin.com/in/triinu-n-9b1309262/" target="_blank">LinkedIn</a> |
-            Indrek: <a href="https://www.linkedin.com/in/indrek-kuusk-2aa9a874/" target="_blank">LinkedIn</a> |
+            | {% trans "Janek" %}: <a href="https://www.linkedin.com/in/janek-sitsmann-752a392b0/" target="_blank">LinkedIn</a> |
+            {% trans "Triinu" %}: <a href="https://www.linkedin.com/in/triinu-n-9b1309262/" target="_blank">LinkedIn</a> |
+            {% trans "Indrek" %}: <a href="https://www.linkedin.com/in/indrek-kuusk-2aa9a874/" target="_blank">LinkedIn</a> |
         </div>
     </footer>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

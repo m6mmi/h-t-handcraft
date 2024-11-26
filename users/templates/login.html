@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% load static %}
 
@@ -8,7 +9,7 @@
 
 {% block content %}
 <div class="container mt-3">
-    <h1>Logi sisse</h1>
+    <h1>{% trans 'Logi sisse' %}</h1>
 
     {% if form.non_field_errors %}
     <div class="error-message">
@@ -20,21 +21,21 @@
         {% csrf_token %}
 
         <div class="form-group mb-3">
-            <label for="username">Kasutajanimi:</label>
-            <input type="text" id="username" name="username" placeholder="Sisesta enda kasutajanimi" required>
+            <label for="username">{% trans 'Kasutajanimi:' %}</label>
+            <input type="text" id="username" name="username" placeholder="{% trans 'Sisesta enda kasutajanimi' %}" required>
         </div>
 
         <div class="form-group mb-3">
-            <label for="password">Parool:</label>
-            <input type="password" id="password" name="password" placeholder="Sisesta enda parool" required>
+            <label for="password">{% trans 'Parool:' %}</label>
+            <input type="password" id="password" name="password" placeholder="{% trans 'Sisesta enda parool' %}" required>
         </div>
 
         <div class="wrap mb-3">
-            <button type="submit" class="custom-btn">Logi sisse</button>
+            <button type="submit" class="custom-btn">{% trans 'Logi sisse' %}</button>
         </div>
     </form>
 
-    <a href="{% url 'reset_password' %}" class="footer-link"><i>Unustasid parooli?</i></a>
-    <p>Kasutaja puudub? <a href="{% url 'users:register' %}" class="footer-link">Registreeri siin</a>.</p>
+    <a href="{% url 'reset_password' %}" class="footer-link"><i>{% trans 'Unustasid parooli?' %}</i></a>
+    <p>{% trans 'Kasutaja puudub?' %} <a href="{% url 'users:register' %}" class="footer-link">{% trans 'Registreeri siin' %}</a>.</p>
 </div>
 {% endblock %}

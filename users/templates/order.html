@@ -1,11 +1,10 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
     <div class="row">
         <div class="col-md-8">
-            <h2 class="mt-3">Tellimus {{ order_id|stringformat:"06d" }} ei leitud</h2>
+            <h2 class="mt-3">{% trans 'Tellimus' %} {{ order_id|stringformat:"06d" }} {% trans 'ei leitud' %}</h2>
         </div>
-    </div>
-</div>
     </div>
 {% endblock %}
