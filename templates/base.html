@@ -83,11 +83,11 @@
             </ul>
 
             {% include 'weather.html' %}
-<div class="absolute-bottom d-flex flex-column">
-    <a href="{% url 'about' %}" class="me-3">{% trans "Meist" %}</a>
-    <a href="{% url 'users:feedback' %}" class="me-3">{% trans "Tagasiside" %}</a>
-    <a href="{% url 'users:feedback_list' %}" class="mt-0.5">{% trans "Jäetud tagasiside" %}</a>
-</div>
+            <div class="absolute-bottom d-flex flex-column">
+                <a href="{% url 'about' %}" class="me-3">{% trans "Meist" %}</a>
+                <a href="{% url 'users:feedback' %}" class="me-3">{% trans "Tagasiside" %}</a>
+                <a href="{% url 'users:feedback_list' %}" class="mt-0.5">{% trans "Jäetud tagasiside" %}</a>
+            </div>
 
         </nav>
 
@@ -99,23 +99,23 @@
         </main>
     </div>
 
-<footer class="row bg-light py-3 text-center position-relative">
-    <div class="col">
-        | Janek: <a href="https://www.linkedin.com/in/janek-sitsmann-752a392b0/" target="_blank">LinkedIn</a> |
-        Triinu: <a href="https://www.linkedin.com/in/triinu-n-9b1309262/" target="_blank">LinkedIn</a> |
-        Indrek: <a href="https://www.linkedin.com/in/indrek-kuusk-2aa9a874/" target="_blank">LinkedIn</a> |
-    </div>
-    <div class="flag-container">
-        <form method="post" action="{% url 'set_language' %}" class="flag-form">
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{{ request.path }}">
-            <button type="submit" name="language" value="et" class="btn">🇪🇪</button>
-            <button type="submit" name="language" value="en" class="btn">🇬🇧</button>
-            <button type="submit" name="language" value="ru" class="btn">🇷🇺</button>
-            <button type="submit" name="language" value="es" class="btn">🇪🇸</button>
-        </form>
-    </div>
-</footer>
+    <footer class="row bg-light py-3 text-center position-relative">
+        <div class="col">
+            | Janek: <a href="https://www.linkedin.com/in/janek-sitsmann-752a392b0/" target="_blank">LinkedIn</a> |
+            Triinu: <a href="https://www.linkedin.com/in/triinu-n-9b1309262/" target="_blank">LinkedIn</a> |
+            Indrek: <a href="https://www.linkedin.com/in/indrek-kuusk-2aa9a874/" target="_blank">LinkedIn</a> |
+        </div>
+        <div class="flag-container">
+            <form method="post" action="{% url 'set_language' %}" class="flag-form">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button type="submit" name="language" value="et" class="btn">🇪🇪</button>
+                <button type="submit" name="language" value="en" class="btn">🇬🇧</button>
+                <button type="submit" name="language" value="ru" class="btn">🇷🇺</button>
+                <button type="submit" name="language" value="es" class="btn">🇪🇸</button>
+            </form>
+        </div>
+    </footer>
 
 
 </div>
