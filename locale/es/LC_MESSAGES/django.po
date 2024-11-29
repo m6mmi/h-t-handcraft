@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 14:28+0200\n"
+"POT-Creation-Date: 2024-11-29 08:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,14 +148,6 @@ msgstr "Precio €"
 msgid "Kokku €"
 msgstr "Total €"
 
-#: shopping_cart/templates/cart.html:29
-msgid "-"
-msgstr "-"
-
-#: shopping_cart/templates/cart.html:34
-msgid "+"
-msgstr "+"
-
 #: shopping_cart/templates/cart.html:42
 #: shopping_cart/templates/shipping.html:44
 #: users/templates/itella_order.html:14 users/templates/itella_order.html:29
@@ -173,7 +165,7 @@ msgstr "Confirmar pedido"
 msgid "Tooteid ei ole listud ostukorvi"
 msgstr "No hay productos en el carrito"
 
-#: shopping_cart/templates/cart.html:58 templates/base.html:66
+#: shopping_cart/templates/cart.html:58 templates/base.html:58
 #: users/templates/itella_order.html:36 users/templates/omniva_order.html:36
 #: users/templates/order_address.html:34 users/templates/user_orders.html:40
 msgid "Logi sisse / Registreeri"
@@ -253,54 +245,46 @@ msgstr "Búsqueda"
 msgid "Otsi tooteid..."
 msgstr "Buscar productos..."
 
-#: templates/base.html:31
+#: templates/base.html:32
 msgid "Product search"
 msgstr "Búsqueda de productos"
 
-#: templates/base.html:32
+#: templates/base.html:33
 msgid "Otsi"
 msgstr "Buscar"
 
-#: templates/base.html:56 users/templates/user_orders.html:6
+#: templates/base.html:48 users/templates/user_orders.html:6
 msgid "Tellimused"
 msgstr "Pedidos"
 
-#: templates/base.html:59
+#: templates/base.html:51
 msgid "Profiil"
 msgstr "Perfil"
 
-#: templates/base.html:62
+#: templates/base.html:54
 msgid "Logi välja"
 msgstr "Cerrar sesión"
 
-#: templates/base.html:86
+#: templates/base.html:72
+msgid "category.name"
+msgstr ""
+
+#: templates/base.html:79
 msgid "Erilahendused"
 msgstr "Soluciones personalizadas"
 
-#: templates/base.html:94
+#: templates/base.html:87
 msgid "Meist"
 msgstr "Sobre nosotros"
 
-#: templates/base.html:95 users/templates/feedback.html:10
+#: templates/base.html:88 users/templates/feedback.html:10
 #: users/templates/feedback_list.html:16
 msgid "Tagasiside"
 msgstr "Comentarios"
 
-#: templates/base.html:96
+#: templates/base.html:89
 msgid "Jäetud tagasiside"
 msgstr "Comentarios dejados"
-
-#: templates/base.html:111
-msgid "Janek"
-msgstr "Janek"
-
-#: templates/base.html:112
-msgid "Triinu"
-msgstr "Triinu"
-
-#: templates/base.html:113
-msgid "Indrek"
-msgstr "Indrek"
 
 #: templates/index.html:19
 msgid "Vaikimisi pilt"
@@ -378,10 +362,6 @@ msgstr "Datos del destinatario"
 msgid "Saatmise viis"
 msgstr "Método de envío"
 
-#: users/templates/itella_order.html:50
-msgid "Itella"
-msgstr "Itella"
-
 #: users/templates/itella_order.html:53 users/templates/omniva_order.html:53
 msgid "Pakiautomaat"
 msgstr "Máquina de paquetería"
@@ -418,10 +398,6 @@ msgstr "¿No tienes cuenta?"
 #: users/templates/login.html:39
 msgid "Registreeri siin"
 msgstr "Regístrate aquí"
-
-#: users/templates/omniva_order.html:50
-msgid "Omniva"
-msgstr "Omniva"
 
 #: users/templates/order.html:7
 msgid "ei leitud"
@@ -560,15 +536,3 @@ msgstr "Confirmado"
 #: users/templates/user_orders.html:30
 msgid "Kinnitamata"
 msgstr "No confirmado"
-
-#~ msgid "Eesti"
-#~ msgstr "Estonia"
-
-#~ msgid "Inglise"
-#~ msgstr "Inglés"
-
-#~ msgid "Vene"
-#~ msgstr "Ruso"
-
-#~ msgid "Hispaania"
-#~ msgstr "Español"
