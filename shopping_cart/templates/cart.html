@@ -31,7 +31,7 @@
                                 {{ item.quantity }}
                                 <form action="{% url 'products:add_to_cart' item.product.id %}" method="post" class="d-inline mx-2">
                                     {% csrf_token %}
-                                    <button class="btn btn-outline-success btn-sm" type="submit">+}</button>
+                                    <button class="btn btn-outline-success btn-sm" type="submit">+</button>
                                 </form>
                             </td>
                             <td>{{ item.product.price }}</td>
