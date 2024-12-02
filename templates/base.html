@@ -68,7 +68,7 @@
                 {% for category in categories %}
                   <li class="nav-item active">
                         <a class="nav-link fw-bold " aria-current="page"
-                           href="{% url 'products:category_products' category.id %}">{{ category.name }}</a>
+                           href="{% url 'products:category_products' category.id %}">{% trans category.name %}</a>
                     </li>
                     <hr class="p-0 m-0">
                 {% endfor %}

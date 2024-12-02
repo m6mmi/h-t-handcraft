@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-29 08:19+0200\n"
+"POT-Creation-Date: 2024-12-02 16:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -264,24 +264,20 @@ msgstr "Profile"
 msgid "Logi välja"
 msgstr "Log out"
 
-#: templates/base.html:72
-msgid "category.name"
-msgstr ""
-
-#: templates/base.html:79
+#: templates/base.html:77
 msgid "Erilahendused"
 msgstr "Custom Solutions"
 
-#: templates/base.html:87
+#: templates/base.html:85
 msgid "Meist"
 msgstr "About Us"
 
-#: templates/base.html:88 users/templates/feedback.html:10
+#: templates/base.html:86 users/templates/feedback.html:10
 #: users/templates/feedback_list.html:16
 msgid "Tagasiside"
 msgstr "Feedback"
 
-#: templates/base.html:89
+#: templates/base.html:87
 msgid "Jäetud tagasiside"
 msgstr "Feedback left"
 
@@ -535,3 +531,10 @@ msgstr "Confirmed"
 #: users/templates/user_orders.html:30
 msgid "Kinnitamata"
 msgstr "NOT Confirmed"
+
+msgid "Muu"
+msgstr "Other"
+
+msgid "Reeglid"
+msgstr "Rules"
+
