@@ -15,10 +15,10 @@ class Product(models.Model):
     image_path = models.ImageField(upload_to='products/img', null=True, blank=True)
     stock = models.IntegerField(default=0, null=False, blank=False)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    height = models.FloatField(null=True, blank=True)
-    width = models.FloatField(null=True, blank=True)
-    length = models.FloatField(null=True, blank=True)
-    weight = models.FloatField(null=True, blank=True)
+    # height = models.FloatField(null=True, blank=True)
+    # width = models.FloatField(null=True, blank=True)
+    # length = models.FloatField(null=True, blank=True)
+    # weight = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         category_name = Category.objects.get(id=self.category.id)
