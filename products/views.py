@@ -1,11 +1,13 @@
+from random import shuffle
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import EmailMessage
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.utils.translation.trans_null import get_language
 from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView, FormView
-from random import shuffle
 
 from h_t_handcraft import settings
 from shopping_cart.models import Cart, CartProduct
@@ -43,6 +45,8 @@ class IndexView(View):
         products = list(Product.objects.all())
         shuffle(products)
         random_products = products[:8]
+
+        print(get_language())
 
         return render(request, 'index.html', {'random_products': random_products})
 
