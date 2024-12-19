@@ -46,8 +46,6 @@ class IndexView(View):
         shuffle(products)
         random_products = products[:8]
 
-        print(get_language())
-
         return render(request, 'index.html', {'random_products': random_products})
 
 

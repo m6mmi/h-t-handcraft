@@ -164,3 +164,7 @@ cython_debug/
 /H&T.xlsx
 /products/img/gallery/IMG_1772_ktfnc19.jpg
 /invoices/
+.DS_Store
+h_t_handcraft/.DS_Store
+templates/.DS_Store
+templates/static/.DS_Store

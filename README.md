@@ -81,7 +81,8 @@ python manage.py migrate
 ```
 
 ```bash
-python manage.py loaddata fixtures_products.json
+python manage.py loaddata products.json
+python manage.py loaddata categories.json
 ```
 
 
